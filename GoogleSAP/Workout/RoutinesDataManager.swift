@@ -26,7 +26,7 @@ class RoutinesDataManager: ObservableObject {
         if let retrievedData = try? Data(contentsOf: archiveUrl),
            let decodedData = try? plistDecoder.decode(Array<Routine>.self, from: retrievedData){
             finalRoutines = decodedData
-        }
+        } else {finalRoutines = []}
         routines = finalRoutines
     }
     func saveData() {

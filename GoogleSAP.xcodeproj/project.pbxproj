@@ -11,6 +11,15 @@
 		452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DE28F6E0E50037A0FB /* ContentView.swift */; };
 		452821E128F6E0E80037A0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E028F6E0E80037A0FB /* Assets.xcassets */; };
 		452821E428F6E0E80037A0FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E328F6E0E80037A0FB /* Preview Assets.xcassets */; };
+		4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */; };
+		4548F18A28F70BA20033B5B8 /* EditDayRoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */; };
+		4548F18B28F70BA20033B5B8 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17F28F70BA20033B5B8 /* Routine.swift */; };
+		4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18028F70BA20033B5B8 /* RoutinesView.swift */; };
+		4548F18D28F70BA20033B5B8 /* RoutinesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */; };
+		4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18328F70BA20033B5B8 /* LoggerView.swift */; };
+		4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18528F70BA20033B5B8 /* StandardsView.swift */; };
+		4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18628F70BA20033B5B8 /* CalculatorView.swift */; };
+		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +28,15 @@
 		452821DE28F6E0E50037A0FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		452821E028F6E0E80037A0FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		452821E328F6E0E80037A0FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRoutineComponentView.swift; sourceTree = "<group>"; };
+		4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDayRoutinesView.swift; sourceTree = "<group>"; };
+		4548F17F28F70BA20033B5B8 /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
+		4548F18028F70BA20033B5B8 /* RoutinesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
+		4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesDataManager.swift; sourceTree = "<group>"; };
+		4548F18328F70BA20033B5B8 /* LoggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
+		4548F18528F70BA20033B5B8 /* StandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsView.swift; sourceTree = "<group>"; };
+		4548F18628F70BA20033B5B8 /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
+		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +71,10 @@
 			children = (
 				452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */,
 				452821DE28F6E0E50037A0FB /* ContentView.swift */,
+				4548F18728F70BA20033B5B8 /* Home */,
+				4548F18228F70BA20033B5B8 /* Logger */,
+				4548F18428F70BA20033B5B8 /* Standards */,
+				4548F17C28F70BA20033B5B8 /* Workout */,
 				452821E028F6E0E80037A0FB /* Assets.xcassets */,
 				452821E228F6E0E80037A0FB /* Preview Content */,
 			);
@@ -65,6 +87,43 @@
 				452821E328F6E0E80037A0FB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4548F17C28F70BA20033B5B8 /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */,
+				4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */,
+				4548F17F28F70BA20033B5B8 /* Routine.swift */,
+				4548F18028F70BA20033B5B8 /* RoutinesView.swift */,
+				4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+		4548F18228F70BA20033B5B8 /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				4548F18328F70BA20033B5B8 /* LoggerView.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
+		4548F18428F70BA20033B5B8 /* Standards */ = {
+			isa = PBXGroup;
+			children = (
+				4548F18528F70BA20033B5B8 /* StandardsView.swift */,
+				4548F18628F70BA20033B5B8 /* CalculatorView.swift */,
+			);
+			path = Standards;
+			sourceTree = "<group>";
+		};
+		4548F18728F70BA20033B5B8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				4548F18828F70BA20033B5B8 /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +196,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */,
+				4548F18B28F70BA20033B5B8 /* Routine.swift in Sources */,
+				4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */,
+				4548F18A28F70BA20033B5B8 /* EditDayRoutinesView.swift in Sources */,
+				4548F18D28F70BA20033B5B8 /* RoutinesDataManager.swift in Sources */,
+				4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */,
 				452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */,
+				4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */,
+				4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */,
+				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
 				452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

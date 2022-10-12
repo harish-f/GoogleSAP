@@ -12,7 +12,19 @@ struct ContentView: View {
         TabView {
             RoutinesView()
                 .tabItem {
-                    Label("Routines", systemImage: "airtag")
+                    Label("Workout", systemImage: "figure.walk.circle.fill")
+                }
+            LoggerView()
+                .tabItem {
+                    Label("Logger", systemImage: "list.number")
+                }
+            CalculatorView()
+                .tabItem {
+                    Label("Calculator", systemImage: "number.circle.fill")
+                }
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
                 }
         }
     }
