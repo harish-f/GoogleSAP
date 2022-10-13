@@ -16,13 +16,13 @@ struct CircularProgressView<Content: View>: View {
             content
             Circle()
                 .stroke(
-                    Color.pink.opacity(0.5),
+                    Color.red.opacity(0.5),
                     lineWidth: 30
                 )
             Circle() // 2
                 .trim(from: 0, to: progress)
                 .stroke(
-                    Color.pink,
+                    Color.green,
                     // 1
                     style: StrokeStyle(
                         lineWidth: 30,
