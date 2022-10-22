@@ -20,7 +20,8 @@
 		4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18528F70BA20033B5B8 /* StandardsView.swift */; };
 		4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18628F70BA20033B5B8 /* CalculatorView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
-		DCE56DF928F7A11F0067DB9E /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE56DF828F7A11F0067DB9E /* CircularProgressView.swift */; };
+		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
+		DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +39,8 @@
 		4548F18528F70BA20033B5B8 /* StandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsView.swift; sourceTree = "<group>"; };
 		4548F18628F70BA20033B5B8 /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		DCE56DF828F7A11F0067DB9E /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
+		DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressViewLarge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,7 +134,8 @@
 		DCE56DFA28F7A40B0067DB9E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DCE56DF828F7A11F0067DB9E /* CircularProgressView.swift */,
+				DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */,
+				DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -217,7 +220,8 @@
 				4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */,
 				4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
-				DCE56DF928F7A11F0067DB9E /* CircularProgressView.swift in Sources */,
+				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
+				DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */,
 				452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

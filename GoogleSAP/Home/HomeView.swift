@@ -7,31 +7,34 @@
 
 import SwiftUI
 
+
+
 struct HomeView: View {
-    @State var progress = 0.0
+    let LineThicknessBiggest = 25;
+    let LineThicknessSmaller = 9;
+    @State var progress = 0.0;
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .leading) {
-//              TODO: Make the ProgressViews data dependent on internal storage
+                //              TODO: Make the ProgressViews data dependent on internal storage
                 VStack(alignment: .leading) {
-                    CircularProgressView(progress:progress, content: {
-                        CircularProgressView(progress: progress, content: {
+                    CircularProgressViewLarge(progress:progress, lineWidth:LineThicknessBiggest, content: {
+                        CircularProgressViewLarge(progress: progress, lineWidth:LineThicknessBiggest, content: {
                             Button {
                                 progress += 0.1
                             } label: {
                                 Text("Press me")
                             }
                         })
-                            .frame(width:UIScreen.main.bounds.width-150, height: UIScreen.main.bounds.width-50)
+                        .padding(.leading, 45)
+                        .padding(.trailing, 45)
                     })
-                        .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
-                        .padding(20)
-                    HStack {
-                        
-                    }
-                    Spacer()
-                }
-                .navigationTitle("Overview")
+                    .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
+                    .padding(.bottom, 20)
+                }.navigationTitle("Overview")
             }
         }
     }

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct CircularProgressView<Content: View>: View {
+struct CircularProgressViewSmall<Content: View>: View {
     let progress: Double
+    let lineWidth: Int
     @ViewBuilder var content: Content
     
     var body: some View {
@@ -17,7 +18,7 @@ struct CircularProgressView<Content: View>: View {
             Circle()
                 .stroke(
                     Color.red.opacity(0.5),
-                    lineWidth: 30
+                    lineWidth: CGFloat(lineWidth)
                 )
             Circle() // 2
                 .trim(from: 0, to: progress)
@@ -25,7 +26,7 @@ struct CircularProgressView<Content: View>: View {
                     Color.green,
                     // 1
                     style: StrokeStyle(
-                        lineWidth: 30,
+                        lineWidth: CGFloat(lineWidth),
                         lineCap: .round
                     )
                 )
@@ -35,14 +36,14 @@ struct CircularProgressView<Content: View>: View {
     }
 }
 
-extension CircularProgressView where Content == EmptyView {
-  init(progress: Double) {
-      self.init(progress: progress, content: { EmptyView() })
+extension CircularProgressViewSmall where Content == EmptyView {
+    init(progress: Double, lineWidth: Int) {
+      self.init(progress: progress, lineWidth: lineWidth, content: { EmptyView() })
   }
 }
 
 
-struct CircularProgressView_Previews: PreviewProvider {
+struct CircularProgressViewSmall_Previews: PreviewProvider {
     struct SimpleView: View {
         var body: some View {
             VStack {
@@ -51,12 +52,12 @@ struct CircularProgressView_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        CircularProgressView(progress: 0.25, content: {
+        CircularProgressViewSmall(progress: 0.25, lineWidth:30, content: {
             SimpleView()
         })
             .frame(width:200, height: 200)
         
-        CircularProgressView(progress: 0.25)
+        CircularProgressViewSmall(progress: 0.25, lineWidth:30)
             .frame(width:200, height: 200)
     }
 }
