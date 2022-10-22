@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CircularProgressViewSmall<Content: View>: View {
     let progress: Double
-    let lineWidth: Int
     @ViewBuilder var content: Content
     
     var body: some View {
@@ -18,7 +17,7 @@ struct CircularProgressViewSmall<Content: View>: View {
             Circle()
                 .stroke(
                     Color.red.opacity(0.5),
-                    lineWidth: CGFloat(lineWidth)
+                    lineWidth: CGFloat(10)
                 )
             Circle() // 2
                 .trim(from: 0, to: progress)
@@ -26,7 +25,7 @@ struct CircularProgressViewSmall<Content: View>: View {
                     Color.green,
                     // 1
                     style: StrokeStyle(
-                        lineWidth: CGFloat(lineWidth),
+                        lineWidth: CGFloat(10),
                         lineCap: .round
                     )
                 )
@@ -37,8 +36,8 @@ struct CircularProgressViewSmall<Content: View>: View {
 }
 
 extension CircularProgressViewSmall where Content == EmptyView {
-    init(progress: Double, lineWidth: Int) {
-      self.init(progress: progress, lineWidth: lineWidth, content: { EmptyView() })
+    init(progress: Double) {
+      self.init(progress: progress, content: { EmptyView() })
   }
 }
 
@@ -52,12 +51,12 @@ struct CircularProgressViewSmall_Previews: PreviewProvider {
         }
     }
     static var previews: some View {
-        CircularProgressViewSmall(progress: 0.25, lineWidth:30, content: {
+        CircularProgressViewSmall(progress: 0.25, content: {
             SimpleView()
         })
             .frame(width:200, height: 200)
         
-        CircularProgressViewSmall(progress: 0.25, lineWidth:30)
+        CircularProgressViewSmall(progress: 0.25)
             .frame(width:200, height: 200)
     }
 }

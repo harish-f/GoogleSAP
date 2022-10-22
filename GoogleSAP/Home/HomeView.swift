@@ -10,30 +10,93 @@ import SwiftUI
 
 
 struct HomeView: View {
-    let LineThicknessBiggest = 25;
-    let LineThicknessSmaller = 9;
+    let SMALL_PROGRESS_VIEW_SIZE = UIScreen.main.bounds.width-280
+    let SMALL_PROGRESS_VIEW_PADDING = CGFloat(14)
+    
     @State var progress = 0.0;
     
     var body: some View {
         NavigationView {
             ZStack(alignment: .leading) {
-                //              TODO: Make the ProgressViews data dependent on internal storage
+                // TODO: Make the ProgressViews data dependent on internal storage
+                
                 VStack(alignment: .leading) {
-                    CircularProgressViewLarge(progress:progress, lineWidth:LineThicknessBiggest, content: {
-                        CircularProgressViewLarge(progress: progress, lineWidth:LineThicknessBiggest, content: {
-                            Button {
-                                progress += 0.1
-                            } label: {
-                                Text("Press me")
-                            }
+                    HStack {
+                        Spacer()
+                        CircularProgressViewLarge(progress:progress, content: {
+                            CircularProgressViewLarge(progress: progress, content: {
+                                Button {
+                                    progress += 0.1
+                                } label: {
+                                    Text("Press me")
+                                }
+                            })
+                            .padding(.leading, 45)
+                            .padding(.trailing, 45)
                         })
-                        .padding(.leading, 45)
-                        .padding(.trailing, 45)
-                    })
-                    .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 20)
-                    .padding(.bottom, 20)
+                        .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
+                        Spacer()
+                    }
+                    .padding(.top, 10)
+                    
+                    // TODO: make this adapt to different screen sizes
+                    HStack {
+                        Spacer()
+                        
+                        CircularProgressViewSmall(progress: 0.25) {
+                            CircularProgressViewSmall(progress: 0.25)
+                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        }
+                        .frame(width: SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        
+                        Spacer()
+                        
+                        CircularProgressViewSmall(progress: 0.25) {
+                            CircularProgressViewSmall(progress: 0.25)
+                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        }
+                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        
+                        Spacer()
+                        
+                        CircularProgressViewSmall(progress: 0.25) {
+                            CircularProgressViewSmall(progress: 0.25)
+                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        }
+                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        
+                        Spacer()
+                    }
+                    .padding(.leading, 3)
+                    .padding(.trailing, 3)
+                    .padding(.top, 20)
+                    
+                    HStack {
+                        Spacer()
+                        
+                        CircularProgressViewSmall(progress: 0.25) {
+                            CircularProgressViewSmall(progress: 0.25)
+                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        }
+                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        
+                        Spacer()
+                        
+                        CircularProgressViewSmall(progress: 0.25) {
+                            CircularProgressViewSmall(progress: 0.25)
+                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        }
+                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        
+                        Spacer()
+                    }
+                    .padding(.leading, 3)
+                    .padding(.trailing, 3)
+                    .padding(.top, 20)
+                    
+                    Spacer()
+                    
+                    
                 }.navigationTitle("Overview")
             }
         }
