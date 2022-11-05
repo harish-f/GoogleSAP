@@ -14,6 +14,8 @@ struct HomeView: View {
     let SMALL_PROGRESS_VIEW_PADDING = CGFloat(14)
     
     @State var progress = 0.0;
+    @StateObject var homeManager = HomeDataManager()
+
     
     var body: some View {
         NavigationView {
@@ -25,11 +27,7 @@ struct HomeView: View {
                         Spacer()
                         CircularProgressViewLarge(progress:progress, content: {
                             CircularProgressViewLarge(progress: progress, content: {
-                                Button {
-                                    progress += 0.1
-                                } label: {
-                                    Text("Press me")
-                                }
+                                
                             })
                             .padding(.leading, 45)
                             .padding(.trailing, 45)
@@ -38,6 +36,9 @@ struct HomeView: View {
                         Spacer()
                     }
                     .padding(.top, 10)
+                    
+                    
+                    
                     
                     // TODO: make this adapt to different screen sizes
                     HStack {
