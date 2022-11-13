@@ -18,7 +18,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Logger", systemImage: "list.number")
                 }
-            CalculatorView()
+            CalculatorStartPageView()
                 .tabItem {
                     Label("Calculator", systemImage: "number.circle.fill")
                 }

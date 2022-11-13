@@ -17,9 +17,11 @@
 		4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18028F70BA20033B5B8 /* RoutinesView.swift */; };
 		4548F18D28F70BA20033B5B8 /* RoutinesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */; };
 		4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18328F70BA20033B5B8 /* LoggerView.swift */; };
-		4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18528F70BA20033B5B8 /* StandardsView.swift */; };
-		4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18628F70BA20033B5B8 /* CalculatorView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
+		A95B961729213B5C006B041D /* ScoringStandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B961629213B5C006B041D /* ScoringStandardsView.swift */; };
+		A95B961929213B6D006B041D /* GradeScoreCaclulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B961829213B6D006B041D /* GradeScoreCaclulator.swift */; };
+		A95B961B29214066006B041D /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B961A29214066006B041D /* DataTypes.swift */; };
+		A95B961D2921495C006B041D /* CalculatorStartPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95B961C2921495B006B041D /* CalculatorStartPageView.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
 		DCA9E79D290395DE0099B500 /* InternalProgressDataLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */; };
@@ -40,9 +42,11 @@
 		4548F18028F70BA20033B5B8 /* RoutinesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
 		4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesDataManager.swift; sourceTree = "<group>"; };
 		4548F18328F70BA20033B5B8 /* LoggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
-		4548F18528F70BA20033B5B8 /* StandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsView.swift; sourceTree = "<group>"; };
-		4548F18628F70BA20033B5B8 /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A95B961629213B5C006B041D /* ScoringStandardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoringStandardsView.swift; sourceTree = "<group>"; };
+		A95B961829213B6D006B041D /* GradeScoreCaclulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeScoreCaclulator.swift; sourceTree = "<group>"; };
+		A95B961A29214066006B041D /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
+		A95B961C2921495B006B041D /* CalculatorStartPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorStartPageView.swift; sourceTree = "<group>"; };
 		DC0002672915F2B7008E03CC /* HomeDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
 		DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalProgressDataLargeView.swift; sourceTree = "<group>"; };
@@ -124,8 +128,10 @@
 		4548F18428F70BA20033B5B8 /* Standards */ = {
 			isa = PBXGroup;
 			children = (
-				4548F18528F70BA20033B5B8 /* StandardsView.swift */,
-				4548F18628F70BA20033B5B8 /* CalculatorView.swift */,
+				A95B961A29214066006B041D /* DataTypes.swift */,
+				A95B961C2921495B006B041D /* CalculatorStartPageView.swift */,
+				A95B961629213B5C006B041D /* ScoringStandardsView.swift */,
+				A95B961829213B6D006B041D /* GradeScoreCaclulator.swift */,
 			);
 			path = Standards;
 			sourceTree = "<group>";
@@ -238,18 +244,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A95B961929213B6D006B041D /* GradeScoreCaclulator.swift in Sources */,
 				DCA9E79D290395DE0099B500 /* InternalProgressDataLargeView.swift in Sources */,
-				4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */,
 				4548F18B28F70BA20033B5B8 /* Routine.swift in Sources */,
+				A95B961B29214066006B041D /* DataTypes.swift in Sources */,
 				4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */,
 				4548F18A28F70BA20033B5B8 /* EditDayRoutinesView.swift in Sources */,
 				4548F18D28F70BA20033B5B8 /* RoutinesDataManager.swift in Sources */,
 				4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */,
 				452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */,
 				DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */,
-				4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */,
 				4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */,
+				A95B961729213B5C006B041D /* ScoringStandardsView.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
+				A95B961D2921495C006B041D /* CalculatorStartPageView.swift in Sources */,
 				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
 				DCA9E79F290395EB0099B500 /* InternalProgressDataSmallView.swift in Sources */,
 				DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */,
