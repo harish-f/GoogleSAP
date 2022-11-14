@@ -17,9 +17,6 @@ struct ScoringStandardsView: View {
     @State var selected: Int = 1
     
     var body: some View {
-        // show standards with circle picker
-        // circle picker to pick [overall + rest of the exercises]
-        // nice animations included
         ZStack {
             GeometryReader{ geometry in
                 Spacer().onAppear { ViewGeometry = geometry.size }
@@ -27,16 +24,18 @@ struct ScoringStandardsView: View {
             Group {
                 GeometryReader{ geometry in
                     Circle()
-                        .fill(Color(UIColor.secondarySystemBackground))
+                        .fill(Color(UIColor.label))
                         .frame(width: ViewGeometry.width*1.5, height: ViewGeometry.height*1.5)
                         .scaleEffect(circlePickerScale)
-                        .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50) //ViewGeometry.height/2-ViewGeometry.height*0.1
+                        .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50)
                         .onAppear{ withAnimation{ circlePickerScale = 1.0 } }
                 }
                 let stations = Stations[ageInput<18 ? "NAPFA":"IPPT"]!
                 let countOffset = 360.0/Double(Stations[ageInput<18 ? "NAPFA":"IPPT"]!.count)
                 ForEach(stations, id: \.self) {
                     Text($0.name)
+                        .bold()
+                        .foregroundColor(Color(UIColor.secondarySystemBackground))
                         .multilineTextAlignment(.center)
                         .frame(width: ViewGeometry.width/5)
                         .padding(.bottom, ViewGeometry.width)

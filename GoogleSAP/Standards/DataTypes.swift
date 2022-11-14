@@ -27,7 +27,7 @@ struct Workout: Hashable {
     var isInt: Bool // false is less than and also /100
 }
 
-let Stations: [String:[Workout]] = [
+let Stations: [String:[Workout]] = [//Add overall one for each maybe
     "NAPFA": [
         Workout(name: "No. of Sit-ups in 1 min", range: 0...42, isInt: true),
         Workout(name: "Standing Broad Jump", range: 0...251, isInt: true),
