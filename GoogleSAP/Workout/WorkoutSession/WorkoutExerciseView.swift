@@ -97,8 +97,8 @@ struct WorkoutExerciseView: View {
                     Text("Great Job!")
                     List(exercises) { exercise in
                         HStack {
-                            Image(systemName: completedExercises.contains(exercise) ? "xmark" : "checkmark")
-                                .foregroundColor(completedExercises.contains(exercise) ? .red : .green)
+                            Image(systemName: completedExercises.contains(exercise) ? "checkmark" : "xmark")
+                                .foregroundColor(completedExercises.contains(exercise) ? .green : .red)
                             Text(exercise.name)
                         }
                     }
