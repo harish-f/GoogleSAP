@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
+    }
+    
     var body: some View {
         TabView {
             RoutinesView()
@@ -18,14 +23,14 @@ struct ContentView: View {
                 .tabItem {
                     Label("Logger", systemImage: "list.number")
                 }
-            CalculatorView()
+            CalculatorStartPageView()
                 .tabItem {
                     Label("Calculator", systemImage: "number.circle.fill")
                 }
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
+//            HomeView()
+//                .tabItem {
+//                    Label("Home", systemImage: "house.fill")
+//                }
         }
     }
 }
