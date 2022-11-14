@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
+    }
+    
     var body: some View {
         TabView {
             RoutinesView()
