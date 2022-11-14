@@ -12,7 +12,7 @@ struct ScoringStandardsView: View {
     @State var ViewGeometry: CGSize = CGSize(width: 0.0, height: 0.0)
     @State var circlePickerScale = 0.0
     
-    @State var ageInput: Int
+    @Binding var ageInput: Int
     
     @State var selected: Int = 0
     @State var scrollSelected: Int = 0
@@ -70,6 +70,6 @@ struct ScoringStandardsView: View {
 
 struct ScoringStandardsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoringStandardsView(ageInput: 14)
+        ScoringStandardsView(ageInput: .constant(14))
     }
 }
