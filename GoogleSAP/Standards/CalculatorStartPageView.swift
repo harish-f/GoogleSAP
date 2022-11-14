@@ -22,17 +22,11 @@ struct CalculatorStartPageView: View {
                         ForEach(9...60, id: \.self) {
                             Text(String($0)).tag($0)
                         }
-                    }
+                    }.frame(maxWidth: .infinity)
                         .overlay {
                             VStack {
                                 Spacer()
-                                HStack {
-                                    Spacer()
-                                    Spacer()
-                                    Rectangle().fill(ageInput == 0 ? .red:.clear).frame(height: 2)
-                                    Spacer()
-                                    Spacer()
-                                }
+                                Rectangle().fill(ageInput == 0 ? .red:.clear).frame(height: 2).padding(.horizontal).padding(.horizontal)
                             }
                         }
                     Text("year old")
@@ -40,20 +34,14 @@ struct CalculatorStartPageView: View {
                         ForEach(gender.allCases, id: \.self) {
                             Text($0.rawValue.capitalized)
                         }
-                    }
+                    }.frame(maxWidth: .infinity)
                         .overlay {
                             VStack {
                                 Spacer()
-                                HStack {
-                                    Spacer()
-                                    Spacer()
-                                    Rectangle().fill(genderInput == .gender ? .red:.clear).frame(height: 2)
-                                    Spacer()
-                                    Spacer()
-                                }
+                                Rectangle().fill(genderInput == .gender ? .red:.clear).frame(height: 2).padding(.horizontal).padding(.horizontal)
                             }
                         }
-                }.pickerStyle(.menu).padding()
+                }.pickerStyle(.menu).frame(maxWidth: .infinity).padding().padding(.horizontal)
             if pageType == calcPage.none || ageInput == 0 || genderInput == .gender { //should switch to switch case?
                 ForEach(calcPage.allCases, id: \.self) { page in
                     if page != calcPage.none {
