@@ -14,7 +14,8 @@ struct ScoringStandardsView: View {
     
     @State var ageInput: Int
     
-    @State var selected: Int = 1
+    @State var selected: Int = 0
+    @State var scrollSelected: Int = 0
     
     var body: some View {
         ZStack {
@@ -22,6 +23,12 @@ struct ScoringStandardsView: View {
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
             Group {
+                let stations = Stations[ageInput<18 ? "NAPFA":"IPPT"]!
+                VStack {
+                    Text(ageInput<18 ? "NAPFA":"IPPT").font(.title).bold()
+                    Text(stations[selected].name)
+                    Spacer()
+                }
                 GeometryReader{ geometry in
                     Circle()
                         .fill(Color(UIColor.label))
@@ -30,8 +37,7 @@ struct ScoringStandardsView: View {
                         .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50)
                         .onAppear{ withAnimation{ circlePickerScale = 1.0 } }
                 }
-                let stations = Stations[ageInput<18 ? "NAPFA":"IPPT"]!
-                let countOffset = 360.0/Double(Stations[ageInput<18 ? "NAPFA":"IPPT"]!.count)
+                let countOffset = 360.0/Double(stations.count)
                 ForEach(stations, id: \.self) {
                     Text($0.name)
                         .bold()
@@ -40,14 +46,22 @@ struct ScoringStandardsView: View {
                         .frame(width: ViewGeometry.width/5)
                         .padding(.bottom, ViewGeometry.width)
                         .rotationEffect(Angle(
-                            degrees: countOffset*Double(stations.firstIndex(of: $0)!) + countOffset*Double(selected)
+                            degrees: countOffset*Double(stations.firstIndex(of: $0)!) - countOffset*Double(scrollSelected)
                         ))
                         .offset(y: (ViewGeometry.height/2-ViewGeometry.height/50)*1.5)
                 }
             }.gesture(DragGesture()
                 .onEnded { drag in
+                    var ref = 0
+                    if drag.translation.width>0 { ref = -1 }
+                    else if drag.translation.width<0 { ref = 1 }
+                    let stationsCount = Stations[ageInput<18 ? "NAPFA":"IPPT"]!.count
+                    var ref2 = ref
+                    if selected+ref<0 { ref2 += stationsCount }
+                    if selected+ref>=stationsCount { ref2 -= stationsCount }
                     withAnimation(.spring(response: 0.25, dampingFraction: 0.5)) {
-                        selected += drag.translation.width>0 ? 1:-1
+                        scrollSelected += ref
+                        selected += ref2
                     }
                 })
         }
