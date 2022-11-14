@@ -13,6 +13,7 @@ struct ScoringStandardsView: View {
     @State var circlePickerScale = 0.0
     
     @Binding var ageInput: Int
+    @Binding var genderInput: gender
     
     @State var selected: Int = 0
     @State var scrollSelected: Int = 0
@@ -70,6 +71,6 @@ struct ScoringStandardsView: View {
 
 struct ScoringStandardsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoringStandardsView(ageInput: .constant(14))
+        ScoringStandardsView(ageInput: .constant(14), genderInput: .constant(gender.male))
     }
 }
