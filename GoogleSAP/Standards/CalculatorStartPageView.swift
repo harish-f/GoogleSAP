@@ -65,7 +65,7 @@ struct CalculatorStartPageView: View {
                 }
             } else if pageType == calcPage.standards {
                 Spacer()
-                ScoringStandardsView()
+                ScoringStandardsView(ageInput: ageInput)
                 Spacer()
             } else if pageType == calcPage.calculate {
                 Spacer()
