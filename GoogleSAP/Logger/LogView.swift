@@ -1,20 +1,20 @@
 //
-//  StandardsView.swift
+//  LogView.swift
 //  GoogleSAP
 //
-//  Created by HARISH RAM BAGHAVATH stu on 12/10/22.
+//  Created by Sairam Suresh on 14/11/22.
 //
 
 import SwiftUI
 
-struct StandardsView: View {
+struct LogView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct StandardsView_Previews: PreviewProvider {
+struct LogView_Previews: PreviewProvider {
     static var previews: some View {
-        StandardsView()
+        LogView()
     }
 }
