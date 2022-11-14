@@ -7,13 +7,18 @@
 
 import Foundation
 
-struct Exercise: Codable {
+
+struct Exercise: Identifiable, Codable, Equatable {
     var name: String
     
-    var time: Int
+    var duration: Int
+    var reps: Int
+    
+    var id = UUID()
 }
 
 struct Routine: Identifiable, Codable, Equatable {
     var title: String
+    var exercises: [Exercise]
     var id = UUID()
 }

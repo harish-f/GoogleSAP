@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4519A77529215DF200E4D8B9 /* WorkoutHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4519A77429215DF200E4D8B9 /* WorkoutHistoryManager.swift */; };
 		452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */; };
 		452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DE28F6E0E50037A0FB /* ContentView.swift */; };
 		452821E128F6E0E80037A0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E028F6E0E80037A0FB /* Assets.xcassets */; };
 		452821E428F6E0E80037A0FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E328F6E0E80037A0FB /* Preview Assets.xcassets */; };
-		4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */; };
+		4548F18928F70BA20033B5B8 /* EditExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17D28F70BA20033B5B8 /* EditExerciseView.swift */; };
 		4548F18A28F70BA20033B5B8 /* EditDayRoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */; };
 		4548F18B28F70BA20033B5B8 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F17F28F70BA20033B5B8 /* Routine.swift */; };
 		4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18028F70BA20033B5B8 /* RoutinesView.swift */; };
@@ -20,15 +21,20 @@
 		4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18528F70BA20033B5B8 /* StandardsView.swift */; };
 		4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18628F70BA20033B5B8 /* CalculatorView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
+		454EB88E29039E6500F0A8BF /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454EB88D29039E6500F0A8BF /* StartWorkoutView.swift */; };
+		455598E529123BFC000E2ABA /* WorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455598E429123BFC000E2ABA /* WorkoutExerciseView.swift */; };
+		45BFA4FD28FEA7E10054527A /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BFA4FC28FEA7E10054527A /* AddExerciseView.swift */; };
+		45CE06BA29160A2600AD9764 /* TimerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CE06B929160A2600AD9764 /* TimerBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4519A77429215DF200E4D8B9 /* WorkoutHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryManager.swift; sourceTree = "<group>"; };
 		452821D928F6E0E50037A0FB /* GoogleSAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSAPApp.swift; sourceTree = "<group>"; };
 		452821DE28F6E0E50037A0FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		452821E028F6E0E80037A0FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		452821E328F6E0E80037A0FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditRoutineComponentView.swift; sourceTree = "<group>"; };
+		4548F17D28F70BA20033B5B8 /* EditExerciseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditExerciseView.swift; sourceTree = "<group>"; };
 		4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDayRoutinesView.swift; sourceTree = "<group>"; };
 		4548F17F28F70BA20033B5B8 /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		4548F18028F70BA20033B5B8 /* RoutinesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutinesView.swift; sourceTree = "<group>"; };
@@ -37,6 +43,10 @@
 		4548F18528F70BA20033B5B8 /* StandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsView.swift; sourceTree = "<group>"; };
 		4548F18628F70BA20033B5B8 /* CalculatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		454EB88D29039E6500F0A8BF /* StartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
+		455598E429123BFC000E2ABA /* WorkoutExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseView.swift; sourceTree = "<group>"; };
+		45BFA4FC28FEA7E10054527A /* AddExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
+		45CE06B929160A2600AD9764 /* TimerBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +102,11 @@
 		4548F17C28F70BA20033B5B8 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
-				4548F17D28F70BA20033B5B8 /* EditRoutineComponentView.swift */,
-				4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */,
-				4548F17F28F70BA20033B5B8 /* Routine.swift */,
-				4548F18028F70BA20033B5B8 /* RoutinesView.swift */,
 				4548F18128F70BA20033B5B8 /* RoutinesDataManager.swift */,
+				4519A77429215DF200E4D8B9 /* WorkoutHistoryManager.swift */,
+				4548F17F28F70BA20033B5B8 /* Routine.swift */,
+				45AA7E962902F0D8002C738D /* WorkoutSession */,
+				454EB88C29039E0800F0A8BF /* EditingWorkouts */,
 			);
 			path = Workout;
 			sourceTree = "<group>";
@@ -124,6 +134,27 @@
 				4548F18828F70BA20033B5B8 /* HomeView.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		454EB88C29039E0800F0A8BF /* EditingWorkouts */ = {
+			isa = PBXGroup;
+			children = (
+				4548F17D28F70BA20033B5B8 /* EditExerciseView.swift */,
+				45BFA4FC28FEA7E10054527A /* AddExerciseView.swift */,
+				4548F17E28F70BA20033B5B8 /* EditDayRoutinesView.swift */,
+				4548F18028F70BA20033B5B8 /* RoutinesView.swift */,
+			);
+			path = EditingWorkouts;
+			sourceTree = "<group>";
+		};
+		45AA7E962902F0D8002C738D /* WorkoutSession */ = {
+			isa = PBXGroup;
+			children = (
+				454EB88D29039E6500F0A8BF /* StartWorkoutView.swift */,
+				455598E429123BFC000E2ABA /* WorkoutExerciseView.swift */,
+				45CE06B929160A2600AD9764 /* TimerBar.swift */,
+			);
+			path = WorkoutSession;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,15 +228,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				4548F18F28F70BA20033B5B8 /* StandardsView.swift in Sources */,
+				45CE06BA29160A2600AD9764 /* TimerBar.swift in Sources */,
 				4548F18B28F70BA20033B5B8 /* Routine.swift in Sources */,
 				4548F18C28F70BA20033B5B8 /* RoutinesView.swift in Sources */,
 				4548F18A28F70BA20033B5B8 /* EditDayRoutinesView.swift in Sources */,
+				455598E529123BFC000E2ABA /* WorkoutExerciseView.swift in Sources */,
+				45BFA4FD28FEA7E10054527A /* AddExerciseView.swift in Sources */,
 				4548F18D28F70BA20033B5B8 /* RoutinesDataManager.swift in Sources */,
 				4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */,
 				452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */,
 				4548F19028F70BA20033B5B8 /* CalculatorView.swift in Sources */,
-				4548F18928F70BA20033B5B8 /* EditRoutineComponentView.swift in Sources */,
+				4548F18928F70BA20033B5B8 /* EditExerciseView.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
+				454EB88E29039E6500F0A8BF /* StartWorkoutView.swift in Sources */,
+				4519A77529215DF200E4D8B9 /* WorkoutHistoryManager.swift in Sources */,
 				452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
