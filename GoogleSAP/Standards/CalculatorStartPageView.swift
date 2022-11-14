@@ -22,36 +22,38 @@ struct CalculatorStartPageView: View {
                         ForEach(9...60, id: \.self) {
                             Text(String($0)).tag($0)
                         }
-                    }.overlay {
-                        VStack {
-                            Spacer()
-                            HStack {
+                    }.frame(maxWidth: .infinity)
+                        .overlay {
+                            VStack {
                                 Spacer()
-                                Spacer()
-                                Rectangle().fill(ageInput == 0 ? .red:.clear).frame(height: 2)
-                                Spacer()
-                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Spacer()
+                                    Rectangle().fill(ageInput == 0 ? .red:.clear).frame(height: 2)
+                                    Spacer()
+                                    Spacer()
+                                }
                             }
                         }
-                    }
                     Text("year old")
                     Picker("Gender", selection: $genderInput) {
                         ForEach(gender.allCases, id: \.self) {
                             Text($0.rawValue.capitalized)
                         }
-                    }.overlay {
-                        VStack {
-                            Spacer()
-                            HStack {
+                    }.frame(maxWidth: .infinity)
+                        .overlay {
+                            VStack {
                                 Spacer()
-                                Spacer()
-                                Rectangle().fill(genderInput == .gender ? .red:.clear).frame(height: 2)
-                                Spacer()
-                                Spacer()
+                                HStack {
+                                    Spacer()
+                                    Spacer()
+                                    Rectangle().fill(genderInput == .gender ? .red:.clear).frame(height: 2)
+                                    Spacer()
+                                    Spacer()
+                                }
                             }
                         }
-                    }
-                }.pickerStyle(.menu).padding(.vertical) //fix text wrapping
+                }.pickerStyle(.menu).padding().frame(maxWidth: .infinity)
             if pageType == calcPage.none || ageInput == 0 || genderInput == .gender { //should switch to switch case?
                 ForEach(calcPage.allCases, id: \.self) { page in
                     if page != calcPage.none {
