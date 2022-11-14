@@ -60,6 +60,8 @@ struct CalculatorStartPageView: View {
                         }.buttonStyle(.borderedProminent)
                             .disabled(ageInput == 0 || genderInput == .gender)
                     }
+                }.onAppear {
+                    withAnimation{ pageType = .none }
                 }
             } else if pageType == calcPage.standards {
                 Spacer()
