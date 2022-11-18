@@ -114,27 +114,27 @@ struct CreateNewLogView: View {
                     
                     Section {
                         Text("2.4KM Run")
-                        TextField("2.4KM Run", text: $twoPointFourKMRun)
+                        TextField("Seconds", text: $twoPointFourKMRun)
                     }
                     Section {
                         Text("Sit And Reach")
-                        TextField("Sit And Reach", text: $sitAndReach)
+                        TextField("CM", text: $sitAndReach)
                     }
                     Section {
                         Text("Standing Broad Jump")
-                        TextField("Standing Broad Jump", text: $standingBroadJump)
+                        TextField("CM", text: $standingBroadJump)
                     }
                     Section {
                         Text("Inclined Pullups")
-                        TextField("Inclined Pullups", text: $inclinedPullups)
+                        TextField("Reps", text: $inclinedPullups)
                     }
                     Section {
                         Text("Shuttle Run")
-                        TextField("Shuttle Run", text: $shuttleRun)
+                        TextField("Seconds", text: $shuttleRun)
                     }
                     Section {
                         Text("Situps")
-                        TextField("Situps", text: $sitUps)
+                        TextField("Reps", text: $sitUps)
                     }
                 }
             }
