@@ -27,10 +27,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Calculator", systemImage: "number.circle.fill")
                 }
-//            HomeView()
-//                .tabItem {
-//                    Label("Home", systemImage: "house.fill")
-//                }
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
         }
     }
 }
