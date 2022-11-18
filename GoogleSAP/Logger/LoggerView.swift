@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoggerView: View {
-//    @ObservedObject var loggerHistoryManager = LoggerDataManager()
+    @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     // Tracks what type of logs the user wants to see (custom workouts or napfa scores)
     @State var loggedType = "NAPFA"
@@ -46,6 +46,14 @@ struct LoggerView: View {
                         }
                     }
                 }
+            }
+            .onAppear {
+                data = loggerHistoryManager.logRecords
+            }
+            .onChange(of: data) {_ in
+                loggerHistoryManager.logRecords = data
+                loggerHistoryManager.saveData()
+                
             }
             .navigationTitle("Logger")
             .navigationBarTitleDisplayMode(.inline)
