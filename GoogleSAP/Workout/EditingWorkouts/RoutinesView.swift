@@ -13,31 +13,36 @@ struct RoutinesView: View {
     @StateObject var routinesData = RoutinesDataManager()
     var body: some View {
         NavigationView {
-            VStack {
-                List($routinesData.routines) { $routine in
-                    NavigationLink {
-                        EditDayRoutinesView(routine: $routine)
-                    } label: {
-                        Text("\(routine.title)")
+            ZStack{
+                VStack {
+                    List($routinesData.routines) { $routine in
+                        NavigationLink {
+                            EditDayRoutinesView(routine: $routine)
+                        } label: {
+                            Text("\(routine.title)")
+                        }
                     }
                 }
-                NavigationLink {
-                    WorkingOutHomeView(routinesManager: routinesData)
-//                        .onDisappear {
-//                            routinesData.loadData()
-//                        }
-                } label: {
-                    Text("Start Workout")
-                        .padding(10)
-                        .background(.blue)
-                        .cornerRadius(15)
-                        .foregroundColor(.white)
+                VStack{
+                    Spacer()
+                    NavigationLink {
+                        WorkingOutHomeView(routinesManager: routinesData)
+                    } label: {
+                        VStack {
+                            Text("Start Workout")
+                                .padding(10)
+                                .background(.blue)
+                                .cornerRadius(15)
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .padding(.bottom)
                 }
-            }
-            .navigationTitle("Workouts")
-            .onAppear {
-                routinesData.saveData()
-            }
+                
+            }.navigationTitle("Workouts")
+                .onAppear {
+                    routinesData.saveData()
+                }
         }
     }
 }

@@ -50,10 +50,17 @@ struct WorkingOutHomeView: View {
             .toolbar {
                 EditButton()
             }
-            NavigationLink {
-                WorkoutExerciseView(exercises: routinesManager.routines[dow].exercises)
-            } label: {
-                Text("Start")
+            Section {
+                NavigationLink {
+                    WorkoutExerciseView(exercises: routinesManager.routines[dow].exercises)
+                } label: {
+                    Text("Start")
+                        .padding(10)
+                        .cornerRadius(15)
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .padding()
+                }
             }
         }
         .toolbar {
