@@ -28,7 +28,7 @@ class LoggerDataManager: ObservableObject {
             finalData = decodedData
         } else {
             finalData = [
-                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "0.1", shuttleRun: "0.2", sitUps: "0.3", sitAndReach: "0.4", inclinedPullups: "0.5", standingBroadJump: "0.6")
+                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5")
             ]
             print("ded")
 //            finalData = []
@@ -40,7 +40,5 @@ class LoggerDataManager: ObservableObject {
         let plistEncoder = PropertyListEncoder()
         let encodedData = try? plistEncoder.encode(logRecords)
         try? encodedData?.write(to: archiveUrl, options: .noFileProtection)
-        print("Saved!")
-        print(try? Data(contentsOf: archiveUrl))
     }
 }

@@ -16,14 +16,13 @@ struct LoggerView: View {
     @State var triggerReload = false
     
     // TODO: MAKE IT OBTAIN FROM PERSISTENCE
-        @State var data = [
-                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "0.1", shuttleRun: "0.2", sitUps: "0.3", sitAndReach: "0.4", inclinedPullups: "0.5", standingBroadJump: "0.6")
-        ]
+    @State var data: [LogRecord] = []
+    
     var body: some View {
         NavigationView {
             VStack {
                 Form {
-                    List(data) { datum in
+                    List(loggerHistoryManager.logRecords) { datum in
                         
                         if ((loggedType == "NAPFA") && (datum.napfaOrWorkout == "Napfa")) {
                             NavigationLink {
