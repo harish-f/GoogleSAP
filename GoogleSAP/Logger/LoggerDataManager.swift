@@ -31,7 +31,6 @@ class LoggerDataManager: ObservableObject {
                 LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5")
             ]
             print("ded")
-//            finalData = []
         }
         logRecords = finalData
     }
