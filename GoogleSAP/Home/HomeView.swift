@@ -14,6 +14,16 @@ struct ProgressData: Hashable {
 }
 
 
+//  - Replace Text with symbols
+//  - Fix wrapping text issues
+//  - Add symbols to the start of the rings
+//  - The rings might be too close to the edge
+//  - Switch the weird picker thing for a textfield
+//  - Colour Scheme
+//  -
+
+
+
 struct HomeView: View {
     let SMALL_PROGRESS_VIEW_PADDING = CGFloat(16)
     
@@ -75,7 +85,7 @@ struct HomeView: View {
                                     }
                                     .padding(SMALL_PROGRESS_VIEW_PADDING)
                                 }
-                                .frame(width: geometry.size.width/3-20, height: geometry.size.width/3-20)
+                                .frame(width: geometry.size.width/3-25, height: geometry.size.width/3-25)
                                 Spacer()
                             }
                         }
@@ -89,17 +99,18 @@ struct HomeView: View {
                             ForEach(thirdRow, id: \.self) { text in
                                 CircularProgressViewSmall(progress: 0.0) {
                                     CircularProgressViewSmall(progress: text.fraction) {
-                                        Text(text.text).multilineTextAlignment(.center)
+                                        Text(text.text)
+                                            .multilineTextAlignment(.center)
                                     }
                                     .padding(SMALL_PROGRESS_VIEW_PADDING)
                                 }
-                                .frame(width: geometry.size.width/3-10, height: geometry.size.width/3-10)
+                                .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
                                 Spacer()
                             }
                         }
                         .padding(.leading, 3)
                         .padding(.trailing, 3)
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                         
                         Spacer()
                         
