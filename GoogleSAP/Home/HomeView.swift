@@ -32,6 +32,14 @@ struct HomeView: View {
     @State var progress = 0.0;
     @StateObject var homeManager = HomeDataManager()
     
+    @State var TwoPointFourKMRunHighestScore = 641.0
+    @State var ShuttleRunHighestScore = 10.2
+    @State var SitUpsHighestScore = 42
+    @State var SitAndReachHighestScore = 45
+    @State var InclinedPullupsHighestScore = 7
+    @State var StandingBroadJumpHighestScore = 237.0
+    
+    
     // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var lastNAPFAElement: LogRecord = LogRecord(
         NapfaOrWorkouts: .napfa,
@@ -69,7 +77,7 @@ struct HomeView: View {
                         HStack {
                             Spacer()
                             CircularProgressViewLarge(progress: progress, content: {
-                                CircularProgressViewLarge(progress: Double(lastNAPFAElement.standingBroadJump)! / 237, content: {
+                                CircularProgressViewLarge(progress: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore, content: {
                                     Text("Standing Broad Jump").font(.title2)
                                 })
                                 .padding(.leading, 45)
@@ -130,16 +138,16 @@ struct HomeView: View {
                 print(lastNAPFAElement)
                 
                 secondRow = [
-                    ProgressData(text: "2.4 Run", fraction: Double(lastNAPFAElement.twoPointFourKMRun)! / 237),
-                    ProgressData(text: "Situps", fraction: Double(lastNAPFAElement.sitUps)! / 42),
-                    ProgressData(text: "Inclined Pullups", fraction: Double(lastNAPFAElement.standingBroadJump)! / 7),
+                    ProgressData(text: "2.4 Run", fraction: Double(lastNAPFAElement.twoPointFourKMRun)! / TwoPointFourKMRunHighestScore),
+                    ProgressData(text: "Situps", fraction: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore),
+                    ProgressData(text: "Inclined Pullups", fraction: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore),
                 ]
                 
                 print(secondRow[2])
                 
                 thirdRow = [
-                    ProgressData(text: "Sit & Reach", fraction: Double(lastNAPFAElement.sitAndReach)! / 45),
-                    ProgressData(text: "Shuttle Run", fraction: Double(lastNAPFAElement.shuttleRun)! / 10.2),
+                    ProgressData(text: "Sit & Reach", fraction: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore),
+                    ProgressData(text: "Shuttle Run", fraction: Double(lastNAPFAElement.shuttleRun)! / ShuttleRunHighestScore),
                 ]
                 
             }
