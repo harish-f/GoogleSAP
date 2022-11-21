@@ -139,7 +139,7 @@ struct HomeView: View {
                 
                 thirdRow = [
                     ProgressData(text: "Sit & Reach", fraction: Double(lastNAPFAElement.sitAndReach)! / 45),
-                    ProgressData(text: "Shuttle Run", fraction: 10 / Double(lastNAPFAElement.shuttleRun)!),
+                    ProgressData(text: "Shuttle Run", fraction: Double(lastNAPFAElement.shuttleRun)! / 10.2),
                 ]
                 
             }
