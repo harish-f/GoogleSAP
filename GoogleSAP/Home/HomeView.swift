@@ -40,6 +40,9 @@ struct HomeView: View {
     @State var InclinedPullupsHighestScore = 7.0
     @State var StandingBroadJumpHighestScore = 237.0
     
+    // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
+    @State var age = 16
+    
     
     // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var lastNAPFAElement: LogRecord = LogRecord(
@@ -116,7 +119,7 @@ struct HomeView: View {
                                         .scrollSnappingAnchor(.bounds)
                                         .id(idGen(text: datum.text))
                                 }
-
+                                
                             }
                             .padding(.bottom, sizeOfBigProgress * 0.000)
                         }
@@ -129,56 +132,58 @@ struct HomeView: View {
                         
                     }.navigationTitle("Overview")
                         .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarItems(trailing:Stepper(value: $age, in: 0...20) {Text("")})
+                        .navigationBarItems(leading:Text("Age: " + String(age)))
+                }.onAppear {
+                    loggerHistoryManager.loadData()
+                    
+                    lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
+                        LogRecord.napfaOrWorkout == "Napfa"
+                    } ?? LogRecord(
+                        NapfaOrWorkouts: .napfa,
+                        description: "This is my description",
+                        date: Date(timeInterval: .zero, since: .now),
+                        twoPointFourKMRun: "0",
+                        shuttleRun: "0",
+                        sitUps: "0",
+                        sitAndReach: "0",
+                        inclinedPullups: "0",
+                        standingBroadJump: "0"
+                    )
+                    
+                    lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
+                        LogRecord.NapfaOrWorkouts == .workout
+                    } ?? LogRecord(
+                        NapfaOrWorkouts: .workout,
+                        description: "This is my description",
+                        date: Date(timeInterval: .zero, since: .now),
+                        twoPointFourKMRun: "0",
+                        shuttleRun: "0",
+                        sitUps: "0",
+                        sitAndReach: "0",
+                        inclinedPullups: "0",
+                        standingBroadJump: "0"
+                    )
+                    
+                    data = [
+                        ProgressData(text: "2.4 Run",
+                                     fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
+                                     fractionWorkout: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
+                        ProgressData(text: "Situps",
+                                     fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore, fractionWorkout: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore),
+                        ProgressData(text: "Inclined Pullups",
+                                     fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / StandingBroadJumpHighestScore,
+                                     fractionWorkout: Double(lastWorkoutElement.inclinedPullups)! / StandingBroadJumpHighestScore),
+                        ProgressData(text: "Sit & Reach",
+                                     fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
+                                     fractionWorkout: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore),
+                        ProgressData(text: "Shuttle Run",
+                                     fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
+                                     fractionWorkout: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!),
+                        ProgressData(text: "Standing Broad Jump",
+                                     fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore, fractionWorkout: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore)
+                    ]
                 }
-            }.onAppear {
-                loggerHistoryManager.loadData()
-                
-                lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
-                    LogRecord.napfaOrWorkout == "Napfa"
-                } ?? LogRecord(
-                    NapfaOrWorkouts: .napfa,
-                    description: "This is my description",
-                    date: Date(timeInterval: .zero, since: .now),
-                    twoPointFourKMRun: "0",
-                    shuttleRun: "0",
-                    sitUps: "0",
-                    sitAndReach: "0",
-                    inclinedPullups: "0",
-                    standingBroadJump: "0"
-                )
-                
-                lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
-                    LogRecord.NapfaOrWorkouts == .workout
-                } ?? LogRecord(
-                    NapfaOrWorkouts: .workout,
-                    description: "This is my description",
-                    date: Date(timeInterval: .zero, since: .now),
-                    twoPointFourKMRun: "0",
-                    shuttleRun: "0",
-                    sitUps: "0",
-                    sitAndReach: "0",
-                    inclinedPullups: "0",
-                    standingBroadJump: "0"
-                )
-                
-                data = [
-                    ProgressData(text: "2.4 Run",
-                                 fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
-                                 fractionWorkout: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
-                    ProgressData(text: "Situps",
-                                 fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore, fractionWorkout: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore),
-                    ProgressData(text: "Inclined Pullups",
-                                 fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / StandingBroadJumpHighestScore,
-                                 fractionWorkout: Double(lastWorkoutElement.inclinedPullups)! / StandingBroadJumpHighestScore),
-                    ProgressData(text: "Sit & Reach",
-                                 fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
-                                 fractionWorkout: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore),
-                    ProgressData(text: "Shuttle Run",
-                                 fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
-                                 fractionWorkout: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!),
-                    ProgressData(text: "Standing Broad Jump",
-                                 fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore, fractionWorkout: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore)
-                ]
             }
         }
     }
