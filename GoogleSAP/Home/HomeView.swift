@@ -31,11 +31,7 @@ struct idGen: Hashable {
 
 
 struct HomeView: View {
-    let SMALL_PROGRESS_VIEW_PADDING = CGFloat(16)
-    
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
-    
-    @State var progress = 0.0;
     
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
@@ -74,8 +70,6 @@ struct HomeView: View {
     @State var data: [ProgressData] = []
     
     @State var sizeOfBigProgress = 0.0
-    
-    @State var heightOfNavView = 0.0
     
     var body: some View {
         GeometryReader { geometry in
@@ -126,11 +120,6 @@ struct HomeView: View {
                             }
                             .padding(.bottom, sizeOfBigProgress * 0.000)
                         }
-                        
-                        
-                        
-//                        CustomScrollView(sizeOfProgBar: $heightOfNavView)
-//                            .frame(height: heightOfNavView)
                         
                         
                         Form {
@@ -195,143 +184,8 @@ struct HomeView: View {
     }
 }
 
-
-//struct CustomScrollView: View {
-//    @Environment(\.colorScheme) var colorScheme
-//
-//    @State var selectedRing = 0
-//    @State var geometry = CGSize(width: 0.0, height: 0.0)
-//
-//    @Binding var sizeOfProgBar: Double
-//
-//    var body: some View {
-//        ZStack(alignment: .center) {
-//            GeometryReader {geo in
-//                HStack {
-//
-//                }.onAppear {
-//                    geometry = geo.size
-//                }
-//            }
-//
-//            ZStack {
-//                Rectangle()
-//                    .fill(colorScheme == .dark ? .white : .black)
-//                    .frame(width: geometry.width, height: geometry.width / 8)
-//                HStack {
-//                    CustomProgressView(geometry: geometry, Selection: $selectedRing, index: 0)
-//
-//                    Spacer()
-//
-//                    CustomProgressView(geometry: geometry, Selection: $selectedRing, index: 1)
-//
-//                    Spacer()
-//
-//                    CustomProgressView(geometry: geometry, Selection: $selectedRing, index: 2)
-//
-//                }.frame(width: geometry.width / 2.5, height: geometry.width / 11)
-//            }
-//            .background {
-//                GeometryReader { geometryProxy in
-//                    Color.clear
-//                        .onAppear {
-//                            sizeOfProgBar = geometryProxy.size.height
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//struct CustomProgressView: View {
-//    @Environment(\.colorScheme) var colorScheme
-//    var geometry: CGSize
-//    @Binding var Selection: Int
-//    var index: Int
-//
-//    var body: some View {
-//        ZStack(alignment:.center) {
-//            Circle()
-//                .fill(Selection == index ? colorScheme == .dark ? .black : .white : .clear)
-//                .frame(width: geometry.width / 17, height: geometry.width / 17)
-//            Circle()
-//                .stroke(
-//                    Color.red.opacity(0.7),
-//                    lineWidth: CGFloat(10)
-//                )
-//
-//            Circle() // 2
-//                .trim(from: 0, to: 0.25)
-//                .stroke(
-//                    Color.green,
-//                    // 1
-//                    style: StrokeStyle(
-//                        lineWidth: CGFloat(10),
-//                        lineCap: .round
-//                    )
-//                )
-//                .rotationEffect(.degrees(-90))
-//                .animation(.easeOut, value: 0.25)
-//        }
-//        .frame(width: geometry.width / 18, height: geometry.width / 18)
-//        .onTapGesture {
-//            withAnimation {
-//                Selection = index
-//            }
-//
-//        }
-//    }
-//}
-
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
     }
 }
-
-//struct CustomScrollView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack(alignment: .center) {
-//            Spacer()
-//            CustomScrollView(sizeOfProgBar: )
-//        }
-//    }
-//}
-
-//
-//HStack {
-//    Spacer()
-//
-//    ForEach(secondRow, id: \.self) { theLists in
-//        CircularProgressViewSmall(progress: 0) {
-//            CircularProgressViewSmall(progress: theLists.fraction) {
-//                Text(theLists.text).multilineTextAlignment(.center)
-//            }
-//            .padding(SMALL_PROGRESS_VIEW_PADDING)
-//        }
-//        .frame(width: geometry.size.width/3-25, height: geometry.size.width/3-25)
-//        Spacer()
-//    }
-//}
-//.padding(.leading, 3)
-//.padding(.trailing, 3)
-//.padding(.top, 20)
-//
-//HStack {
-//    Spacer()
-//
-//    ForEach(thirdRow, id: \.self) { text in
-//        CircularProgressViewSmall(progress: 0.0) {
-//            CircularProgressViewSmall(progress: text.fraction) {
-//                Text(text.text)
-//                    .multilineTextAlignment(.center)
-//            }
-//            .padding(SMALL_PROGRESS_VIEW_PADDING)
-//        }
-//        .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
-//        Spacer()
-//    }
-//}
-//.padding(.leading, 3)
-//.padding(.trailing, 3)
-//.padding(.top, 10)
