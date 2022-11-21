@@ -31,6 +31,8 @@ struct idGen: Hashable {
 
 
 struct HomeView: View {
+    @Binding var tabSelection: Int
+    
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     
@@ -124,7 +126,15 @@ struct HomeView: View {
                         
                         Form {
                             Section {
-                                Text("helo wolrd")
+                                Button("Go to Workouts") {
+                                    self.tabSelection = 1
+                                }
+                                Button("Go to Logger") {
+                                    self.tabSelection = 2
+                                }
+                                Button("Go to Calculator") {
+                                    self.tabSelection = 3
+                                }
                             }
                         }
                         .padding(.top, sizeOfBigProgress * 0.00)
@@ -189,7 +199,8 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    @State static var a = 1
     static var previews: some View {
-        HomeView()
+        HomeView(tabSelection: $a)
     }
 }
