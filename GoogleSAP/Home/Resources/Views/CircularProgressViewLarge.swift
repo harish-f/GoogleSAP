@@ -16,7 +16,7 @@ struct CircularProgressViewLarge<Content: View>: View {
             content
             Circle()
                 .stroke(
-                    Color.red.opacity(0.5),
+                    Color.red.opacity(0.7),
                     lineWidth: CGFloat(30)
                 )
             Circle() // 2
