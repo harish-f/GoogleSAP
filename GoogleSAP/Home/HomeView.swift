@@ -35,6 +35,7 @@ struct HomeView: View {
     
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
+    @State var autoScroll = true
     
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
     @State var TwoPointFourKMRunHighestScore = 641.0
@@ -113,6 +114,32 @@ struct HomeView: View {
                                                 }
                                         }
                                     )
+                                    .onAppear {
+                                        if (autoScroll) {
+//                                            print("aaa")
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                                withAnimation {
+                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 1) > 5 ? 0 : data.firstIndex(of: datum)! + 1].text))
+                                                }
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*2) {
+                                                print("a")
+                                                withAnimation {
+                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 2) > 5 ? 0 : data.firstIndex(of: datum)! + 2].text))
+                                                }
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*3) {
+                                                withAnimation {
+                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 3) > 5 ? 0 : data.firstIndex(of: datum)! + 3].text))
+                                                }
+                                            }
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*4) {
+                                                withAnimation {
+                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 4) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
+                                                }
+                                            }
+                                        }
+                                    }
                                     
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
@@ -126,6 +153,7 @@ struct HomeView: View {
                         
                         Form {
                             Section {
+                                Text("")
                                 Button("Go to Workouts") {
                                     self.tabSelection = 1
                                 }
