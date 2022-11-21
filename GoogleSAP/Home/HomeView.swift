@@ -33,6 +33,8 @@ struct idGen: Hashable {
 struct HomeView: View {
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
+    
+    // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
     @State var SitUpsHighestScore = 42.0
@@ -71,18 +73,13 @@ struct HomeView: View {
     
     // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var data: [ProgressData] = []
-    
     @State var sizeOfBigProgress = 0.0
     
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
                 ZStack(alignment: .leading) {
-                    // TODO: MAKE VIEWS ADAPT TO USER AGE
-                    
                     VStack(alignment: .leading) {
-                        
-                        
                         ScrollViewReader { proxy in
                             SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
@@ -126,7 +123,9 @@ struct HomeView: View {
                         
                         
                         Form {
-                            Text("helo wolrd")
+                            Section {
+                                Text("helo wolrd")
+                            }
                         }
                         .padding(.top, sizeOfBigProgress * 0.00)
                         
