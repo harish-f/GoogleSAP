@@ -31,6 +31,8 @@ struct HomeView: View {
     
     @State var progress = 0.0;
     @StateObject var homeManager = HomeDataManager()
+    
+    // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var lastNAPFAElement: LogRecord = LogRecord(
         NapfaOrWorkouts: .napfa,
         description: "This is my description",
@@ -42,11 +44,15 @@ struct HomeView: View {
         inclinedPullups: "0.5",
         standingBroadJump: "0.6"
     )
+    
+    // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var secondRow: [ProgressData] = [
         ProgressData(text: "2.4 Run", fraction: 0.0),
         ProgressData(text: "Situps", fraction: 0.0),
         ProgressData(text: "Inclined Pullups",fraction: 0.0),
     ]
+    
+    // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var thirdRow: [ProgressData] = [
         ProgressData(text: "Sit & Reach", fraction: 0.0),
         ProgressData(text: "Shuttle Run", fraction: 0.0),
