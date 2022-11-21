@@ -30,7 +30,6 @@ struct HomeView: View {
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     @State var progress = 0.0;
-    @StateObject var homeManager = HomeDataManager()
     
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
@@ -132,22 +131,20 @@ struct HomeView: View {
                     }.navigationTitle("Overview")
                 }
             }.onAppear {
+                loggerHistoryManager.loadData()
                 lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
                     LogRecord.napfaOrWorkout == "Napfa"
                 }!
-                print(lastNAPFAElement)
                 
                 secondRow = [
-                    ProgressData(text: "2.4 Run", fraction: Double(lastNAPFAElement.twoPointFourKMRun)! / TwoPointFourKMRunHighestScore),
+                    ProgressData(text: "2.4 Run", fraction: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!),
                     ProgressData(text: "Situps", fraction: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore),
                     ProgressData(text: "Inclined Pullups", fraction: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore),
                 ]
                 
-                print(secondRow[2])
-                
                 thirdRow = [
                     ProgressData(text: "Sit & Reach", fraction: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore),
-                    ProgressData(text: "Shuttle Run", fraction: Double(lastNAPFAElement.shuttleRun)! / ShuttleRunHighestScore),
+                    ProgressData(text: "Shuttle Run", fraction: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!),
                 ]
                 
             }
