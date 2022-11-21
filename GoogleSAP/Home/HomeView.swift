@@ -34,9 +34,9 @@ struct HomeView: View {
     
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
-    @State var SitUpsHighestScore = 42
-    @State var SitAndReachHighestScore = 45
-    @State var InclinedPullupsHighestScore = 7
+    @State var SitUpsHighestScore = 42.0
+    @State var SitAndReachHighestScore = 45.0
+    @State var InclinedPullupsHighestScore = 7.0
     @State var StandingBroadJumpHighestScore = 237.0
     
     
