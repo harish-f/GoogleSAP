@@ -101,7 +101,7 @@ struct HomeView: View {
                                                 .padding(.trailing, 45)
                                             })
                                             .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50, alignment: .center)
-                                            .padding(.bottom, geometry.size.height * 0.03)
+//                                            .padding(.bottom, geometry.size.height * 0.03)
                                         }
                                     }
                                     .padding(.top, 10)
@@ -117,27 +117,37 @@ struct HomeView: View {
                                     .onAppear {
                                         if (autoScroll) {
 //                                            print("aaa")
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                                                withAnimation {
-                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 1) > 5 ? 0 : data.firstIndex(of: datum)! + 1].text))
-                                                }
-                                            }
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*2) {
-                                                print("a")
-                                                withAnimation {
-                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 2) > 5 ? 0 : data.firstIndex(of: datum)! + 2].text))
-                                                }
-                                            }
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*3) {
-                                                withAnimation {
-                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 3) > 5 ? 0 : data.firstIndex(of: datum)! + 3].text))
-                                                }
-                                            }
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*4) {
-                                                withAnimation {
-                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 4) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
-                                                }
-                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 1) > 5 ? 0 : data.firstIndex(of: datum)! + 1].text))
+//                                                }
+//                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*2) {
+//                                                print("a")
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 2) > 5 ? 0 : data.firstIndex(of: datum)! + 2].text))
+//                                                }
+//                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*3) {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 3) > 5 ? 0 : data.firstIndex(of: datum)! + 3].text))
+//                                                }
+//                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*4) {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 4) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
+//                                                }
+//                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*5) {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 5) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
+//                                                }
+//                                            }
+//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*6) {
+//                                                withAnimation {
+//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 6) > 5 ? 0 : data.firstIndex(of: datum)! + 6].text))
+//                                                }
+//                                            }
                                         }
                                     }
                                     
@@ -153,7 +163,18 @@ struct HomeView: View {
                         
                         Form {
                             Section {
-                                Text("")
+                                
+                                HStack {
+                                    Image(systemName: "arrowshape.left.fill")
+                                    Spacer()
+                                    Text("Swipe left or right on the rings to view more stations")
+                                        .multilineTextAlignment(.center)
+                                        .font(.footnote)
+                                    Spacer()
+                                    Image(systemName: "arrowshape.right.fill")
+                                }
+                                
+                                
                                 Button("Go to Workouts") {
                                     self.tabSelection = 1
                                 }
