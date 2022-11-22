@@ -309,33 +309,50 @@ struct getGoalData: View {
                     
                     Section {
                         Text("2.4KM Run")
-                        TextField("Seconds", text: $twoPointFourKMRun)
+                        TextField(String(twoPointFourKMRunScore), text: $twoPointFourKMRun)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("Seconds")
                     }
+                    
                     Section {
                         Text("Sit And Reach")
-                        TextField("CM", text: $sitAndReach)
+                        TextField(String(sitAndReachScore), text: $sitAndReach)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("CM")
                     }
+                    
                     Section {
                         Text("Standing Broad Jump")
-                        TextField("CM", text: $standingBroadJump)
+                        TextField(String(standingBroadJumpScore), text: $standingBroadJump)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("CM")
                     }
+                    
                     Section {
                         Text("Inclined Pullups (In 30 seconds)")
-                        TextField("Reps", text: $inclinedPullups)
+                        TextField(String(inclinedPullupsScore), text: $inclinedPullups)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("Reps")
                     }
+                    
                     Section {
                         Text("Shuttle Run")
-                        TextField("Seconds", text: $shuttleRun)
+                        TextField(String(shuttleRunScore), text: $shuttleRun)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("Seconds")
                     }
+                    
                     Section {
                         Text("Situps (In 1 min)")
-                        TextField("Reps", text: $sitUps)
+                        TextField(String(sitUpsScore), text: $sitUps)
                             .keyboardType(.numberPad)
+                    } footer: {
+                        Text("Reps")
                     }
                 }
             }
