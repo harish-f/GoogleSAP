@@ -48,6 +48,9 @@ struct HomeView: View {
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
     @State var age = 16
     
+    // This is to get user's goals, etc
+    @State var showModal = false
+    
     
     // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var lastNAPFAElement: LogRecord = LogRecord(
@@ -187,10 +190,21 @@ struct HomeView: View {
                             }
                         }
                         .padding(.top, sizeOfBigProgress * 0.00)
+                        .sheet(isPresented: $showModal) {
+                            showModal = false
+                        } content: {
+                            getGoalData()
+                        }
                         
                     }.navigationTitle("Overview")
                         .navigationBarTitleDisplayMode(.inline)
-                        .navigationBarItems(trailing:Stepper(value: $age, in: 0...20) {Text("")})
+                        .navigationBarItems(trailing:
+                                            Button {
+                            showModal = true
+                        } label: {
+                            Image(systemName: "target")
+                        }
+                        )
                         .navigationBarItems(leading:Text("Age: " + String(age)))
                 }.onAppear {
                     loggerHistoryManager.loadData()
@@ -247,9 +261,93 @@ struct HomeView: View {
     }
 }
 
+
+struct getGoalData: View {
+    @Environment(\.dismiss) var dismiss
+    
+    @State var birthdate = Date()
+    
+    @State var twoPointFourKMRun = ""
+    @State var standingBroadJump = ""
+    @State var inclinedPullups = ""
+    @State var shuttleRun = ""
+    @State var sitUps = ""
+    @State var sitAndReach = ""
+    
+    var dateClosedRange: ClosedRange<Date> {
+        let min = Calendar.current.date(byAdding: .year, value: -17, to: Date())!
+        let max = Calendar.current.date(byAdding: .year, value: -8, to: Date())!
+        return min...max
+    }
+    
+    
+    var body: some View {
+        NavigationView {
+            HStack {
+                Form {
+                    Section {
+                        DatePicker(selection: $birthdate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
+                    } footer: {
+                        Text("We need your birthday to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
+                    }
+
+                    
+                    Section {
+                        Text("2.4KM Run")
+                        TextField("Seconds", text: $twoPointFourKMRun)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Sit And Reach")
+                        TextField("CM", text: $sitAndReach)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Standing Broad Jump")
+                        TextField("CM", text: $standingBroadJump)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Inclined Pullups (In 30 seconds)")
+                        TextField("Reps", text: $inclinedPullups)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Shuttle Run")
+                        TextField("Seconds", text: $shuttleRun)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Situps (In 1 min)")
+                        TextField("Reps", text: $sitUps)
+                            .keyboardType(.numberPad)
+                    }
+                }
+            }
+            .navigationTitle("Set Your Goals")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(leading: Button {
+                dismiss()
+            } label: {Text("Cancel").foregroundColor(.red)})
+            
+            .navigationBarItems(trailing: Button {
+                dismiss()
+            } label: {Text("Set").foregroundColor(.blue)})
+        }
+    }
+}
+
+
+
 struct HomeView_Previews: PreviewProvider {
     @State static var a = 1
     static var previews: some View {
         HomeView(tabSelection: $a)
+    }
+}
+
+struct HomeViewModal_Previews: PreviewProvider {
+    static var previews: some View {
+        getGoalData()
     }
 }
