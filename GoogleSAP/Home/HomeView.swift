@@ -12,7 +12,8 @@ import SwiftUISnappingScrollView
 struct ProgressData: Hashable, Identifiable {
     var text: String
     var fractionNAPFA: Double
-    var fractionWorkout: Double
+    var fractionWorkoutForA: Double
+    var fractionWorkoutForUserGoal: Double
     var id = UUID()
 }
 
@@ -35,8 +36,6 @@ struct HomeView: View {
     
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
-    @State var autoScroll = true
-    
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
     @State var age = 16
     @State var TwoPointFourKMRunUserSetScore = 641.0
@@ -48,12 +47,12 @@ struct HomeView: View {
     
     
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
-    @State var TwoPointFourKMRunHighestScore = 641.0
-    @State var ShuttleRunHighestScore = 10.2
-    @State var SitUpsHighestScore = 42.0
-    @State var SitAndReachHighestScore = 45.0
-    @State var InclinedPullupsHighestScore = 7.0
-    @State var StandingBroadJumpHighestScore = 237.0
+    @State var TwoPointFourKMRunHighestScore = 0.0
+    @State var ShuttleRunHighestScore = 0.0
+    @State var SitUpsHighestScore = 0.0
+    @State var SitAndReachHighestScore = 0.0
+    @State var InclinedPullupsHighestScore = 0.0
+    @State var StandingBroadJumpHighestScore = 0.0
     
     
     // This is to get user's goals, etc
@@ -98,10 +97,40 @@ struct HomeView: View {
                             SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
                                     Spacer()
+//                                    Spacer()
+//                                    Spacer()
+                                    
+                                    
+//                                    HStack(alignment: .center) {
+//                                        VStack(alignment: .center) {
+//                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkout, sfSymbolName: "target", content: {
+//                                                CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolName: "a.circle", content: {
+//                                                    Button {
+//                                                        proxy.scrollTo(idGen(text: datum.text))
+//                                                    } label: {
+//                                                        Text(datum.text).font(.title3)
+//                                                    }
+//                                                })
+//                                                .padding(45)
+//                                            })
+//                                            .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50, alignment: .center)
+//                                        }
+//                                    }
+//                                    .padding(.top, 10)
+//                                    .padding()
+//                                    .background(
+//                                        GeometryReader { geometryProxy in
+//                                            Color.clear
+//                                                .onAppear {
+//                                                    sizeOfBigProgress = geometryProxy.size.height
+//                                                }
+//                                        }
+//                                    )
+                                    
                                     HStack(alignment: .center) {
                                         VStack(alignment: .center) {
-                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkout, sfSymbolName: "a.circle", content: {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolName: "target", content: {
+                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolName: "target", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolName: "a.circle", content: {
                                                     Button {
                                                         proxy.scrollTo(idGen(text: datum.text))
                                                     } label: {
@@ -110,10 +139,11 @@ struct HomeView: View {
                                                 })
                                                 .padding(45)
                                             })
-                                            .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50, alignment: .center)
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
                                         }
                                     }
                                     .padding(.top, 10)
+                                    .padding()
                                     .padding()
                                     .background(
                                         GeometryReader { geometryProxy in
@@ -123,6 +153,7 @@ struct HomeView: View {
                                                 }
                                         }
                                     )
+                                    
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
                                         .id(idGen(text: datum.text))
@@ -166,7 +197,7 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                         } content: {
-                            getGoalData(twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(age: $age, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -178,7 +209,7 @@ struct HomeView: View {
                             Image(systemName: "target")
                         }
                         )
-                        .navigationBarItems(leading:Text("Age: " + String(age)))
+                        .navigationBarItems(leading:Text("Age: " + String(Int(age))))
                 }.onAppear {
                     loggerHistoryManager.loadData()
                     
@@ -213,20 +244,29 @@ struct HomeView: View {
                     data = [
                         ProgressData(text: "2.4 Run",
                                      fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
-                                     fractionWorkout: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
+                                     fractionWorkoutForA: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!,
+                                     fractionWorkoutForUserGoal: TwoPointFourKMRunUserSetScore == 0.0 ? 0.0 :
+                                        TwoPointFourKMRunUserSetScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
                         ProgressData(text: "Situps",
-                                     fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore, fractionWorkout: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore),
+                                     fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore,
+                                     fractionWorkoutForA: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore,
+                                     fractionWorkoutForUserGoal: SitUpsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitUps)! / SitUpsUserSetScore),
                         ProgressData(text: "Inclined Pullups",
-                                     fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / StandingBroadJumpHighestScore,
-                                     fractionWorkout: Double(lastWorkoutElement.inclinedPullups)! / StandingBroadJumpHighestScore),
+                                     fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                     fractionWorkoutForA: Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                     fractionWorkoutForUserGoal: InclinedPullupsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsUserSetScore),
                         ProgressData(text: "Sit & Reach",
                                      fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
-                                     fractionWorkout: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore),
+                                     fractionWorkoutForA: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore,
+                                     fractionWorkoutForUserGoal: SitAndReachUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitAndReach)! / SitAndReachUserSetScore),
                         ProgressData(text: "Shuttle Run",
                                      fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
-                                     fractionWorkout: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!),
+                                     fractionWorkoutForA: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!,
+                                     fractionWorkoutForUserGoal: ShuttleRunUserSetScore == 0.0 ? 0.0 : ShuttleRunUserSetScore / Double(lastWorkoutElement.shuttleRun)!),
                         ProgressData(text: "Standing Broad Jump",
-                                     fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore, fractionWorkout: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore)
+                                     fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                     fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                     fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
                     ]
                 }
             }
@@ -238,6 +278,7 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var age: Int
     @Binding var twoPointFourKMRunScore: Double
     @Binding var standingBroadJumpScore: Double
     @Binding var inclinedPullupsScore: Double
@@ -275,7 +316,8 @@ struct getGoalData: View {
                     
                     Section {
                         Text("2.4KM Run")
-                        TextField(String(twoPointFourKMRunScore), text: $twoPointFourKMRun)
+                        TextField(String(
+                            Int(twoPointFourKMRunScore)), text: $twoPointFourKMRun)
                             .keyboardType(.numberPad)
                     } footer: {
                         Text("Seconds")
@@ -299,7 +341,7 @@ struct getGoalData: View {
                     
                     Section {
                         Text("Inclined Pullups (In 30 seconds)")
-                        TextField(String(inclinedPullupsScore), text: $inclinedPullups)
+                        TextField(String(Int(inclinedPullupsScore)), text: $inclinedPullups)
                             .keyboardType(.numberPad)
                     } footer: {
                         Text("Reps")
@@ -315,7 +357,7 @@ struct getGoalData: View {
                     
                     Section {
                         Text("Situps (In 1 min)")
-                        TextField(String(sitUpsScore), text: $sitUps)
+                        TextField(String(Int(sitUpsScore)), text: $sitUps)
                             .keyboardType(.numberPad)
                     } footer: {
                         Text("Reps")
@@ -330,6 +372,18 @@ struct getGoalData: View {
             
             .navigationBarItems(trailing: Button {
                 if (Float(twoPointFourKMRun) != nil && Float(sitAndReach) != nil && Float(standingBroadJump) != nil && Float(inclinedPullups) != nil && Float(shuttleRun) != nil && Float(sitUps) != nil) {
+                    twoPointFourKMRunScore = Double(twoPointFourKMRun) ?? 0
+                    standingBroadJumpScore = Double(standingBroadJump) ?? 0
+                    inclinedPullupsScore = Double(inclinedPullups) ?? 0
+                    shuttleRunScore = Double(shuttleRun) ?? 0
+                    sitUpsScore = Double(sitUps) ?? 0
+                    sitAndReachScore = Double(sitAndReach) ?? 0
+                    
+                    let calendar = Calendar.current
+                    let ageComponents = calendar.dateComponents([.year], from: birthdate, to: Date())
+                    age = ageComponents.year!
+                    
+                    dismiss()
                     
                 } else {
                     showAlert = true
@@ -355,7 +409,8 @@ struct HomeView_Previews: PreviewProvider {
 
 struct HomeViewModal_Previews: PreviewProvider {
     @State static var a = 1.0
+    @State static var b = 1
     static var previews: some View {
-        getGoalData(twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
+        getGoalData(age: $b, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
     }
 }
