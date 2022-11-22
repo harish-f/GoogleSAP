@@ -38,21 +38,22 @@ struct HomeView: View {
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
     @State var age = 16
-    @State var TwoPointFourKMRunUserSetScore = 641.0
-    @State var ShuttleRunUserSetScore = 10.2
-    @State var SitUpsUserSetScore = 42.0
-    @State var SitAndReachUserSetScore = 45.0
-    @State var InclinedPullupsUserSetScore = 7.0
-    @State var StandingBroadJumpUserSetScore = 237.0
+    @State var birthdayObj = Date()
+    @State var TwoPointFourKMRunUserSetScore = 0.0
+    @State var ShuttleRunUserSetScore = 0.0
+    @State var SitUpsUserSetScore = 0.0
+    @State var SitAndReachUserSetScore = 0.0
+    @State var InclinedPullupsUserSetScore = 0.0
+    @State var StandingBroadJumpUserSetScore = 0.0
     
     
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
-    @State var TwoPointFourKMRunHighestScore = 0.0
-    @State var ShuttleRunHighestScore = 0.0
-    @State var SitUpsHighestScore = 0.0
-    @State var SitAndReachHighestScore = 0.0
-    @State var InclinedPullupsHighestScore = 0.0
-    @State var StandingBroadJumpHighestScore = 0.0
+    @State var TwoPointFourKMRunHighestScore = 641.0
+    @State var ShuttleRunHighestScore = 10.2
+    @State var SitUpsHighestScore = 42.0
+    @State var SitAndReachHighestScore = 45.0
+    @State var InclinedPullupsHighestScore = 7.0
+    @State var StandingBroadJumpHighestScore = 237.0
     
     
     // This is to get user's goals, etc
@@ -197,7 +198,7 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                         } content: {
-                            getGoalData(age: $age, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(age: $age, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -279,6 +280,7 @@ struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
     @Binding var age: Int
+    @Binding var birthDate: Date
     @Binding var twoPointFourKMRunScore: Double
     @Binding var standingBroadJumpScore: Double
     @Binding var inclinedPullupsScore: Double
@@ -287,7 +289,6 @@ struct getGoalData: View {
     @Binding var sitAndReachScore: Double
     
     @State var showAlert = false
-    @State var birthdate = Date()
     
     @State var twoPointFourKMRun = ""
     @State var standingBroadJump = ""
@@ -308,7 +309,7 @@ struct getGoalData: View {
             HStack {
                 Form {
                     Section {
-                        DatePicker(selection: $birthdate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
+                        DatePicker(selection: $birthDate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
                     } footer: {
                         Text("We need your birthday to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
                     }
@@ -371,16 +372,16 @@ struct getGoalData: View {
             } label: {Text("Cancel").foregroundColor(.red)})
             
             .navigationBarItems(trailing: Button {
-                if (Float(twoPointFourKMRun) != nil && Float(sitAndReach) != nil && Float(standingBroadJump) != nil && Float(inclinedPullups) != nil && Float(shuttleRun) != nil && Float(sitUps) != nil) {
-                    twoPointFourKMRunScore = Double(twoPointFourKMRun) ?? 0
-                    standingBroadJumpScore = Double(standingBroadJump) ?? 0
-                    inclinedPullupsScore = Double(inclinedPullups) ?? 0
-                    shuttleRunScore = Double(shuttleRun) ?? 0
-                    sitUpsScore = Double(sitUps) ?? 0
-                    sitAndReachScore = Double(sitAndReach) ?? 0
+                if (Float(twoPointFourKMRun) != nil && Float(sitAndReach) != nil && Float(standingBroadJump) != nil && Float(inclinedPullups) != nil && Float(shuttleRun) != nil && Float(sitUps) != nil || twoPointFourKMRun == "" || sitAndReach == "" || standingBroadJump == "" || inclinedPullups == "" || shuttleRun == "" || sitUps == "") {
+                    twoPointFourKMRunScore = Double(twoPointFourKMRun) ?? twoPointFourKMRunScore
+                    standingBroadJumpScore = Double(standingBroadJump) ?? standingBroadJumpScore
+                    inclinedPullupsScore = Double(inclinedPullups) ?? inclinedPullupsScore
+                    shuttleRunScore = Double(shuttleRun) ?? shuttleRunScore
+                    sitUpsScore = Double(sitUps) ?? sitUpsScore
+                    sitAndReachScore = Double(sitAndReach) ?? sitAndReachScore
                     
                     let calendar = Calendar.current
-                    let ageComponents = calendar.dateComponents([.year], from: birthdate, to: Date())
+                    let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
                     age = ageComponents.year!
                     
                     dismiss()
@@ -410,7 +411,8 @@ struct HomeView_Previews: PreviewProvider {
 struct HomeViewModal_Previews: PreviewProvider {
     @State static var a = 1.0
     @State static var b = 1
+    @State static var c = Date()
     static var previews: some View {
-        getGoalData(age: $b, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
+        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
     }
 }
