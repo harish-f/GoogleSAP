@@ -37,12 +37,15 @@ struct HomeView: View {
     
     @State var autoScroll = true
     
+    // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
+    @State var age = 16
     @State var TwoPointFourKMRunUserSetScore = 641.0
     @State var ShuttleRunUserSetScore = 10.2
     @State var SitUpsUserSetScore = 42.0
     @State var SitAndReachUserSetScore = 45.0
     @State var InclinedPullupsUserSetScore = 7.0
     @State var StandingBroadJumpUserSetScore = 237.0
+    
     
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
     @State var TwoPointFourKMRunHighestScore = 641.0
@@ -52,8 +55,6 @@ struct HomeView: View {
     @State var InclinedPullupsHighestScore = 7.0
     @State var StandingBroadJumpHighestScore = 237.0
     
-    // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
-    @State var age = 16
     
     // This is to get user's goals, etc
     @State var showModal = false
@@ -99,19 +100,17 @@ struct HomeView: View {
                                     Spacer()
                                     HStack(alignment: .center) {
                                         VStack(alignment: .center) {
-                                            CircularProgressViewLarge(progress: datum.fractionWorkout, content: {
-                                                CircularProgressViewLarge(progress: datum.fractionNAPFA, content: {
+                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkout, sfSymbolName: "a.circle", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolName: "target", content: {
                                                     Button {
                                                         proxy.scrollTo(idGen(text: datum.text))
                                                     } label: {
                                                         Text(datum.text).font(.title3)
                                                     }
                                                 })
-                                                .padding(.leading, 45)
-                                                .padding(.trailing, 45)
+                                                .padding(45)
                                             })
                                             .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50, alignment: .center)
-//                                            .padding(.bottom, geometry.size.height * 0.03)
                                         }
                                     }
                                     .padding(.top, 10)
@@ -124,50 +123,12 @@ struct HomeView: View {
                                                 }
                                         }
                                     )
-                                    .onAppear {
-                                        if (autoScroll) {
-//                                            print("aaa")
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 1) > 5 ? 0 : data.firstIndex(of: datum)! + 1].text))
-//                                                }
-//                                            }
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*2) {
-//                                                print("a")
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 2) > 5 ? 0 : data.firstIndex(of: datum)! + 2].text))
-//                                                }
-//                                            }
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*3) {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 3) > 5 ? 0 : data.firstIndex(of: datum)! + 3].text))
-//                                                }
-//                                            }
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*4) {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 4) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
-//                                                }
-//                                            }
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*5) {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 5) > 5 ? 0 : data.firstIndex(of: datum)! + 4].text))
-//                                                }
-//                                            }
-//                                            DispatchQueue.main.asyncAfter(deadline: .now() + 5.0*6) {
-//                                                withAnimation {
-//                                                    proxy.scrollTo(idGen(text: data[(data.firstIndex(of: datum)! + 6) > 5 ? 0 : data.firstIndex(of: datum)! + 6].text))
-//                                                }
-//                                            }
-                                        }
-                                    }
-                                    
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
                                         .id(idGen(text: datum.text))
                                 }
                                 
                             }
-                            .padding(.bottom, sizeOfBigProgress * 0.000)
                         }
                         
                         
@@ -186,17 +147,22 @@ struct HomeView: View {
                                 
                                 
                                 Button("Go to Workouts") {
-                                    self.tabSelection = 1
+                                    withAnimation {
+                                        self.tabSelection = 1
+                                    }
                                 }
                                 Button("Go to Logger") {
-                                    self.tabSelection = 2
+                                    withAnimation {
+                                        self.tabSelection = 2
+                                    }
                                 }
                                 Button("Go to Calculator") {
-                                    self.tabSelection = 3
+                                    withAnimation {
+                                        self.tabSelection = 3
+                                    }
                                 }
                             }
                         }
-                        .padding(.top, sizeOfBigProgress * 0.00)
                         .sheet(isPresented: $showModal) {
                             showModal = false
                         } content: {
