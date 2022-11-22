@@ -37,6 +37,13 @@ struct HomeView: View {
     
     @State var autoScroll = true
     
+    @State var TwoPointFourKMRunUserSetScore = 641.0
+    @State var ShuttleRunUserSetScore = 10.2
+    @State var SitUpsUserSetScore = 42.0
+    @State var SitAndReachUserSetScore = 45.0
+    @State var InclinedPullupsUserSetScore = 7.0
+    @State var StandingBroadJumpUserSetScore = 237.0
+    
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
@@ -193,7 +200,7 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                         } content: {
-                            getGoalData()
+                            getGoalData(twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -265,6 +272,14 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var twoPointFourKMRunScore: Double
+    @Binding var standingBroadJumpScore: Double
+    @Binding var inclinedPullupsScore: Double
+    @Binding var shuttleRunScore: Double
+    @Binding var sitUpsScore: Double
+    @Binding var sitAndReachScore: Double
+    
+    @State var showAlert = false
     @State var birthdate = Date()
     
     @State var twoPointFourKMRun = ""
@@ -331,8 +346,17 @@ struct getGoalData: View {
             } label: {Text("Cancel").foregroundColor(.red)})
             
             .navigationBarItems(trailing: Button {
-                dismiss()
+                if (Float(twoPointFourKMRun) != nil && Float(sitAndReach) != nil && Float(standingBroadJump) != nil && Float(inclinedPullups) != nil && Float(shuttleRun) != nil && Float(sitUps) != nil) {
+                    
+                } else {
+                    showAlert = true
+                }
             } label: {Text("Set").foregroundColor(.blue)})
+        }
+        .alert("Error!", isPresented: $showAlert) {
+            Button("Ok") {}
+        } message: {
+            Text("Please ensure that the values entered are numbers and are not left blank.")
         }
     }
 }
@@ -347,7 +371,8 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 struct HomeViewModal_Previews: PreviewProvider {
+    @State static var a = 1.0
     static var previews: some View {
-        getGoalData()
+        getGoalData(twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
     }
 }
