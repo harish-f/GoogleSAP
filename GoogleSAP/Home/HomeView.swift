@@ -103,7 +103,7 @@ struct HomeView: View {
                         ScrollViewReader { proxy in
                             SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
                                 ForEach(data) { datum in
-                                    if (datum.fractionWorkoutForUserGoal != 0) {
+                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
                                         Spacer()
                                         
                                         HStack(alignment: .center) {
@@ -111,6 +111,7 @@ struct HomeView: View {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
                                                             Text(datum.text).font(.title3)
+                                                            .padding(geometry.size.width / 9)
                                                             .font(.title3)
                                                     })
                                                     .padding(geometry.size.width / 10)
@@ -202,7 +203,7 @@ struct HomeView: View {
                                     }
                                 }
                                 
-                                if !stillNeedFillNAPFAEntry {
+                                if stillNeedFillNAPFAEntry {
                                     Button {
                                         self.tabSelection = 2
                                     } label: {
@@ -214,7 +215,7 @@ struct HomeView: View {
                                     }
                                 }
                                 
-                                if !stillNeedFillWorkoutEntry {
+                                if stillNeedFillWorkoutEntry {
                                     Button {
                                         self.tabSelection = 2
                                     } label: {
@@ -314,7 +315,6 @@ struct HomeView: View {
                             Image(systemName: "target")
                         }
                         )
-                        .navigationBarItems(leading:Text("Age: " + String(Int(age))))
                 }.onAppear {
                     loggerHistoryManager.loadData()
                     
