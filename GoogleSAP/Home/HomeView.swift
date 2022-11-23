@@ -139,8 +139,8 @@ struct HomeView: View {
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
                                                         Button {
                                                             proxy.scrollTo(idGen(text: datum.text))
                                                         } label: {
