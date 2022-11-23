@@ -37,6 +37,8 @@ struct HomeView: View {
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     @State var stillHaveUnsetGoals = false
+    @State var stillNeedFillNAPFAEntry = false
+    @State var stillNeedFillWorkoutEntry = false
     
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
@@ -106,8 +108,8 @@ struct HomeView: View {
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
                                                         Button {
                                                             proxy.scrollTo(idGen(text: datum.text))
                                                         } label: {
@@ -189,11 +191,40 @@ struct HomeView: View {
                                     Button {
                                         showModal = true
                                     } label: {
-                                        Text("You seem to have some unset goals. You can set some now.")
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You seem to have some unset goals. You can set some now.")
+                                        }
                                     }
-    
                                 }
                                 
+                                if !stillNeedFillNAPFAEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your offical NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
+                                if !stillNeedFillWorkoutEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your mock (Practise) NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            Section {
                                 Button("Go to Workouts") {
                                     withAnimation {
                                         self.tabSelection = 1
@@ -211,7 +242,7 @@ struct HomeView: View {
                                 }
                             }
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     if (data[0].fractionWorkoutForUserGoal == 0.0 || data[1].fractionWorkoutForUserGoal == 0.0 || data[2].fractionWorkoutForUserGoal == 0.0 || data[3].fractionWorkoutForUserGoal == 0.0 || data[4].fractionWorkoutForUserGoal == 0.0 || data[5].fractionWorkoutForUserGoal == 0.0) {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
@@ -221,6 +252,47 @@ struct HomeView: View {
                                             stillHaveUnsetGoals = false
                                         }
                                     }
+                                    
+                                    if (lastNAPFAElement == LogRecord(
+                                        NapfaOrWorkouts: .napfa,
+                                        description: "This is my description",
+                                        date: Date(timeInterval: .zero, since: .now),
+                                        twoPointFourKMRun: "0",
+                                        shuttleRun: "0",
+                                        sitUps: "0",
+                                        sitAndReach: "0",
+                                        inclinedPullups: "0",
+                                        standingBroadJump: "0"
+                                    )) {
+                                        withAnimation {
+                                            stillNeedFillNAPFAEntry = true
+                                        }
+                                    } else {
+                                        withAnimation {
+                                            stillNeedFillNAPFAEntry = false
+                                        }
+                                    }
+                                    
+                                    if (lastWorkoutElement == LogRecord(
+                                        NapfaOrWorkouts: .workout,
+                                        description: "This is my description",
+                                        date: Date(timeInterval: .zero, since: .now),
+                                        twoPointFourKMRun: "0",
+                                        shuttleRun: "0",
+                                        sitUps: "0",
+                                        sitAndReach: "0",
+                                        inclinedPullups: "0",
+                                        standingBroadJump: "0"
+                                    )) {
+                                        withAnimation {
+                                            stillNeedFillWorkoutEntry = true
+                                        }
+                                    } else {
+                                        withAnimation {
+                                            stillNeedFillWorkoutEntry = false
+                                        }
+                                    }
+                                    
                                 }
                             }
                         }
@@ -298,6 +370,13 @@ struct HomeView: View {
                                      fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
                                      fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
                     ]
+                    
+                    print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
+                    print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
+                    print(data[2].text + " " + String(data[2].fractionWorkoutForUserGoal))
+                    print(data[3].text + " " + String(data[3].fractionWorkoutForUserGoal))
+                    print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
+                    print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
                 }
             }
         }
