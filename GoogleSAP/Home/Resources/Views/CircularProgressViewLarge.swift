@@ -52,7 +52,8 @@ extension CircularProgressViewLarge where Content == EmptyView {
 
 struct CircularProgressViewLargeIcon<Content: View>: View {
     let progress: Double
-    let sfSymbolName: String
+    let sfSymbolNameTop: String
+    let sfSymbolNameBottom: String
     @ViewBuilder var content: Content
     
     var body: some View {
@@ -78,21 +79,28 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                     .animation(.easeOut, value: progress)
             }
             VStack {
-                Image(systemName: sfSymbolName)
+                Image(systemName: sfSymbolNameTop)
                     .font(.title2)
                     .foregroundColor(.black)
                 Spacer()
             }
-            .padding(-12)
+            .padding(-13)
+            VStack {
+                Spacer()
+                Image(systemName: sfSymbolNameBottom)
+                    .font(.title2)
+                    .foregroundColor(.black)
+            }
+            .padding(-13)
         }
     }
 }
 
-extension CircularProgressViewLargeIcon where Content == EmptyView {
-    init(progress: Double, symbol: String) {
-        self.init(progress: progress, sfSymbolName: symbol, content: { EmptyView() })
-  }
-}
+//extension CircularProgressViewLargeIcon where Content == EmptyView {
+//    init(progress: Double, symbolTop: String, symbolBottom: String) {
+//        self.init(progress: progress, sfSymbolNameTop: symbolTop, sfSymbolNameBottom: symbolBottom, content: { EmptyView() })
+//  }
+//}
 
 
 
@@ -114,3 +122,23 @@ struct CircularProgressViewLarge_Previews: PreviewProvider {
             .frame(width:200, height: 200)
     }
 }
+
+struct CircularProgressViewLargeIcon_Previews: PreviewProvider {
+    struct SimpleView: View {
+        var body: some View {
+            VStack {
+                Text("SimpleView Text")
+            }
+        }
+    }
+    static var previews: some View {
+        CircularProgressViewLargeIcon(progress: 0.25, sfSymbolNameTop: "arrow.right", sfSymbolNameBottom: "questionmark.circle", content: {
+            SimpleView()
+        })
+            .frame(width:200, height: 200)
+        
+//        CircularProgressViewLargeIcon<<#Content: View#>>(progress: 0.25, symbolTop: "arrow.right", symbolBottom: "")
+//            .frame(width:200, height: 200)
+    }
+}
+

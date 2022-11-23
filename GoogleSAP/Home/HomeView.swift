@@ -36,6 +36,9 @@ struct HomeView: View {
     
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
+    @State var stillHaveUnsetGoals = false
+    
+    
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
     @State var age = 16
     @State var birthdayObj = Date()
@@ -89,6 +92,7 @@ struct HomeView: View {
     @State var data: [ProgressData] = []
     @State var sizeOfBigProgress = 0.0
     
+    @ViewBuilder
     var body: some View {
         GeometryReader { geometry in
             NavigationView {
@@ -97,7 +101,6 @@ struct HomeView: View {
                         ScrollViewReader { proxy in
                             SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
-                                    Spacer()
 //                                    Spacer()
 //                                    Spacer()
                                     
@@ -127,37 +130,72 @@ struct HomeView: View {
 //                                                }
 //                                        }
 //                                    )
-                                    
-                                    HStack(alignment: .center) {
-                                        VStack(alignment: .center) {
-                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolName: "target", content: {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolName: "a.circle", content: {
-                                                    Button {
-                                                        proxy.scrollTo(idGen(text: datum.text))
-                                                    } label: {
-                                                        Text(datum.text).font(.title3)
-                                                    }
+                                    if (datum.fractionWorkoutForUserGoal != 0) {
+                                        Spacer()
+                                        
+                                        HStack(alignment: .center) {
+                                            VStack(alignment: .center) {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
+                                                        Button {
+                                                            proxy.scrollTo(idGen(text: datum.text))
+                                                        } label: {
+                                                            Text(datum.text).font(.title3)
+                                                        }
+                                                    })
+                                                    .padding(45)
                                                 })
-                                                .padding(45)
-                                            })
-                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            }
                                         }
+                                        .padding(.top, 10)
+                                        .padding()
+                                        .padding()
+                                        .background(
+                                            GeometryReader { geometryProxy in
+                                                Color.clear
+                                                    .onAppear {
+                                                        sizeOfBigProgress = geometryProxy.size.height
+                                                    }
+                                            }
+                                        )
+                                        
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
+                                    } else {
+                                        Spacer()
+                                        
+                                        HStack(alignment: .center) {
+                                            VStack(alignment: .center) {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
+                                                        Button {
+                                                            proxy.scrollTo(idGen(text: datum.text))
+                                                        } label: {
+                                                            Text(datum.text).font(.title3)
+                                                        }
+                                                    })
+                                                    .padding(45)
+                                                })
+                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            }
+                                        }
+                                        .padding(.top, 10)
+                                        .padding()
+                                        .padding()
+                                        .background(
+                                            GeometryReader { geometryProxy in
+                                                Color.clear
+                                                    .onAppear {
+                                                        sizeOfBigProgress = geometryProxy.size.height
+                                                    }
+                                            }
+                                        )
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
                                     }
-                                    .padding(.top, 10)
-                                    .padding()
-                                    .padding()
-                                    .background(
-                                        GeometryReader { geometryProxy in
-                                            Color.clear
-                                                .onAppear {
-                                                    sizeOfBigProgress = geometryProxy.size.height
-                                                }
-                                        }
-                                    )
-                                    
-                                    Spacer()
-                                        .scrollSnappingAnchor(.bounds)
-                                        .id(idGen(text: datum.text))
                                 }
                                 
                             }
@@ -176,7 +214,14 @@ struct HomeView: View {
                                     Spacer()
                                     Image(systemName: "arrowshape.right.fill")
                                 }
-                                
+                                if stillHaveUnsetGoals {
+                                    Button {
+                                        showModal = true
+                                    } label: {
+                                        Text("You seem to have some unset goals. You can set some now.")
+                                    }
+    
+                                }
                                 
                                 Button("Go to Workouts") {
                                     withAnimation {
@@ -191,6 +236,15 @@ struct HomeView: View {
                                 Button("Go to Calculator") {
                                     withAnimation {
                                         self.tabSelection = 3
+                                    }
+                                }
+                            }
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                                    if (data[0].fractionWorkoutForUserGoal == 0.0 || data[1].fractionWorkoutForUserGoal == 0.0 || data[2].fractionWorkoutForUserGoal == 0.0 || data[3].fractionWorkoutForUserGoal == 0.0 || data[4].fractionWorkoutForUserGoal == 0.0 || data[5].fractionWorkoutForUserGoal == 0.0) {
+                                        withAnimation {
+                                            stillHaveUnsetGoals = true
+                                        }
                                     }
                                 }
                             }
@@ -220,12 +274,12 @@ struct HomeView: View {
                         NapfaOrWorkouts: .napfa,
                         description: "This is my description",
                         date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
+                        twoPointFourKMRun: "1",
+                        shuttleRun: "1",
+                        sitUps: "1",
+                        sitAndReach: "1",
+                        inclinedPullups: "1",
+                        standingBroadJump: "1"
                     )
                     
                     lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
@@ -234,13 +288,20 @@ struct HomeView: View {
                         NapfaOrWorkouts: .workout,
                         description: "This is my description",
                         date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
+                        twoPointFourKMRun: "700",
+                        shuttleRun: "15",
+                        sitUps: "1",
+                        sitAndReach: "1",
+                        inclinedPullups: "1",
+                        standingBroadJump: "1"
                     )
+                    
+                    print(TwoPointFourKMRunUserSetScore)
+                    print(SitUpsUserSetScore)
+                    print(StandingBroadJumpUserSetScore)
+                    print(InclinedPullupsUserSetScore)
+                    print(SitAndReachUserSetScore)
+                    print(ShuttleRunUserSetScore)
                     
                     data = [
                         ProgressData(text: "2.4 Run",
@@ -269,6 +330,13 @@ struct HomeView: View {
                                      fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
                                      fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
                     ]
+                    
+                    print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
+                    print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
+                    print(data[2].text + " " + String(data[2].fractionWorkoutForUserGoal))
+                    print(data[3].text + " " + String(data[3].fractionWorkoutForUserGoal))
+                    print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
+                    print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
                 }
             }
         }
@@ -400,6 +468,12 @@ struct getGoalData: View {
 }
 
 
+struct InternalButtonIconView: View {
+    var body: some View {
+        Image(systemName: "Arrow.right")
+    }
+}
+
 
 struct HomeView_Previews: PreviewProvider {
     @State static var a = 1
@@ -408,11 +482,11 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
-struct HomeViewModal_Previews: PreviewProvider {
-    @State static var a = 1.0
-    @State static var b = 1
-    @State static var c = Date()
-    static var previews: some View {
-        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
-    }
-}
+//struct HomeViewModal_Previews: PreviewProvider {
+//    @State static var a = 1.0
+//    @State static var b = 1
+//    @State static var c = Date()
+//    static var previews: some View {
+//        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
+//    }
+//}
