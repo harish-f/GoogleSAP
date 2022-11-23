@@ -139,8 +139,8 @@ struct HomeView: View {
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
                                                         Button {
                                                             proxy.scrollTo(idGen(text: datum.text))
                                                         } label: {
@@ -216,6 +216,10 @@ struct HomeView: View {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
                                         }
+                                    } else {
+                                        withAnimation {
+                                            stillHaveUnsetGoals = false
+                                        }
                                     }
                                 }
                             }
@@ -245,12 +249,12 @@ struct HomeView: View {
                         NapfaOrWorkouts: .napfa,
                         description: "This is my description",
                         date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "1",
-                        shuttleRun: "1",
-                        sitUps: "1",
-                        sitAndReach: "1",
-                        inclinedPullups: "1",
-                        standingBroadJump: "1"
+                        twoPointFourKMRun: "0",
+                        shuttleRun: "0",
+                        sitUps: "0",
+                        sitAndReach: "0",
+                        inclinedPullups: "0",
+                        standingBroadJump: "0"
                     )
                     
                     lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
@@ -259,12 +263,12 @@ struct HomeView: View {
                         NapfaOrWorkouts: .workout,
                         description: "This is my description",
                         date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "700",
-                        shuttleRun: "15",
-                        sitUps: "1",
-                        sitAndReach: "1",
-                        inclinedPullups: "1",
-                        standingBroadJump: "1"
+                        twoPointFourKMRun: "0",
+                        shuttleRun: "0",
+                        sitUps: "0",
+                        sitAndReach: "0",
+                        inclinedPullups: "0",
+                        standingBroadJump: "0"
                     )
                     
                     data = [
