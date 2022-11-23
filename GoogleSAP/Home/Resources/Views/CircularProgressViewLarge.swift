@@ -89,9 +89,11 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
             .padding(-13)
             VStack {
                 Spacer()
-                Image(systemName: sfSymbolNameBottom)
-                    .font(.title2)
-                    .foregroundColor(.white)
+                if sfSymbolNameBottom != "" {
+                    Image(systemName: sfSymbolNameBottom)
+                        .font(.title2)
+                        .foregroundColor(.white)
+                }
             }
             .padding(-13)
         }

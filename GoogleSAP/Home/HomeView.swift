@@ -19,12 +19,12 @@ struct ProgressData: Hashable, Identifiable {
 
 
 //  - Replace Text with symbols
-//  - Fix wrapping text issues
-//  - Add symbols to the start of the rings
-//  - The rings might be too close to the edge
 //  - Switch the weird picker thing for a textfield
 //  - Colour Scheme
-//  -
+
+
+// TODO: FIGURE OUT A WAY TO GET HOMESCREEN TO RERENDER AFTER MODAL VIEW IS REMOVED FROM SCREEN
+// TODO: PUT DOWN ALL VALUES FROM NAPFA INTO TABLE VIEW TO SHOW NAPFA A SCORE DIFFS
 
 struct idGen: Hashable {
     var text: String
@@ -248,10 +248,11 @@ struct HomeView: View {
                             }
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                    if (data[0].fractionWorkoutForUserGoal == 0.0 || data[1].fractionWorkoutForUserGoal == 0.0 || data[2].fractionWorkoutForUserGoal == 0.0 || data[3].fractionWorkoutForUserGoal == 0.0 || data[4].fractionWorkoutForUserGoal == 0.0 || data[5].fractionWorkoutForUserGoal == 0.0) {
+                                    if (TwoPointFourKMRunUserSetScore == 0.0 || SitUpsUserSetScore == 0.0 || SitAndReachUserSetScore == 0.0 || InclinedPullupsUserSetScore == 0.0 || ShuttleRunUserSetScore == 0.0 || StandingBroadJumpUserSetScore == 0.0) {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
                                         }
+                                        print("still unset goals")
                                     } else {
                                         withAnimation {
                                             stillHaveUnsetGoals = false
@@ -498,8 +499,6 @@ struct getGoalData: View {
                     let calendar = Calendar.current
                     let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
                     age = ageComponents.year!
-                    
-                    print()
                     
                     dismiss()
                     
