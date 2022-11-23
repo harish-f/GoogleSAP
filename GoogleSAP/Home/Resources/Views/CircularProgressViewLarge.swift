@@ -52,6 +52,7 @@ extension CircularProgressViewLarge where Content == EmptyView {
 
 struct CircularProgressViewLargeIcon<Content: View>: View {
     let progress: Double
+    let screenGeo: CGSize
     let sfSymbolNameTop: String
     let sfSymbolNameBottom: String
     @ViewBuilder var content: Content
@@ -63,7 +64,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                 Circle()
                     .stroke(
                         Color.red.opacity(0.7),
-                        lineWidth: CGFloat(30)
+                        lineWidth: CGFloat(screenGeo.width / 14)
                     )
                 Circle() // 2
                     .trim(from: 0, to: progress)
@@ -71,7 +72,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                         Color.green,
                         // 1
                         style: StrokeStyle(
-                            lineWidth: CGFloat(30),
+                            lineWidth: CGFloat(screenGeo.width / 14),
                             lineCap: .round
                         )
                     )
@@ -131,8 +132,11 @@ struct CircularProgressViewLargeIcon_Previews: PreviewProvider {
             }
         }
     }
+    
+    static var someSize = CGSize(width: 300, height: 300)
+    
     static var previews: some View {
-        CircularProgressViewLargeIcon(progress: 0.25, sfSymbolNameTop: "arrow.right", sfSymbolNameBottom: "questionmark.circle", content: {
+        CircularProgressViewLargeIcon(progress: 0.25, screenGeo: someSize, sfSymbolNameTop: "arrow.right", sfSymbolNameBottom: "questionmark.circle", content: {
             SimpleView()
         })
             .frame(width:200, height: 200)

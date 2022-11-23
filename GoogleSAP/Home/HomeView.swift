@@ -92,7 +92,7 @@ struct HomeView: View {
     
     // Data in here is just placeholder (variable data declared in view .onAppear)
     @State var data: [ProgressData] = []
-    @State var sizeOfBigProgress = 0.0
+    @State var sizeOfBigProgress = CGSize(width: 300, height: 300)
     
     @ViewBuilder
     var body: some View {
@@ -101,22 +101,19 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
+                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
                                 ForEach(data) { datum in
                                     if (datum.fractionWorkoutForUserGoal != 0) {
                                         Spacer()
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                        Button {
-                                                            proxy.scrollTo(idGen(text: datum.text))
-                                                        } label: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
                                                             Text(datum.text).font(.title3)
-                                                        }
+                                                            .font(.title3)
                                                     })
-                                                    .padding(45)
+                                                    .padding(geometry.size.width / 10)
                                                 })
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
                                             }
@@ -128,7 +125,7 @@ struct HomeView: View {
                                             GeometryReader { geometryProxy in
                                                 Color.clear
                                                     .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size.height
+                                                        sizeOfBigProgress = geometryProxy.size
                                                     }
                                             }
                                         )
@@ -136,20 +133,17 @@ struct HomeView: View {
                                         Spacer()
                                             .scrollSnappingAnchor(.bounds)
                                             .id(idGen(text: datum.text))
+                                        
                                     } else {
                                         Spacer()
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                        Button {
-                                                            proxy.scrollTo(idGen(text: datum.text))
-                                                        } label: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
                                                             Text(datum.text).font(.title3)
-                                                        }
                                                     })
-                                                    .padding(45)
+                                                    .padding(geometry.size.width / 10)
                                                 })
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
                                             }
@@ -161,15 +155,22 @@ struct HomeView: View {
                                             GeometryReader { geometryProxy in
                                                 Color.clear
                                                     .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size.height
+                                                        sizeOfBigProgress = geometryProxy.size
                                                     }
                                             }
                                         )
+                                        
                                         Spacer()
                                             .scrollSnappingAnchor(.bounds)
                                             .id(idGen(text: datum.text))
                                     }
                                 }
+                                
+                                
+                                ZStack {
+                                    
+                                }
+                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                                 
                             }
                         }
