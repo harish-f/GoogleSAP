@@ -55,6 +55,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
     let screenGeo: CGSize
     let sfSymbolNameTop: String
     let sfSymbolNameBottom: String
+    @Environment(\.colorScheme) var colorScheme
     @ViewBuilder var content: Content
     
     var body: some View {
@@ -63,7 +64,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                 content
                 Circle()
                     .stroke(
-                        Color.red.opacity(0.7),
+                        colorScheme == .dark ? Color.gray.opacity(0.7) : Color.gray.opacity(0.3),
                         lineWidth: CGFloat(screenGeo.width / 14)
                     )
                 Circle() // 2
@@ -76,7 +77,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                             lineCap: .round
                         )
                     )
-                    .rotationEffect(.degrees(-90))
+                    .rotationEffect(.degrees(-93))
                     .animation(.easeOut, value: progress)
             }
             VStack {
