@@ -110,9 +110,10 @@ struct HomeView: View {
                                             VStack(alignment: .center) {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                            Text(datum.text).font(.title3)
-                                                            .padding(geometry.size.width / 9)
+                                                            Text(datum.text)
                                                             .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
@@ -257,17 +258,19 @@ struct HomeView: View {
                                         }
                                     }
                                     
-                                    if (lastNAPFAElement == LogRecord(
-                                        NapfaOrWorkouts: .napfa,
-                                        description: "This is my description",
-                                        date: Date(timeInterval: .zero, since: .now),
-                                        twoPointFourKMRun: "0",
-                                        shuttleRun: "0",
-                                        sitUps: "0",
-                                        sitAndReach: "0",
-                                        inclinedPullups: "0",
-                                        standingBroadJump: "0"
-                                    )) {
+                                    if (lastNAPFAElement.twoPointFourKMRun == "0" && lastNAPFAElement.shuttleRun == "0" && lastNAPFAElement.sitUps == "0" && lastNAPFAElement.sitAndReach == "0" && lastNAPFAElement.inclinedPullups == "0" && lastNAPFAElement.standingBroadJump == "0")
+//                                     LogRecord(
+//                                        NapfaOrWorkouts: .napfa,
+//                                        description: "This is my description",
+//                                        date: Date(timeInterval: .zero, since: .now),
+//                                        twoPointFourKMRun: "0",
+//                                        shuttleRun: "0",
+//                                        sitUps: "0",
+//                                        sitAndReach: "0",
+//                                        inclinedPullups: "0",
+//                                        standingBroadJump: "0"
+//                                    )
+                                    {
                                         withAnimation {
                                             stillNeedFillNAPFAEntry = true
                                         }
@@ -277,17 +280,19 @@ struct HomeView: View {
                                         }
                                     }
                                     
-                                    if (lastWorkoutElement == LogRecord(
-                                        NapfaOrWorkouts: .workout,
-                                        description: "This is my description",
-                                        date: Date(timeInterval: .zero, since: .now),
-                                        twoPointFourKMRun: "0",
-                                        shuttleRun: "0",
-                                        sitUps: "0",
-                                        sitAndReach: "0",
-                                        inclinedPullups: "0",
-                                        standingBroadJump: "0"
-                                    )) {
+                                    if (lastWorkoutElement.twoPointFourKMRun == "0" && lastWorkoutElement.shuttleRun == "0" && lastWorkoutElement.sitUps == "0" && lastWorkoutElement.sitAndReach == "0" && lastWorkoutElement.inclinedPullups == "0" && lastWorkoutElement.standingBroadJump == "0")
+//                                        LogRecord(
+//                                        NapfaOrWorkouts: .workout,
+//                                        description: "This is my description",
+//                                        date: Date(timeInterval: .zero, since: .now),
+//                                        twoPointFourKMRun: "0",
+//                                        shuttleRun: "0",
+//                                        sitUps: "0",
+//                                        sitAndReach: "0",
+//                                        inclinedPullups: "0",
+//                                        standingBroadJump: "0"
+//                                    )
+                                    {
                                         withAnimation {
                                             stillNeedFillWorkoutEntry = true
                                         }
@@ -296,7 +301,6 @@ struct HomeView: View {
                                             stillNeedFillWorkoutEntry = false
                                         }
                                     }
-                                    
                                 }
                             }
                         }
@@ -494,6 +498,8 @@ struct getGoalData: View {
                     let calendar = Calendar.current
                     let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
                     age = ageComponents.year!
+                    
+                    print()
                     
                     dismiss()
                     
