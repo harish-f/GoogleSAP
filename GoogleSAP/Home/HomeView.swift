@@ -142,6 +142,8 @@ struct HomeView: View {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
                                                             Text(datum.text).font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
