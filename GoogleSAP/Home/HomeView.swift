@@ -101,35 +101,6 @@ struct HomeView: View {
                         ScrollViewReader { proxy in
                             SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
-//                                    Spacer()
-//                                    Spacer()
-                                    
-                                    
-//                                    HStack(alignment: .center) {
-//                                        VStack(alignment: .center) {
-//                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkout, sfSymbolName: "target", content: {
-//                                                CircularProgressViewLargeIcon(progress: datum.fractionNAPFA, sfSymbolName: "a.circle", content: {
-//                                                    Button {
-//                                                        proxy.scrollTo(idGen(text: datum.text))
-//                                                    } label: {
-//                                                        Text(datum.text).font(.title3)
-//                                                    }
-//                                                })
-//                                                .padding(45)
-//                                            })
-//                                            .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50, alignment: .center)
-//                                        }
-//                                    }
-//                                    .padding(.top, 10)
-//                                    .padding()
-//                                    .background(
-//                                        GeometryReader { geometryProxy in
-//                                            Color.clear
-//                                                .onAppear {
-//                                                    sizeOfBigProgress = geometryProxy.size.height
-//                                                }
-//                                        }
-//                                    )
                                     if (datum.fractionWorkoutForUserGoal != 0) {
                                         Spacer()
                                         
@@ -296,13 +267,6 @@ struct HomeView: View {
                         standingBroadJump: "1"
                     )
                     
-                    print(TwoPointFourKMRunUserSetScore)
-                    print(SitUpsUserSetScore)
-                    print(StandingBroadJumpUserSetScore)
-                    print(InclinedPullupsUserSetScore)
-                    print(SitAndReachUserSetScore)
-                    print(ShuttleRunUserSetScore)
-                    
                     data = [
                         ProgressData(text: "2.4 Run",
                                      fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
@@ -330,13 +294,6 @@ struct HomeView: View {
                                      fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
                                      fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
                     ]
-                    
-                    print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
-                    print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
-                    print(data[2].text + " " + String(data[2].fractionWorkoutForUserGoal))
-                    print(data[3].text + " " + String(data[3].fractionWorkoutForUserGoal))
-                    print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
-                    print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
                 }
             }
         }
