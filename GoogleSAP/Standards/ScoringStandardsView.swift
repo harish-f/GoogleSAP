@@ -19,7 +19,7 @@ struct ScoringStandardsView: View {
     @State var scrollSelected: Int = 0
     @State var extraDrag: CGFloat = 0.0
     
-    let ABCDE = ["A", "B", "C", "D", "E"]
+    let ABCDE = ["A", "B", "C", "D", "E", "NIL"]
     
     var body: some View {
         ZStack {
@@ -39,11 +39,19 @@ struct ScoringStandardsView: View {
                 Group {
                     ForEach(0...ABCDE.count-1, id: \.self) { i in
                         HStack {
+                            let reverseI = ABCDE.count-i-1
                             Spacer()
                             Text(ABCDE[i])
-                            Text(String(ABCDE.count-i))
+                            Text(String(reverseI))
                             Spacer()
-                            Text("")
+                            let ref = NAPFAStandards[genderInput]![ageInput]![selected]
+                            if i == 0 {
+                                Text("> " + String(ref[4]))
+                            } else {
+                                let ref2 = reverseI == 0 ? "0":String(ref[reverseI-1])
+                                let ref3 = String(ref[reverseI])
+                                Text(ref2 + " - " + ref3)
+                            }
                             Spacer()
                         }
                     }
