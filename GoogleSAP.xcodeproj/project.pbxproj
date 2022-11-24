@@ -15,6 +15,7 @@
 		4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18328F70BA20033B5B8 /* LoggerView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
 		45D2E3F22924915600D28729 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2E3F12924915600D28729 /* CircleProgressBar.swift */; };
+		A91EDBBC292FAE9100617830 /* StandardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91EDBBB292FAE9100617830 /* StandardsModel.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
 		DC0B4773292F590700537B08 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = DC0B4772292F590700537B08 /* SwiftUISnappingScrollView */; };
 		DC759309292BB36700E17B27 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -50,6 +51,7 @@
 		4548F18328F70BA20033B5B8 /* LoggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		45D2E3F12924915600D28729 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
+		A91EDBBB292FAE9100617830 /* StandardsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardsModel.swift; sourceTree = "<group>"; };
 		DC0002672915F2B7008E03CC /* HomeDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
 		DCA9E7A2290398330099B500 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				DCADE8F029221A200047B13F /* CalculatorStartPageView.swift */,
 				DCADE8F129221A200047B13F /* DataTypes.swift */,
+				A91EDBBB292FAE9100617830 /* StandardsModel.swift */,
 				DCADE8F229221A200047B13F /* GradeScoreCaclulator.swift */,
 				DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */,
 			);
@@ -294,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A91EDBBC292FAE9100617830 /* StandardsModel.swift in Sources */,
 				DCADE8F629221A200047B13F /* GradeScoreCaclulator.swift in Sources */,
 				DCADE90729221A7D0047B13F /* EditExerciseView.swift in Sources */,
 				DCADE90F29221A7D0047B13F /* TimerBar.swift in Sources */,
