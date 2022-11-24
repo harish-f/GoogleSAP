@@ -15,6 +15,10 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
             RoutinesView()
                 .tabItem {
                     Label("Workout", systemImage: "figure.walk.circle.fill")
@@ -27,10 +31,6 @@ struct ContentView: View {
                 .tabItem {
                     Label("Calculator", systemImage: "number.circle.fill")
                 }
-//            HomeView()
-//                .tabItem {
-//                    Label("Home", systemImage: "house.fill")
-//                }
         }
     }
 }

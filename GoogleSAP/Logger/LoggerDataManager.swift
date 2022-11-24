@@ -13,23 +13,24 @@ class LoggerDataManager: ObservableObject {
         loadData()
     }
     func getArchiveUrl() -> URL {
-        let plistName = "loggerData.plist"
-        let docDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return docDir.appendingPathExtension(plistName)
+        let plistName = "routinesData.plist"
+        let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsDir.appendingPathComponent(plistName)
     }
     func loadData() {
         let archiveUrl = getArchiveUrl()
         let plistDecoder = PropertyListDecoder()
         
-        let finalData: [LogRecord]
+        let finalData: [LogRecord]!
         
         if let retrievedData = try? Data(contentsOf: archiveUrl),
            let decodedData = try? plistDecoder.decode(Array<LogRecord>.self, from: retrievedData) {
             finalData = decodedData
         } else {
             finalData = [
-                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "0.1", shuttleRun: "0.2", sitUps: "0.3", sitAndReach: "0.4", inclinedPullups: "0.5", standingBroadJump: "0.6")
+                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5")
             ]
+            print("ded")
         }
         logRecords = finalData
     }

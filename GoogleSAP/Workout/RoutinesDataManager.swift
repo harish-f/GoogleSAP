@@ -15,6 +15,7 @@ class RoutinesDataManager: ObservableObject {
     func getArchiveUrl() -> URL {
         let plistName = "routinesData.plist"
         let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        print(documentsDir.appendingPathComponent(plistName))
         return documentsDir.appendingPathComponent(plistName)
     }
     func loadData() {

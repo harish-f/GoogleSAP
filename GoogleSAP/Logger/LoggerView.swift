@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoggerView: View {
-//    @ObservedObject var loggerHistoryManager = LoggerDataManager()
+    @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     // Tracks what type of logs the user wants to see (custom workouts or napfa scores)
     @State var loggedType = "NAPFA"
@@ -16,14 +16,13 @@ struct LoggerView: View {
     @State var triggerReload = false
     
     // TODO: MAKE IT OBTAIN FROM PERSISTENCE
-        @State var data = [
-                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "0.1", shuttleRun: "0.2", sitUps: "0.3", sitAndReach: "0.4", inclinedPullups: "0.5", standingBroadJump: "0.6")
-        ]
+    @State var data: [LogRecord] = []
+    
     var body: some View {
         NavigationView {
             VStack {
                 Form {
-                    List(data) { datum in
+                    List(loggerHistoryManager.logRecords) { datum in
                         
                         if ((loggedType == "NAPFA") && (datum.napfaOrWorkout == "Napfa")) {
                             NavigationLink {
@@ -46,6 +45,14 @@ struct LoggerView: View {
                         }
                     }
                 }
+            }
+            .onAppear {
+                data = loggerHistoryManager.logRecords
+            }
+            .onChange(of: data) {_ in
+                loggerHistoryManager.logRecords = data
+                loggerHistoryManager.saveData()
+                
             }
             .navigationTitle("Logger")
             .navigationBarTitleDisplayMode(.inline)
@@ -106,15 +113,34 @@ struct CreateNewLogView: View {
                     }
                     
                     Section {
-                        TextField("2.4KM Run", text: $twoPointFourKMRun)
-                            .onSubmit {
-                                
-                            }
-                        TextField("Standing Broad Jump", text: $standingBroadJump)
-                        TextField("Inclined Pullups", text: $inclinedPullups)
-                        TextField("Shuttle Run", text: $shuttleRun)
-                        TextField("Situps", text: $sitUps)
-                        TextField("Sit And Reach", text: $sitAndReach)
+                        Text("2.4KM Run")
+                        TextField("Seconds", text: $twoPointFourKMRun)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Sit And Reach")
+                        TextField("CM", text: $sitAndReach)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Standing Broad Jump")
+                        TextField("CM", text: $standingBroadJump)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Inclined Pullups")
+                        TextField("Reps", text: $inclinedPullups)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Shuttle Run")
+                        TextField("Seconds", text: $shuttleRun)
+                            .keyboardType(.numberPad)
+                    }
+                    Section {
+                        Text("Situps")
+                        TextField("Reps", text: $sitUps)
+                            .keyboardType(.numberPad)
                     }
                 }
             }

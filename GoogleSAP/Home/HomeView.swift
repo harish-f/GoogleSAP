@@ -8,97 +8,134 @@
 import SwiftUI
 
 
+struct ProgressData: Hashable {
+    var text: String
+    var fraction: Double
+}
+
+
+//  - Replace Text with symbols
+//  - Fix wrapping text issues
+//  - Add symbols to the start of the rings
+//  - The rings might be too close to the edge
+//  - Switch the weird picker thing for a textfield
+//  - Colour Scheme
+//  -
+
+
 
 struct HomeView: View {
-    let SMALL_PROGRESS_VIEW_SIZE = UIScreen.main.bounds.width-280
-    let SMALL_PROGRESS_VIEW_PADDING = CGFloat(14)
+    let SMALL_PROGRESS_VIEW_PADDING = CGFloat(16)
+    
+    @ObservedObject var loggerHistoryManager = LoggerDataManager()
     
     @State var progress = 0.0;
     @StateObject var homeManager = HomeDataManager()
-
+    @State var lastNAPFAElement: LogRecord = LogRecord(
+        NapfaOrWorkouts: .napfa,
+        description: "This is my description",
+        date: Date(timeInterval: .zero, since: .now),
+        twoPointFourKMRun: "0.1",
+        shuttleRun: "0.2",
+        sitUps: "0.3",
+        sitAndReach: "0.4",
+        inclinedPullups: "0.5",
+        standingBroadJump: "0.6"
+    )
+    @State var secondRow: [ProgressData] = [
+        ProgressData(text: "2.4 Run", fraction: 0.0),
+        ProgressData(text: "Situps", fraction: 0.0),
+        ProgressData(text: "Inclined Pullups",fraction: 0.0),
+    ]
+    @State var thirdRow: [ProgressData] = [
+        ProgressData(text: "Sit & Reach", fraction: 0.0),
+        ProgressData(text: "Shuttle Run", fraction: 0.0),
+    ]
+    
     
     var body: some View {
-        NavigationView {
-            ZStack(alignment: .leading) {
-                // TODO: Make the ProgressViews data dependent on internal storage
-                
-                VStack(alignment: .leading) {
-                    HStack {
-                        Spacer()
-                        CircularProgressViewLarge(progress:progress, content: {
+        GeometryReader { geometry in
+            NavigationView {
+                ZStack(alignment: .leading) {
+                    // TODO: MAKE VIEWS ADAPT TO USER AGE
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Spacer()
                             CircularProgressViewLarge(progress: progress, content: {
-                                
+                                CircularProgressViewLarge(progress: Double(lastNAPFAElement.standingBroadJump)! / 237, content: {
+                                    Text("Standing Broad Jump").font(.title2)
+                                })
+                                .padding(.leading, 45)
+                                .padding(.trailing, 45)
                             })
-                            .padding(.leading, 45)
-                            .padding(.trailing, 45)
-                        })
-                        .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
-                        Spacer()
-                    }
-                    .padding(.top, 10)
-                    
-                    
-                    
-                    
-                    // TODO: make this adapt to different screen sizes
-                    HStack {
-                        Spacer()
-                        
-                        CircularProgressViewSmall(progress: 0.25) {
-                            CircularProgressViewSmall(progress: 0.25)
-                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                            .frame(width:UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
+                            Spacer()
                         }
-                        .frame(width: SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        .padding(.top, 10)
                         
-                        Spacer()
                         
-                        CircularProgressViewSmall(progress: 0.25) {
-                            CircularProgressViewSmall(progress: 0.25)
-                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        HStack {
+                            Spacer()
+                            
+                            ForEach(secondRow, id: \.self) { theLists in
+                                CircularProgressViewSmall(progress: 0) {
+                                    CircularProgressViewSmall(progress: theLists.fraction) {
+                                        Text(theLists.text).multilineTextAlignment(.center)
+                                    }
+                                    .padding(SMALL_PROGRESS_VIEW_PADDING)
+                                }
+                                .frame(width: geometry.size.width/3-25, height: geometry.size.width/3-25)
+                                Spacer()
+                            }
                         }
-                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        .padding(.leading, 3)
+                        .padding(.trailing, 3)
+                        .padding(.top, 20)
                         
-                        Spacer()
-                        
-                        CircularProgressViewSmall(progress: 0.25) {
-                            CircularProgressViewSmall(progress: 0.25)
-                                .padding(SMALL_PROGRESS_VIEW_PADDING)
+                        HStack {
+                            Spacer()
+                            
+                            ForEach(thirdRow, id: \.self) { text in
+                                CircularProgressViewSmall(progress: 0.0) {
+                                    CircularProgressViewSmall(progress: text.fraction) {
+                                        Text(text.text)
+                                            .multilineTextAlignment(.center)
+                                    }
+                                    .padding(SMALL_PROGRESS_VIEW_PADDING)
+                                }
+                                .frame(width: geometry.size.width/3-15, height: geometry.size.width/3-15)
+                                Spacer()
+                            }
                         }
-                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
-                        
-                        Spacer()
-                    }
-                    .padding(.leading, 3)
-                    .padding(.trailing, 3)
-                    .padding(.top, 20)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        CircularProgressViewSmall(progress: 0.25) {
-                            CircularProgressViewSmall(progress: 0.25)
-                                .padding(SMALL_PROGRESS_VIEW_PADDING)
-                        }
-                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
+                        .padding(.leading, 3)
+                        .padding(.trailing, 3)
+                        .padding(.top, 10)
                         
                         Spacer()
                         
-                        CircularProgressViewSmall(progress: 0.25) {
-                            CircularProgressViewSmall(progress: 0.25)
-                                .padding(SMALL_PROGRESS_VIEW_PADDING)
-                        }
-                        .frame(width:SMALL_PROGRESS_VIEW_SIZE, height: SMALL_PROGRESS_VIEW_SIZE)
                         
-                        Spacer()
-                    }
-                    .padding(.leading, 3)
-                    .padding(.trailing, 3)
-                    .padding(.top, 20)
-                    
-                    Spacer()
-                    
-                    
-                }.navigationTitle("Overview")
+                    }.navigationTitle("Overview")
+                }
+            }.onAppear {
+                lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
+                    LogRecord.napfaOrWorkout == "Napfa"
+                }!
+                print(lastNAPFAElement)
+                
+                secondRow = [
+                    ProgressData(text: "2.4 Run", fraction: Double(lastNAPFAElement.twoPointFourKMRun)! / 237),
+                    ProgressData(text: "Situps", fraction: Double(lastNAPFAElement.sitUps)! / 42),
+                    ProgressData(text: "Inclined Pullups", fraction: Double(lastNAPFAElement.standingBroadJump)! / 7),
+                ]
+                
+                print(secondRow[2])
+                
+                thirdRow = [
+                    ProgressData(text: "Sit & Reach", fraction: Double(lastNAPFAElement.sitAndReach)! / 45),
+                    ProgressData(text: "Shuttle Run", fraction: 10 / Double(lastNAPFAElement.shuttleRun)!),
+                ]
+                
             }
         }
     }
