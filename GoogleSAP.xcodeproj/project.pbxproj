@@ -156,7 +156,7 @@
 			children = (
 				DCADE8F029221A200047B13F /* CalculatorStartPageView.swift */,
 				DCADE8F129221A200047B13F /* DataTypes.swift */,
-				A9C9EFEB292F4387002CD872 /* StandardsModel.swift */,
+				A91EDBBB292FAE9100617830 /* StandardsModel.swift */,
 				DCADE8F229221A200047B13F /* GradeScoreCaclulator.swift */,
 				DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */,
 			);
