@@ -22,7 +22,7 @@ struct CalculatorStartPageView: View {
                     Text("I am a")
                     Picker("Age", selection: $ageInput) {
                         Text("Age").tag(0)
-                        ForEach(9...60, id: \.self) {
+                        ForEach(9...19, id: \.self) { //updated for napfa only, ippt up to age 60
                             Text(String($0)).tag($0)
                         }
                     }.frame(maxWidth: .infinity)
