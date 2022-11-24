@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum _stations: Codable {
+enum _stations: Codable, Equatable {
     case TwoPointFourKMRun
     case ShuttleRun
     case SitUps
@@ -16,7 +16,7 @@ enum _stations: Codable {
     case StandingBroadJump
 }
 
-enum NapfaOrWorkout: Codable {
+enum NapfaOrWorkout: Codable, Equatable {
     case napfa
     case workout
     
