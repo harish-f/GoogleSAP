@@ -30,6 +30,24 @@ struct idGen: Hashable {
     var text: String
 }
 
+struct NAPFAAScores {
+    var age: Int
+    var TwoPointFourKMRunUserSetScoreMale: Double
+    var ShuttleRunUserSetScoreMale: Double
+    var SitUpsUserSetScoreMale: Double
+    var SitAndReachUserSetScoreMale: Double
+    var InclinedPullupsUserSetScoreMale: Double
+    var StandingBroadJumpUserSetScoreMale: Double
+    
+    var TwoPointFourKMRunUserSetScoreFemale: Double
+    var ShuttleRunUserSetScoreFemale: Double
+    var SitUpsUserSetScoreFemale: Double
+    var SitAndReachUserSetScoreFemale: Double
+    var InclinedPullupsUserSetScoreFemale: Double
+    var StandingBroadJumpUserSetScoreFemale: Double
+}
+
+
 
 struct HomeView: View {
     @Binding var tabSelection: Int
@@ -39,6 +57,39 @@ struct HomeView: View {
     @State var stillHaveUnsetGoals = false
     @State var stillNeedFillNAPFAEntry = false
     @State var stillNeedFillWorkoutEntry = false
+    
+    @State var listOfNapfaScores = [
+        NAPFAAScores(age: 12,
+                    TwoPointFourKMRunUserSetScoreMale: 721,
+                     ShuttleRunUserSetScoreMale: 10.4,
+                     SitUpsUserSetScoreMale: 41.0,
+                     SitAndReachUserSetScoreMale: 39.0,
+                     InclinedPullupsUserSetScoreMale: 24.0,
+                     StandingBroadJumpUserSetScoreMale: 202.0,
+                     TwoPointFourKMRunUserSetScoreFemale: 881.0,
+                     ShuttleRunUserSetScoreFemale: 11.5,
+                     SitUpsUserSetScoreFemale: 29.0,
+                     SitAndReachUserSetScoreFemale: 39.0,
+                     InclinedPullupsUserSetScoreFemale: 15.0,
+                     StandingBroadJumpUserSetScoreFemale: 167.0
+                    ),
+        NAPFAAScores(
+            age: 13,
+            TwoPointFourKMRunUserSetScoreMale: <#T##Double#>,
+            ShuttleRunUserSetScoreMale: <#T##Double#>,
+            SitUpsUserSetScoreMale: <#T##Double#>,
+            SitAndReachUserSetScoreMale: <#T##Double#>,
+            InclinedPullupsUserSetScoreMale: <#T##Double#>,
+            StandingBroadJumpUserSetScoreMale: <#T##Double#>,
+            TwoPointFourKMRunUserSetScoreFemale: <#T##Double#>,
+            ShuttleRunUserSetScoreFemale: <#T##Double#>,
+            SitUpsUserSetScoreFemale: <#T##Double#>,
+            SitAndReachUserSetScoreFemale: <#T##Double#>,
+            InclinedPullupsUserSetScoreFemale: <#T##Double#>,
+            StandingBroadJumpUserSetScoreFemale: <#T##Double#>
+        )
+        
+    ]
     
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
@@ -200,6 +251,7 @@ struct HomeView: View {
                                             Image(systemName: "info.circle")
                                                 .font(.title3)
                                             Text("You seem to have some unset goals. You can set some now.")
+                                                .multilineTextAlignment(.leading)
                                         }
                                     }
                                 }
