@@ -19,6 +19,8 @@ struct ScoringStandardsView: View {
     @State var scrollSelected: Int = 0
     @State var extraDrag: CGFloat = 0.0
     
+    let ABCDE = ["A", "B", "C", "D", "E"]
+    
     var body: some View {
         ZStack {
             GeometryReader{ geometry in
@@ -33,6 +35,18 @@ struct ScoringStandardsView: View {
                     Text("")
                 } else {
                     Text("Age Group: \(ageGroup)")
+                }
+                Group {
+                    ForEach(0...ABCDE.count-1, id: \.self) { i in
+                        HStack {
+                            Spacer()
+                            Text(ABCDE[i])
+                            Text(String(ABCDE.count-i))
+                            Spacer()
+                            Text("")
+                            Spacer()
+                        }
+                    }
                 }
                 Spacer()
             }
