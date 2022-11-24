@@ -17,6 +17,11 @@ struct ProgressData: Hashable, Identifiable {
     var id = UUID()
 }
 
+enum Gender {
+    case male
+    case female
+    case none
+}
 
 //  - Replace Text with symbols
 //  - Switch the weird picker thing for a textfield
@@ -58,180 +63,186 @@ struct HomeView: View {
     @State var stillNeedFillNAPFAEntry = false
     @State var stillNeedFillWorkoutEntry = false
     
+    @State var isAgeLegal = true
+    @State var firstTimeEnteringAge = true
+    
     @State var listOfNapfaScores = [
         NAPFAAScores(age: 9,
-            TwoPointFourKMRunUserSetScoreMale: 580.0,
-            ShuttleRunUserSetScoreMale: 11.3,
-            SitUpsUserSetScoreMale: 35.0,
-            SitAndReachUserSetScoreMale: 33.0,
-            InclinedPullupsUserSetScoreMale: 21.0,
-            StandingBroadJumpUserSetScoreMale: 168.0,
+                     TwoPointFourKMRunUserSetScoreMale: 580.0,
+                     ShuttleRunUserSetScoreMale: 11.3,
+                     SitUpsUserSetScoreMale: 35.0,
+                     SitAndReachUserSetScoreMale: 33.0,
+                     InclinedPullupsUserSetScoreMale: 21.0,
+                     StandingBroadJumpUserSetScoreMale: 168.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 640.0,
-            ShuttleRunUserSetScoreFemale: 11.8,
-            SitUpsUserSetScoreFemale: 26.0,
-            SitAndReachUserSetScoreFemale: 37.0,
-            InclinedPullupsUserSetScoreFemale: 22.0,
-            StandingBroadJumpUserSetScoreFemale: 158.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 640.0,
+                     ShuttleRunUserSetScoreFemale: 11.8,
+                     SitUpsUserSetScoreFemale: 26.0,
+                     SitAndReachUserSetScoreFemale: 37.0,
+                     InclinedPullupsUserSetScoreFemale: 22.0,
+                     StandingBroadJumpUserSetScoreFemale: 158.0
+                    ),
         
         NAPFAAScores(age: 10,
-            TwoPointFourKMRunUserSetScoreMale: 570.0,
-            ShuttleRunUserSetScoreMale: 11.1,
-            SitUpsUserSetScoreMale: 36.0,
-            SitAndReachUserSetScoreMale: 35.0,
-            InclinedPullupsUserSetScoreMale: 22.0,
-            StandingBroadJumpUserSetScoreMale: 174.0,
+                     TwoPointFourKMRunUserSetScoreMale: 570.0,
+                     ShuttleRunUserSetScoreMale: 11.1,
+                     SitUpsUserSetScoreMale: 36.0,
+                     SitAndReachUserSetScoreMale: 35.0,
+                     InclinedPullupsUserSetScoreMale: 22.0,
+                     StandingBroadJumpUserSetScoreMale: 174.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 630.0,
-            ShuttleRunUserSetScoreFemale: 11.7,
-            SitUpsUserSetScoreFemale: 27.0,
-            SitAndReachUserSetScoreFemale: 39.0,
-            InclinedPullupsUserSetScoreFemale: 21.0,
-            StandingBroadJumpUserSetScoreFemale: 161.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 630.0,
+                     ShuttleRunUserSetScoreFemale: 11.7,
+                     SitUpsUserSetScoreFemale: 27.0,
+                     SitAndReachUserSetScoreFemale: 39.0,
+                     InclinedPullupsUserSetScoreFemale: 21.0,
+                     StandingBroadJumpUserSetScoreFemale: 161.0
+                    ),
         
         NAPFAAScores(age: 11,
-            TwoPointFourKMRunUserSetScoreMale: 530.0,
-            ShuttleRunUserSetScoreMale: 10.7,
-            SitUpsUserSetScoreMale: 39.0,
-            SitAndReachUserSetScoreMale: 37.0,
-            InclinedPullupsUserSetScoreMale: 23.0,
-            StandingBroadJumpUserSetScoreMale: 188.0,
+                     TwoPointFourKMRunUserSetScoreMale: 530.0,
+                     ShuttleRunUserSetScoreMale: 10.7,
+                     SitUpsUserSetScoreMale: 39.0,
+                     SitAndReachUserSetScoreMale: 37.0,
+                     InclinedPullupsUserSetScoreMale: 23.0,
+                     StandingBroadJumpUserSetScoreMale: 188.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 620.0,
-            ShuttleRunUserSetScoreFemale: 11.6,
-            SitUpsUserSetScoreFemale: 28.0,
-            SitAndReachUserSetScoreFemale: 41.0,
-            InclinedPullupsUserSetScoreFemale: 20.0,
-            StandingBroadJumpUserSetScoreFemale: 164.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 620.0,
+                     ShuttleRunUserSetScoreFemale: 11.6,
+                     SitUpsUserSetScoreFemale: 28.0,
+                     SitAndReachUserSetScoreFemale: 41.0,
+                     InclinedPullupsUserSetScoreFemale: 20.0,
+                     StandingBroadJumpUserSetScoreFemale: 164.0
+                    ),
         
         NAPFAAScores(age: 12,
-            TwoPointFourKMRunUserSetScoreMale: 721,
-            ShuttleRunUserSetScoreMale: 10.4,
-            SitUpsUserSetScoreMale: 41.0,
-            SitAndReachUserSetScoreMale: 39.0,
-            InclinedPullupsUserSetScoreMale: 24.0,
-            StandingBroadJumpUserSetScoreMale: 202.0,
+                     TwoPointFourKMRunUserSetScoreMale: 721,
+                     ShuttleRunUserSetScoreMale: 10.4,
+                     SitUpsUserSetScoreMale: 41.0,
+                     SitAndReachUserSetScoreMale: 39.0,
+                     InclinedPullupsUserSetScoreMale: 24.0,
+                     StandingBroadJumpUserSetScoreMale: 202.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 881.0,
-            ShuttleRunUserSetScoreFemale: 11.5,
-            SitUpsUserSetScoreFemale: 29.0,
-            SitAndReachUserSetScoreFemale: 39.0,
-            InclinedPullupsUserSetScoreFemale: 15.0,
-            StandingBroadJumpUserSetScoreFemale: 167.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 881.0,
+                     ShuttleRunUserSetScoreFemale: 11.5,
+                     SitUpsUserSetScoreFemale: 29.0,
+                     SitAndReachUserSetScoreFemale: 39.0,
+                     InclinedPullupsUserSetScoreFemale: 15.0,
+                     StandingBroadJumpUserSetScoreFemale: 167.0
+                    ),
         NAPFAAScores(age: 13,
-            TwoPointFourKMRunUserSetScoreMale: 490.0,
-            ShuttleRunUserSetScoreMale: 10.3,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 41.0,
-            InclinedPullupsUserSetScoreMale: 25.0,
-            StandingBroadJumpUserSetScoreMale: 214.0,
+                     TwoPointFourKMRunUserSetScoreMale: 490.0,
+                     ShuttleRunUserSetScoreMale: 10.3,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 41.0,
+                     InclinedPullupsUserSetScoreMale: 25.0,
+                     StandingBroadJumpUserSetScoreMale: 214.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 600.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 45.0,
-            InclinedPullupsUserSetScoreFemale: 17.0,
-            StandingBroadJumpUserSetScoreFemale: 170.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 600.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 45.0,
+                     InclinedPullupsUserSetScoreFemale: 17.0,
+                     StandingBroadJumpUserSetScoreFemale: 170.0
+                    ),
         NAPFAAScores(age: 14,
-            TwoPointFourKMRunUserSetScoreMale: 661.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 43.0,
-            InclinedPullupsUserSetScoreMale: 26.0,
-            StandingBroadJumpUserSetScoreMale: 225.0,
+                     TwoPointFourKMRunUserSetScoreMale: 661.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 43.0,
+                     InclinedPullupsUserSetScoreMale: 26.0,
+                     StandingBroadJumpUserSetScoreMale: 225.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 861.0,
-            ShuttleRunUserSetScoreFemale: 11.5,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 43.0,
-            InclinedPullupsUserSetScoreFemale: 16.0,
-            StandingBroadJumpUserSetScoreFemale: 177.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 861.0,
+                     ShuttleRunUserSetScoreFemale: 11.5,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 43.0,
+                     InclinedPullupsUserSetScoreFemale: 16.0,
+                     StandingBroadJumpUserSetScoreFemale: 177.0
+                    ),
         NAPFAAScores(age: 15,
-            TwoPointFourKMRunUserSetScoreMale: 641.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 45.0,
-            InclinedPullupsUserSetScoreMale: 7.0,
-            StandingBroadJumpUserSetScoreMale: 237.0,
-            
-            TwoPointFourKMRunUserSetScoreFemale: 851.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 45.0,
-            InclinedPullupsUserSetScoreFemale: 16.0,
-            StandingBroadJumpUserSetScoreFemale: 182.0
-        ),
-        NAPFAAScores(age: 16,
-            TwoPointFourKMRunUserSetScoreMale: 631.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 47.0,
-            InclinedPullupsUserSetScoreMale: 8.0,
-            StandingBroadJumpUserSetScoreMale: 245.0,
-                    
-            TwoPointFourKMRunUserSetScoreFemale: 851.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 46.0,
-            InclinedPullupsUserSetScoreFemale: 17.0,
-            StandingBroadJumpUserSetScoreFemale: 186.0
-        ),
-        NAPFAAScores(age: 17,
-            TwoPointFourKMRunUserSetScoreMale: 621.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 48.0,
-            InclinedPullupsUserSetScoreMale: 9.0,
-            StandingBroadJumpUserSetScoreMale: 249.0,
+                     TwoPointFourKMRunUserSetScoreMale: 641.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 45.0,
+                     InclinedPullupsUserSetScoreMale: 7.0,
+                     StandingBroadJumpUserSetScoreMale: 237.0,
                      
-            TwoPointFourKMRunUserSetScoreFemale: 841.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 46.0,
-            InclinedPullupsUserSetScoreFemale: 17.0,
-            StandingBroadJumpUserSetScoreFemale: 189.0
-        ),
+                     TwoPointFourKMRunUserSetScoreFemale: 851.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 45.0,
+                     InclinedPullupsUserSetScoreFemale: 16.0,
+                     StandingBroadJumpUserSetScoreFemale: 182.0
+                    ),
+        NAPFAAScores(age: 16,
+                     TwoPointFourKMRunUserSetScoreMale: 631.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 47.0,
+                     InclinedPullupsUserSetScoreMale: 8.0,
+                     StandingBroadJumpUserSetScoreMale: 245.0,
+                     
+                     TwoPointFourKMRunUserSetScoreFemale: 851.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 46.0,
+                     InclinedPullupsUserSetScoreFemale: 17.0,
+                     StandingBroadJumpUserSetScoreFemale: 186.0
+                    ),
+        NAPFAAScores(age: 17,
+                     TwoPointFourKMRunUserSetScoreMale: 621.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 48.0,
+                     InclinedPullupsUserSetScoreMale: 9.0,
+                     StandingBroadJumpUserSetScoreMale: 249.0,
+                     
+                     TwoPointFourKMRunUserSetScoreFemale: 841.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 46.0,
+                     InclinedPullupsUserSetScoreFemale: 17.0,
+                     StandingBroadJumpUserSetScoreFemale: 189.0
+                    ),
         NAPFAAScores(age: 18,
-            TwoPointFourKMRunUserSetScoreMale: 621.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 48.0,
-            InclinedPullupsUserSetScoreMale: 10.0,
-            StandingBroadJumpUserSetScoreMale: 251.0,
-                    
-            TwoPointFourKMRunUserSetScoreFemale: 841.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 46.0,
-            InclinedPullupsUserSetScoreFemale: 17,
-            StandingBroadJumpUserSetScoreFemale: 192.0
-        ),
+                     TwoPointFourKMRunUserSetScoreMale: 621.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 48.0,
+                     InclinedPullupsUserSetScoreMale: 10.0,
+                     StandingBroadJumpUserSetScoreMale: 251.0,
+                     
+                     TwoPointFourKMRunUserSetScoreFemale: 841.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 46.0,
+                     InclinedPullupsUserSetScoreFemale: 17,
+                     StandingBroadJumpUserSetScoreFemale: 192.0
+                    ),
         NAPFAAScores(age: 19,
-            TwoPointFourKMRunUserSetScoreMale: 621.0,
-            ShuttleRunUserSetScoreMale: 10.2,
-            SitUpsUserSetScoreMale: 42.0,
-            SitAndReachUserSetScoreMale: 48.0,
-            InclinedPullupsUserSetScoreMale: 10.0,
-            StandingBroadJumpUserSetScoreMale: 251.0,
-                    
-            TwoPointFourKMRunUserSetScoreFemale: 861.0,
-            ShuttleRunUserSetScoreFemale: 11.3,
-            SitUpsUserSetScoreFemale: 30.0,
-            SitAndReachUserSetScoreFemale: 45.0,
-            InclinedPullupsUserSetScoreFemale: 17.0,
-            StandingBroadJumpUserSetScoreFemale: 195.0
-        ),
+                     TwoPointFourKMRunUserSetScoreMale: 621.0,
+                     ShuttleRunUserSetScoreMale: 10.2,
+                     SitUpsUserSetScoreMale: 42.0,
+                     SitAndReachUserSetScoreMale: 48.0,
+                     InclinedPullupsUserSetScoreMale: 10.0,
+                     StandingBroadJumpUserSetScoreMale: 251.0,
+                     
+                     TwoPointFourKMRunUserSetScoreFemale: 861.0,
+                     ShuttleRunUserSetScoreFemale: 11.3,
+                     SitUpsUserSetScoreFemale: 30.0,
+                     SitAndReachUserSetScoreFemale: 45.0,
+                     InclinedPullupsUserSetScoreFemale: 17.0,
+                     StandingBroadJumpUserSetScoreFemale: 195.0
+                    ),
     ]
+    
+    @State var userAgeBasedBestScore = NAPFAAScores(age: 0, TwoPointFourKMRunUserSetScoreMale: 0.0, ShuttleRunUserSetScoreMale: 0.0, SitUpsUserSetScoreMale: 0.0, SitAndReachUserSetScoreMale: 0.0, InclinedPullupsUserSetScoreMale: 0.0, StandingBroadJumpUserSetScoreMale: 0.0, TwoPointFourKMRunUserSetScoreFemale: 0.0, ShuttleRunUserSetScoreFemale: 0.0, SitUpsUserSetScoreFemale: 0.0, SitAndReachUserSetScoreFemale: 0.0, InclinedPullupsUserSetScoreFemale: 0.0, StandingBroadJumpUserSetScoreFemale: 0.0)
     
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
-    @State var age = 16
+    @State var gender: Gender = .male
+    @State var age = 0
     @State var birthdayObj = Date()
     @State var TwoPointFourKMRunUserSetScore = 0.0
     @State var ShuttleRunUserSetScore = 0.0
@@ -242,6 +253,7 @@ struct HomeView: View {
     
     
     // TODO: MAKE THESE A(HIGHEST) SCORES ADAPT TO USER AGE
+    
     @State var TwoPointFourKMRunHighestScore = 641.0
     @State var ShuttleRunHighestScore = 10.2
     @State var SitUpsHighestScore = 42.0
@@ -290,7 +302,7 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
+                            SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
                                     if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
                                         Spacer()
@@ -299,10 +311,22 @@ struct HomeView: View {
                                             VStack(alignment: .center) {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
+                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
                                                             Text(datum.text)
-                                                            .font(.title3)
-                                                            .multilineTextAlignment(.center)
-                                                            .padding(geometry.size.width / 9)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                            Text("Pullups")
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text != "Inclined Pullups") {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        }
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
@@ -332,9 +356,22 @@ struct HomeView: View {
                                             VStack(alignment: .center) {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                            Text(datum.text).font(.title3)
+                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
+                                                            Text(datum.text)
+                                                                .font(.title3)
                                                                 .multilineTextAlignment(.center)
                                                                 .padding(geometry.size.width / 9)
+                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                            Text("Pullups")
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text != "Inclined Pullups") {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        }
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
@@ -394,6 +431,19 @@ struct HomeView: View {
                                     }
                                 }
                                 
+                                if !isAgeLegal && !firstTimeEnteringAge {
+                                    Button {
+                                        showModal = true
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("It seems like your age does not fall into any napfa scoring standards that we can use. Please update your age to be within the range of 9-19 inclusive.")
+                                                .multilineTextAlignment(.leading)
+                                        }
+                                    }
+                                }
+                                
                                 if stillNeedFillNAPFAEntry {
                                     Button {
                                         self.tabSelection = 2
@@ -438,6 +488,46 @@ struct HomeView: View {
                             }
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    userAgeBasedBestScore = listOfNapfaScores.last { score in
+                                        score.age == age
+                                    } ?? NAPFAAScores(age: 0, TwoPointFourKMRunUserSetScoreMale: 0.0, ShuttleRunUserSetScoreMale: 0.0, SitUpsUserSetScoreMale: 0.0, SitAndReachUserSetScoreMale: 0.0, InclinedPullupsUserSetScoreMale: 0.0, StandingBroadJumpUserSetScoreMale: 0.0, TwoPointFourKMRunUserSetScoreFemale: 0.0, ShuttleRunUserSetScoreFemale: 0.0, SitUpsUserSetScoreFemale: 0.0, SitAndReachUserSetScoreFemale: 0.0, InclinedPullupsUserSetScoreFemale: 0.0, StandingBroadJumpUserSetScoreFemale: 0.0)
+                                    
+                                    if listOfNapfaScores.last(where: { score in score.age == age }) ?? nil == nil {
+                                        withAnimation {
+                                            isAgeLegal = false
+                                        }
+                                    } else {
+                                        if (gender == .male) {
+                                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreMale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
+                                            
+                                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreMale
+                                            
+                                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreMale
+                                            
+                                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreMale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
+                                        } else if (gender == .female) {
+                                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreFemale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
+                                            
+                                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreFemale
+                                            
+                                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreFemale
+                                            
+                                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreFemale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
+                                        }
+                                        withAnimation {
+                                            isAgeLegal = true
+                                        }
+                                    }
+                                    
+                                    
                                     if (TwoPointFourKMRunUserSetScore == 0.0 || SitUpsUserSetScore == 0.0 || SitAndReachUserSetScore == 0.0 || InclinedPullupsUserSetScore == 0.0 || ShuttleRunUserSetScore == 0.0 || StandingBroadJumpUserSetScore == 0.0) {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
@@ -450,17 +540,17 @@ struct HomeView: View {
                                     }
                                     
                                     if (lastNAPFAElement.twoPointFourKMRun == "0" && lastNAPFAElement.shuttleRun == "0" && lastNAPFAElement.sitUps == "0" && lastNAPFAElement.sitAndReach == "0" && lastNAPFAElement.inclinedPullups == "0" && lastNAPFAElement.standingBroadJump == "0")
-//                                     LogRecord(
-//                                        NapfaOrWorkouts: .napfa,
-//                                        description: "This is my description",
-//                                        date: Date(timeInterval: .zero, since: .now),
-//                                        twoPointFourKMRun: "0",
-//                                        shuttleRun: "0",
-//                                        sitUps: "0",
-//                                        sitAndReach: "0",
-//                                        inclinedPullups: "0",
-//                                        standingBroadJump: "0"
-//                                    )
+                                    //                                     LogRecord(
+                                    //                                        NapfaOrWorkouts: .napfa,
+                                    //                                        description: "This is my description",
+                                    //                                        date: Date(timeInterval: .zero, since: .now),
+                                    //                                        twoPointFourKMRun: "0",
+                                    //                                        shuttleRun: "0",
+                                    //                                        sitUps: "0",
+                                    //                                        sitAndReach: "0",
+                                    //                                        inclinedPullups: "0",
+                                    //                                        standingBroadJump: "0"
+                                    //                                    )
                                     {
                                         withAnimation {
                                             stillNeedFillNAPFAEntry = true
@@ -472,17 +562,17 @@ struct HomeView: View {
                                     }
                                     
                                     if (lastWorkoutElement.twoPointFourKMRun == "0" && lastWorkoutElement.shuttleRun == "0" && lastWorkoutElement.sitUps == "0" && lastWorkoutElement.sitAndReach == "0" && lastWorkoutElement.inclinedPullups == "0" && lastWorkoutElement.standingBroadJump == "0")
-//                                        LogRecord(
-//                                        NapfaOrWorkouts: .workout,
-//                                        description: "This is my description",
-//                                        date: Date(timeInterval: .zero, since: .now),
-//                                        twoPointFourKMRun: "0",
-//                                        shuttleRun: "0",
-//                                        sitUps: "0",
-//                                        sitAndReach: "0",
-//                                        inclinedPullups: "0",
-//                                        standingBroadJump: "0"
-//                                    )
+                                    //                                        LogRecord(
+                                    //                                        NapfaOrWorkouts: .workout,
+                                    //                                        description: "This is my description",
+                                    //                                        date: Date(timeInterval: .zero, since: .now),
+                                    //                                        twoPointFourKMRun: "0",
+                                    //                                        shuttleRun: "0",
+                                    //                                        sitUps: "0",
+                                    //                                        sitAndReach: "0",
+                                    //                                        inclinedPullups: "0",
+                                    //                                        standingBroadJump: "0"
+                                    //                                    )
                                     {
                                         withAnimation {
                                             stillNeedFillWorkoutEntry = true
@@ -497,14 +587,17 @@ struct HomeView: View {
                         }
                         .sheet(isPresented: $showModal) {
                             showModal = false
+                            tabSelection = 0
+                            print("the enddd")
+                            print(age)
                         } content: {
-                            getGoalData(age: $age, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(trailing:
-                                            Button {
+                                                Button {
                             showModal = true
                         } label: {
                             Image(systemName: "target")
@@ -575,6 +668,7 @@ struct HomeView: View {
                     print(data[3].text + " " + String(data[3].fractionWorkoutForUserGoal))
                     print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
                     print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
+                    
                 }
             }
         }
@@ -585,7 +679,10 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var tabSelection: Int
     @Binding var age: Int
+    @Binding var firstTimeEnterAge: Bool
+    @Binding var gender: Gender
     @Binding var birthDate: Date
     @Binding var twoPointFourKMRunScore: Double
     @Binding var standingBroadJumpScore: Double
@@ -604,7 +701,7 @@ struct getGoalData: View {
     @State var sitAndReach = ""
     
     var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .year, value: -17, to: Date())!
+        let min = Calendar.current.date(byAdding: .year, value: -19, to: Date())!
         let max = Calendar.current.date(byAdding: .year, value: -8, to: Date())!
         return min...max
     }
@@ -616,16 +713,20 @@ struct getGoalData: View {
                 Form {
                     Section {
                         DatePicker(selection: $birthDate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
+                        Picker(selection: $gender, label: Text("Gender")) {
+                            Text("Male").tag(Gender.male)
+                            Text("Female").tag(Gender.female)
+                        }
                     } footer: {
-                        Text("We need your birthday to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
+                        Text("We need your birthday and gender to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
                     }
-
+                    
                     
                     Section {
                         Text("2.4KM Run")
                         TextField(String(
                             Int(twoPointFourKMRunScore)), text: $twoPointFourKMRun)
-                            .keyboardType(.numberPad)
+                        .keyboardType(.numberPad)
                     } footer: {
                         Text("Seconds")
                     }
@@ -671,6 +772,11 @@ struct getGoalData: View {
                     }
                 }
             }
+            .onAppear {
+                withAnimation {
+                    firstTimeEnterAge = false
+                }
+            }
             .navigationTitle("Set Your Goals")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button {
@@ -689,6 +795,11 @@ struct getGoalData: View {
                     let calendar = Calendar.current
                     let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
                     age = ageComponents.year!
+                    
+                    tabSelection = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        tabSelection = 0
+                    }
                     
                     dismiss()
                     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45129771292E3D1300C54A69 /* EndedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45129770292E3D1300C54A69 /* EndedWorkoutView.swift */; };
 		452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */; };
 		452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DE28F6E0E50037A0FB /* ContentView.swift */; };
 		452821E128F6E0E80037A0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E028F6E0E80037A0FB /* Assets.xcassets */; };
@@ -14,8 +15,10 @@
 		4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18328F70BA20033B5B8 /* LoggerView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
 		A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C9EFEB292F4387002CD872 /* StandardsModel.swift */; };
+		45D2E3F22924915600D28729 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2E3F12924915600D28729 /* CircleProgressBar.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
-		DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */; };
+		DC0B4773292F590700537B08 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = DC0B4772292F590700537B08 /* SwiftUISnappingScrollView */; };
+		DC759309292BB36700E17B27 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
 		DCA9E7A3290398330099B500 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E7A2290398330099B500 /* data.swift */; };
 		DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E72922197F0047B13F /* LoggerData.swift */; };
@@ -32,15 +35,14 @@
 		DCADE90A29221A7D0047B13F /* AddExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8FC29221A7D0047B13F /* AddExerciseView.swift */; };
 		DCADE90B29221A7D0047B13F /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8FD29221A7D0047B13F /* Routine.swift */; };
 		DCADE90C29221A7D0047B13F /* WorkoutHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8FE29221A7D0047B13F /* WorkoutHistoryManager.swift */; };
-		DCADE90D29221A7D0047B13F /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8FF29221A7D0047B13F /* Model.xcdatamodeld */; };
 		DCADE90E29221A7D0047B13F /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE90229221A7D0047B13F /* StartWorkoutView.swift */; };
 		DCADE90F29221A7D0047B13F /* TimerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE90329221A7D0047B13F /* TimerBar.swift */; };
 		DCADE91029221A7D0047B13F /* WorkoutExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE90429221A7D0047B13F /* WorkoutExerciseView.swift */; };
-		DCADE91129221A7D0047B13F /* StartedWorkoutExercisingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE90529221A7D0047B13F /* StartedWorkoutExercisingView.swift */; };
 		DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45129770292E3D1300C54A69 /* EndedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndedWorkoutView.swift; sourceTree = "<group>"; };
 		452821D928F6E0E50037A0FB /* GoogleSAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSAPApp.swift; sourceTree = "<group>"; };
 		452821DE28F6E0E50037A0FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 		4548F18328F70BA20033B5B8 /* LoggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A9C9EFEB292F4387002CD872 /* StandardsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardsModel.swift; sourceTree = "<group>"; };
+		45D2E3F12924915600D28729 /* CircleProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleProgressBar.swift; sourceTree = "<group>"; };
 		DC0002672915F2B7008E03CC /* HomeDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
 		DCA9E7A2290398330099B500 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
@@ -66,11 +69,9 @@
 		DCADE8FC29221A7D0047B13F /* AddExerciseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddExerciseView.swift; sourceTree = "<group>"; };
 		DCADE8FD29221A7D0047B13F /* Routine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		DCADE8FE29221A7D0047B13F /* WorkoutHistoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryManager.swift; sourceTree = "<group>"; };
-		DCADE90029221A7D0047B13F /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		DCADE90229221A7D0047B13F /* StartWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
 		DCADE90329221A7D0047B13F /* TimerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerBar.swift; sourceTree = "<group>"; };
 		DCADE90429221A7D0047B13F /* WorkoutExerciseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutExerciseView.swift; sourceTree = "<group>"; };
-		DCADE90529221A7D0047B13F /* StartedWorkoutExercisingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartedWorkoutExercisingView.swift; sourceTree = "<group>"; };
 		DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressViewLarge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */,
+				DC0B4773292F590700537B08 /* SwiftUISnappingScrollView in Frameworks */,
+				DC759309292BB36700E17B27 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,10 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				DCADE8F829221A7D0047B13F /* EditingWorkouts */,
-				DCADE8FF29221A7D0047B13F /* Model.xcdatamodeld */,
 				DCADE8FD29221A7D0047B13F /* Routine.swift */,
 				DCADE8F729221A7D0047B13F /* RoutinesDataManager.swift */,
-				DCADE8FE29221A7D0047B13F /* WorkoutHistoryManager.swift */,
 				DCADE90129221A7D0047B13F /* WorkoutSession */,
 			);
 			path = Workout;
@@ -202,10 +202,12 @@
 		DCADE90129221A7D0047B13F /* WorkoutSession */ = {
 			isa = PBXGroup;
 			children = (
+				DCADE8FE29221A7D0047B13F /* WorkoutHistoryManager.swift */,
 				DCADE90229221A7D0047B13F /* StartWorkoutView.swift */,
 				DCADE90329221A7D0047B13F /* TimerBar.swift */,
+				45D2E3F12924915600D28729 /* CircleProgressBar.swift */,
 				DCADE90429221A7D0047B13F /* WorkoutExerciseView.swift */,
-				DCADE90529221A7D0047B13F /* StartedWorkoutExercisingView.swift */,
+				45129770292E3D1300C54A69 /* EndedWorkoutView.swift */,
 			);
 			path = WorkoutSession;
 			sourceTree = "<group>";
@@ -236,7 +238,7 @@
 			);
 			name = GoogleSAP;
 			packageProductDependencies = (
-				DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */,
+				DC0B4772292F590700537B08 /* SwiftUISnappingScrollView */,
 			);
 			productName = GoogleSAP;
 			productReference = 452821D928F6E0E50037A0FB /* GoogleSAP.app */;
@@ -267,7 +269,7 @@
 			);
 			mainGroup = 452821D028F6E0E50037A0FB;
 			packageReferences = (
-				DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
+				DC0B4771292F590700537B08 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
 			);
 			productRefGroup = 452821DA28F6E0E50037A0FB /* Products */;
 			projectDirPath = "";
@@ -300,14 +302,13 @@
 				DCADE90F29221A7D0047B13F /* TimerBar.swift in Sources */,
 				4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */,
 				452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */,
+				45D2E3F22924915600D28729 /* CircleProgressBar.swift in Sources */,
 				DCADE90929221A7D0047B13F /* RoutinesView.swift in Sources */,
 				DCADE90829221A7D0047B13F /* EditDayRoutinesView.swift in Sources */,
 				DCADE8F429221A200047B13F /* CalculatorStartPageView.swift in Sources */,
 				DCADE90A29221A7D0047B13F /* AddExerciseView.swift in Sources */,
 				DCADE8EE2922197F0047B13F /* LoggerMenuItem.swift in Sources */,
 				DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */,
-				DCADE90D29221A7D0047B13F /* Model.xcdatamodeld in Sources */,
-				DCADE91129221A7D0047B13F /* StartedWorkoutExercisingView.swift in Sources */,
 				DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
 				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
@@ -323,6 +324,7 @@
 				DCA9E7A3290398330099B500 /* data.swift in Sources */,
 				DCADE8F529221A200047B13F /* DataTypes.swift in Sources */,
 				DCADE90629221A7D0047B13F /* RoutinesDataManager.swift in Sources */,
+				45129771292E3D1300C54A69 /* EndedWorkoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +531,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */ = {
+		DC0B4771292F590700537B08 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ciaranrobrien/SwiftUISnappingScrollView.git";
 			requirement = {
@@ -540,25 +542,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */ = {
+		DC0B4772292F590700537B08 /* SwiftUISnappingScrollView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
+			package = DC0B4771292F590700537B08 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
 			productName = SwiftUISnappingScrollView;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		DCADE8FF29221A7D0047B13F /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				DCADE90029221A7D0047B13F /* Model.xcdatamodel */,
-			);
-			currentVersion = DCADE90029221A7D0047B13F /* Model.xcdatamodel */;
-			path = Model.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 452821D128F6E0E50037A0FB /* Project object */;
 }
