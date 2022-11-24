@@ -13,6 +13,9 @@ struct CalculatorStartPageView: View {
     @State var genderInput: gender = .gender
     @State var pageType: calcPage = .none
     
+    @State var insideViewGeometry: CGSize = CGSize(width: 0.0, height: 0.0)
+    @State var dragOffset: CGFloat = .zero
+    
     var body: some View {
         VStack {
                 HStack(spacing: 0) {
@@ -53,15 +56,43 @@ struct CalculatorStartPageView: View {
                 }.onAppear {
                     withAnimation{ pageType = .none }
                 }
-            } else if pageType == calcPage.standards {
-                Spacer()
-                ScoringStandardsView(ageInput: $ageInput, genderInput: $genderInput)
-                Spacer()
-            } else if pageType == calcPage.calculate {
-                Spacer()
-                GradeScoreCaclulator()
-                Spacer()
-            }//add pull down to reset age and gender
+            } else {
+                ZStack {
+                    GeometryReader{ geometry in
+                        Spacer().onAppear { insideViewGeometry = geometry.size }
+                    }
+                    VStack {
+                        Spacer()
+                        Group {
+                            if pageType == calcPage.standards {
+                                ScoringStandardsView(ageInput: $ageInput, genderInput: $genderInput)
+                            } else if pageType == calcPage.calculate {
+                                GradeScoreCaclulator()
+                            }
+                        }
+                        .offset(y: dragOffset)
+                        .gesture(DragGesture()
+                            .onChanged({ drag in
+                                dragOffset = drag.translation.height>0 ? drag.translation.height:CGFloat.zero
+                            })
+                            .onEnded({ drag in
+                                if drag.translation.height>insideViewGeometry.height*0.66 {
+                                    withAnimation(.spring(response: 0.25)){
+                                        dragOffset = insideViewGeometry.height
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                        withAnimation(.spring(response: 0.25)){
+                                            pageType = .none
+                                        }
+                                        DispatchQueue.main.asyncAfter(deadline: .now()+0.25) { dragOffset = .zero }
+                                    }
+                                } else { withAnimation(.spring()){ dragOffset = CGFloat.zero } }
+                            })
+                        )
+                        Spacer()
+                    }
+                }
+            }
         }
     }
 }

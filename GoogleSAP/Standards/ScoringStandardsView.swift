@@ -33,7 +33,7 @@ struct ScoringStandardsView: View {
                 } else {
                     Text("Age Group: \(ageGroup)")
                 }
-                Spacer()
+                Color(UIColor.systemBackground)
             }
             Group {
                 GeometryReader{ geometry in
