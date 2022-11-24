@@ -38,31 +38,36 @@ struct WorkoutExerciseView: View {
             if started && !ended {
                 VStack {
                     HStack {
-                        Spacer()
-                        CircleProgressBar(
-                            totalTime: Double(exercises[currentExerciseIndex].duration),
-                            showReps: false,
-                            timeRemaining: $timeRemaining,
-                            repInfo: "jhgk"
-                        )
-                        Spacer()
-                        CircleProgressBar(
-                            totalTime: Double(exercises[currentExerciseIndex].duration)/Double(exercises[currentExerciseIndex].reps),
-                            showReps: false,
-                            timeRemaining: $remainingTimePerRep,
-                            repInfo: "jhgk"
-                        )
-                        Spacer()
+                        if exercises[currentExerciseIndex].name == "Rest" {
+                            CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration))
+                        } else {
+                            Spacer()
+                            CircleProgressBar(
+                                totalTime: Double(exercises[currentExerciseIndex].duration),
+                                showReps: false,
+                                timeRemaining: $timeRemaining,
+                                repInfo: ""
+                            )
+                            Spacer()
+                            CircleProgressBar(
+                                totalTime: Double(exercises[currentExerciseIndex].duration)/Double(exercises[currentExerciseIndex].reps),
+                                showReps: true,
+                                timeRemaining: $remainingTimePerRep,
+                                repInfo: "\(ceil(Double(Int(timeRemaining)/exercises[currentExerciseIndex].duration*exercises[currentExerciseIndex].reps)))/\(exercises[currentExerciseIndex].reps)"
+                            )
+                            Spacer()
+                        }
                     }
-                    
+                    Text("\(Int(timeRemaining)/exercises[currentExerciseIndex].duration*exercises[currentExerciseIndex].reps)/\(exercises[currentExerciseIndex].reps)")
                     Text("\(exercises[currentExerciseIndex].name)")
-                    Text("\(timeRemaining)")
                         .onReceive(timer) { _ in
                             if !isPaused && started {
                                 if timeRemaining > 0 {
                                     withAnimation(.linear(duration: 0.1)) {
                                         timeRemaining -= 0.1
-                                        remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                        if exercises[currentExerciseIndex].name != "Rest" {
+                                            remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                        }
                                     }
                                 } else {
                                     if !ended {
@@ -79,15 +84,6 @@ struct WorkoutExerciseView: View {
                             }
                         }
                     Spacer()
-                    Button {
-                        
-                    } label: {
-                        Text("Skip")
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .padding(10)
-                            .background(.red)
-                            .foregroundColor(.white)
-                    }
                     Form {
                         Section {
                             Button {

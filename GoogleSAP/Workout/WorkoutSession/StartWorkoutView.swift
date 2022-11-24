@@ -34,11 +34,20 @@ struct WorkingOutHomeView: View {
                             shownExerciseIndex = routinesManager.routines[dow].exercises.firstIndex(of: exercise)!
                             showEditSheet = true
                         } label: {
-                            VStack(alignment: .leading) {
-                                Text("\(exercise.name)")
-                                Text("\(exercise.reps) reps, \(exercise.duration)s")
-                                    .font(.caption)
-                                    .foregroundColor(.black)
+                            if exercise.name == "Rest" {
+                                VStack(alignment: .leading) {
+                                    Text(exercise.name)
+                                    Text("\(exercise.duration)s")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
+                            } else {
+                                VStack(alignment: .leading) {
+                                    Text(exercise.name)
+                                    Text("\(exercise.reps) reps, \(exercise.duration)s")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
                     }

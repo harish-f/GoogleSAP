@@ -11,6 +11,7 @@ struct AddExerciseView: View {
     @Binding var exercises: [Exercise]
     @State var newExercise = Exercise(name: "Name", duration: 0, reps: 0)
     @State var repSelection = 0
+    @State var isRest = false
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
@@ -20,38 +21,51 @@ struct AddExerciseView: View {
                 .frame(alignment: .leading)
                 .padding()
             Form {
-                HStack {
-                    Text("Name")
-                    Spacer()
-                    TextField("0", text: $newExercise.name)
-                        .fixedSize()
+                Section {
+                    Toggle("Rest", isOn: $isRest)
                 }
-                HStack {
-                    Text("Duration")
-                    Spacer()
-                    TextField("0", value: $newExercise.duration, format: .number)
-                        .keyboardType(.numberPad)
-                        .fixedSize()
+                
+                Section {
+                    if !isRest {
+                        HStack {
+                            Text("Name")
+                            Spacer()
+                            TextField("0", text: $newExercise.name)
+                                .fixedSize()
+                        }
+                        HStack {
+                            Text("Reps")
+                            Spacer()
+                            TextField("0", value: $newExercise.reps, format: .number)
+                                .keyboardType(.numberPad)
+                                .fixedSize()
+                        }
+                    }
+                    HStack {
+                        Text("Duration")
+                        Spacer()
+                        TextField("0", value: $newExercise.duration, format: .number)
+                            .keyboardType(.numberPad)
+                            .fixedSize()
+                    }
                 }
-                HStack {
-                    Text("Reps")
-                    Spacer()
-                    TextField("0", value: $newExercise.reps, format: .number)
-                        .keyboardType(.numberPad)
-                        .fixedSize()
-                }
+                
                 Section {
                     Button {
+                        if isRest {
+                            newExercise.name = "Rest"
+                            newExercise.reps = 1
+                        }
                         exercises.append(newExercise)
                         dismiss()
                     } label: {
-                        Text("Done")
-                            .padding(10)
-                            .disabled(newExercise.reps <= 0 || newExercise.duration <= 0 || newExercise.name == "")
-//                            .background()
-                            .cornerRadius(15)
-//                            .foregroundColor(.white)
+                        HStack {
+                            Spacer()
+                            Text("Done")
+                            Spacer()
+                        }
                     }
+                    .disabled(!isRest && (newExercise.reps <= 0 || newExercise.duration <= 0 || newExercise.name == ""))
                 }
             }
         }
