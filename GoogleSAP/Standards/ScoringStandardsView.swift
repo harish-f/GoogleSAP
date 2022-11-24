@@ -85,7 +85,8 @@ struct ScoringStandardsView: View {
                     var ref2 = ref
                     if selected+ref<0 { ref2 += stationsCount }
                     if selected+ref>=stationsCount { ref2 -= stationsCount }
-                    withAnimation(.spring(response: 0.125, dampingFraction: 0.5)) {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.75)) {
+                        extraDrag = 0.0
                         scrollSelected += ref
                         selected += ref2
                     }
