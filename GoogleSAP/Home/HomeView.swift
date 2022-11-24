@@ -301,109 +301,111 @@ struct HomeView: View {
             NavigationView {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
-                                ForEach(data) { datum in
-                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            Text("Pullups")
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text != "Inclined Pullups") {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        }
-                                                    })
-                                                    .padding(geometry.size.width / 10)
-                                                })
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
-                                        }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                        
-                                    } else {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            Text("Pullups")
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text != "Inclined Pullups") {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        }
-                                                    })
-                                                    .padding(geometry.size.width / 10)
-                                                })
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
-                                        }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                    }
-                                }
-                                
-                                
-                                ZStack {
+                        //                        ScrollViewReader { proxy in
+                        //                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
+                        TabView {
+                            ForEach(data) { datum in
+                                if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
+                                    HStack{}
                                     
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .center) {
+                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
+                                                    if (datum.text == "Inclined Pullups" && age <= 14) {
+                                                        Text(datum.text)
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                        Text("Pullups")
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    } else if (datum.text != "Inclined Pullups") {
+                                                        Text(datum.text)
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    }
+                                                })
+                                                .padding(geometry.size.width / 10)
+                                            })
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
+                                        }
+                                    )
+                                    
+//                                    Spacer()
+//                                        .scrollSnappingAnchor(.bounds)
+//                                        .id(idGen(text: datum.text))
+                                    
+                                } else {
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .center) {
+                                            CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
+                                                    if (datum.text == "Inclined Pullups" && age <= 14) {
+                                                        Text(datum.text)
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                        Text("Pullups")
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    } else if (datum.text != "Inclined Pullups") {
+                                                        Text(datum.text)
+                                                            .font(.title3)
+                                                            .multilineTextAlignment(.center)
+                                                            .padding(geometry.size.width / 9)
+                                                    }
+                                                })
+                                                .padding(geometry.size.width / 10)
+                                            })
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
+                                        }
+                                    )
+                                    
+//                                    Spacer()
+//                                        .scrollSnappingAnchor(.bounds)
+//                                        .id(idGen(text: datum.text))
                                 }
-                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
-                                
                             }
+                            
+                            
+//                            ZStack {
+//
+//                            }
+//                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            
                         }
+                        .tabViewStyle(.page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode.never))
+                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                            }
+//                        }
                         
                         
                         Form {
