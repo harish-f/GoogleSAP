@@ -17,6 +17,7 @@ struct ScoringStandardsView: View {
     
     @State var selected: Int = 0
     @State var scrollSelected: Int = 0
+    @State var extraDrag: CGFloat = 0.0
     
     var body: some View {
         ZStack {
@@ -52,11 +53,23 @@ struct ScoringStandardsView: View {
                         .frame(width: ViewGeometry.width/5)
                         .padding(.bottom, ViewGeometry.width)
                         .rotationEffect(Angle(
-                            degrees: countOffset*Double(stations.firstIndex(of: $0)!) - countOffset*Double(scrollSelected)
+                            degrees: countOffset*Double(stations.firstIndex(of: $0)! - scrollSelected) + countOffset*extraDrag
                         ))
                         .offset(y: (ViewGeometry.height/2-ViewGeometry.height/50)*1.5)
                 }
             }.gesture(DragGesture()
+//                .onChanged { drag in
+//                    print()
+//                    print(drag.location.x)
+//                    print(drag.startLocation.x)
+//                    print((drag.location.x-drag.startLocation.x))
+//                    print((drag.location.x+drag.startLocation.x))
+//                    print((drag.location.x-drag.startLocation.x)/drag.startLocation.x)
+//                    print((drag.location.x+drag.startLocation.x)/drag.startLocation.x)
+//                    print(ViewGeometry.width)
+//                    print()
+//                    extraDrag = 2*(drag.location.x/ViewGeometry.width-0.5)
+//                }
                 .onEnded { drag in
                     var ref = 0
                     if drag.translation.width>0 { ref = -1 }
