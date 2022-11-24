@@ -37,8 +37,14 @@ struct ScoringStandardsView: View {
             }
             Group {
                 GeometryReader{ geometry in
+                    let sideColours = Array(1...Int((Double(stations.count-1)/2)+0.5)).map{ _ in Color(UIColor.secondaryLabel)}
                     Circle()
-                        .fill(Color(UIColor.label))
+                        .fill(AngularGradient(
+                            colors: sideColours + [Color(UIColor.label)] + sideColours,
+                            center: .center,
+                            startAngle: .degrees(90),
+                            endAngle: .degrees(450)
+                        ))
                         .frame(width: ViewGeometry.width*1.5, height: ViewGeometry.height*1.5)
                         .scaleEffect(circlePickerScale)
                         .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50)
@@ -47,10 +53,11 @@ struct ScoringStandardsView: View {
                 let countOffset = 360.0/Double(stations.count)
                 ForEach(stations, id: \.self) {
                     Text($0.name)
-                        .bold()
+                        .bold(stations[selected].name == $0.name)
+                        .font(Font.title3)
                         .foregroundColor(Color(UIColor.secondarySystemBackground))
                         .multilineTextAlignment(.center)
-                        .frame(width: ViewGeometry.width/5)
+                        .frame(width: ViewGeometry.width/3)
                         .padding(.bottom, ViewGeometry.width)
                         .rotationEffect(Angle(
                             degrees: countOffset*Double(stations.firstIndex(of: $0)! - scrollSelected) + countOffset*extraDrag
