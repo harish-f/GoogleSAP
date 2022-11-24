@@ -20,6 +20,7 @@ struct WorkoutExerciseView: View {
     @State var showEndedDetails = false
     @State var remainingTimePerRep = 0.0
     @State var restart = "false"
+    @Environment(\.colorScheme) var colorScheme
     
     @ObservedObject var historyManager = WorkoutHistoryManger()
     
@@ -145,7 +146,7 @@ struct WorkoutExerciseView: View {
                         }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .background(timeRemaining == 0 ? .green : .white)
+                .background(timeRemaining == 0 ? .green : colorScheme == .dark ? .black : .white)
             }
             if ended {
                 EndedWorkoutView(restart: $restart, completedExercises: completedExercises, allExercises: exercises)

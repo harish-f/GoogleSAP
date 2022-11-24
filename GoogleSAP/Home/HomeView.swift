@@ -302,7 +302,7 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: true) {
+                            SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
                                 ForEach(data) { datum in
                                     if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
                                         Spacer()
