@@ -18,7 +18,6 @@
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
 		DCA9E7A3290398330099B500 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E7A2290398330099B500 /* data.swift */; };
 		DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E72922197F0047B13F /* LoggerData.swift */; };
-		DCADE8EC2922197F0047B13F /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E82922197F0047B13F /* LogView.swift */; };
 		DCADE8ED2922197F0047B13F /* LoggerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E92922197F0047B13F /* LoggerDataManager.swift */; };
 		DCADE8EE2922197F0047B13F /* LoggerMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */; };
 		DCADE8F329221A200047B13F /* ScoringStandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */; };
@@ -52,7 +51,6 @@
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
 		DCA9E7A2290398330099B500 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		DCADE8E72922197F0047B13F /* LoggerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerData.swift; sourceTree = "<group>"; };
-		DCADE8E82922197F0047B13F /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		DCADE8E92922197F0047B13F /* LoggerDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerDataManager.swift; sourceTree = "<group>"; };
 		DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerMenuItem.swift; sourceTree = "<group>"; };
 		DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoringStandardsView.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				DCADE8E72922197F0047B13F /* LoggerData.swift */,
 				DCADE8E92922197F0047B13F /* LoggerDataManager.swift */,
 				DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */,
-				DCADE8E82922197F0047B13F /* LogView.swift */,
 				4548F18328F70BA20033B5B8 /* LoggerView.swift */,
 			);
 			path = Logger;
@@ -315,7 +312,6 @@
 				DCADE90C29221A7D0047B13F /* WorkoutHistoryManager.swift in Sources */,
 				DCADE8ED2922197F0047B13F /* LoggerDataManager.swift in Sources */,
 				DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */,
-				DCADE8EC2922197F0047B13F /* LogView.swift in Sources */,
 				DCADE8F329221A200047B13F /* ScoringStandardsView.swift in Sources */,
 				DCADE91029221A7D0047B13F /* WorkoutExerciseView.swift in Sources */,
 				DCADE90E29221A7D0047B13F /* StartWorkoutView.swift in Sources */,
