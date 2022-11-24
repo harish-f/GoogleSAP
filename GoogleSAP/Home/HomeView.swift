@@ -311,10 +311,22 @@ struct HomeView: View {
                                             VStack(alignment: .center) {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                        Text(datum.text)
-                                                            .font(.title3)
-                                                            .multilineTextAlignment(.center)
-                                                            .padding(geometry.size.width / 9)
+                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                            Text("Pullups")
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text != "Inclined Pullups") {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        }
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
@@ -344,9 +356,22 @@ struct HomeView: View {
                                             VStack(alignment: .center) {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                        Text(datum.text).font(.title3)
-                                                            .multilineTextAlignment(.center)
-                                                            .padding(geometry.size.width / 9)
+                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                                                            Text("Pullups")
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        } else if (datum.text != "Inclined Pullups") {
+                                                            Text(datum.text)
+                                                                .font(.title3)
+                                                                .multilineTextAlignment(.center)
+                                                                .padding(geometry.size.width / 9)
+                                                        }
                                                     })
                                                     .padding(geometry.size.width / 10)
                                                 })
@@ -463,6 +488,46 @@ struct HomeView: View {
                             }
                             .onAppear {
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                    userAgeBasedBestScore = listOfNapfaScores.last { score in
+                                        score.age == age
+                                    } ?? NAPFAAScores(age: 0, TwoPointFourKMRunUserSetScoreMale: 0.0, ShuttleRunUserSetScoreMale: 0.0, SitUpsUserSetScoreMale: 0.0, SitAndReachUserSetScoreMale: 0.0, InclinedPullupsUserSetScoreMale: 0.0, StandingBroadJumpUserSetScoreMale: 0.0, TwoPointFourKMRunUserSetScoreFemale: 0.0, ShuttleRunUserSetScoreFemale: 0.0, SitUpsUserSetScoreFemale: 0.0, SitAndReachUserSetScoreFemale: 0.0, InclinedPullupsUserSetScoreFemale: 0.0, StandingBroadJumpUserSetScoreFemale: 0.0)
+                                    
+                                    if listOfNapfaScores.last(where: { score in score.age == age }) ?? nil == nil {
+                                        withAnimation {
+                                            isAgeLegal = false
+                                        }
+                                    } else {
+                                        if (gender == .male) {
+                                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreMale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
+                                            
+                                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreMale
+                                            
+                                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreMale
+                                            
+                                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreMale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
+                                        } else if (gender == .female) {
+                                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreFemale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
+                                            
+                                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreFemale
+                                            
+                                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreFemale
+                                            
+                                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreFemale
+                                            
+                                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
+                                        }
+                                        withAnimation {
+                                            isAgeLegal = true
+                                        }
+                                    }
+                                    
+                                    
                                     if (TwoPointFourKMRunUserSetScore == 0.0 || SitUpsUserSetScore == 0.0 || SitAndReachUserSetScore == 0.0 || InclinedPullupsUserSetScore == 0.0 || ShuttleRunUserSetScore == 0.0 || StandingBroadJumpUserSetScore == 0.0) {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
@@ -522,8 +587,11 @@ struct HomeView: View {
                         }
                         .sheet(isPresented: $showModal) {
                             showModal = false
+                            tabSelection = 0
+                            print("the enddd")
+                            print(age)
                         } content: {
-                            getGoalData(age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -601,46 +669,6 @@ struct HomeView: View {
                     print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
                     print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
                     
-                    
-                    userAgeBasedBestScore = listOfNapfaScores.last { score in
-                        score.age == age
-                    } ?? NAPFAAScores(age: 0, TwoPointFourKMRunUserSetScoreMale: 0.0, ShuttleRunUserSetScoreMale: 0.0, SitUpsUserSetScoreMale: 0.0, SitAndReachUserSetScoreMale: 0.0, InclinedPullupsUserSetScoreMale: 0.0, StandingBroadJumpUserSetScoreMale: 0.0, TwoPointFourKMRunUserSetScoreFemale: 0.0, ShuttleRunUserSetScoreFemale: 0.0, SitUpsUserSetScoreFemale: 0.0, SitAndReachUserSetScoreFemale: 0.0, InclinedPullupsUserSetScoreFemale: 0.0, StandingBroadJumpUserSetScoreFemale: 0.0)
-                    
-                    if listOfNapfaScores.last(where: { score in score.age == age }) ?? nil == nil {
-                        withAnimation {
-                            isAgeLegal = false
-                        }
-                    } else {
-                        if (gender == .male) {
-                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreMale
-                            
-                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
-                            
-                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreMale
-                            
-                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreMale
-                            
-                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreMale
-                            
-                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
-                        } else if (gender == .female) {
-                            StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreFemale
-                            
-                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
-                            
-                            InclinedPullupsHighestScore = userAgeBasedBestScore.InclinedPullupsUserSetScoreFemale
-                            
-                            SitUpsHighestScore = userAgeBasedBestScore.SitUpsUserSetScoreFemale
-                            
-                            SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreFemale
-                            
-                            TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
-                        }
-                        withAnimation {
-                            isAgeLegal = true
-                        }
-                    }
-                    
                 }
             }
         }
@@ -651,6 +679,7 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var tabSelection: Int
     @Binding var age: Int
     @Binding var firstTimeEnterAge: Bool
     @Binding var gender: Gender
@@ -672,7 +701,7 @@ struct getGoalData: View {
     @State var sitAndReach = ""
     
     var dateClosedRange: ClosedRange<Date> {
-        let min = Calendar.current.date(byAdding: .year, value: -17, to: Date())!
+        let min = Calendar.current.date(byAdding: .year, value: -19, to: Date())!
         let max = Calendar.current.date(byAdding: .year, value: -8, to: Date())!
         return min...max
     }
@@ -766,6 +795,11 @@ struct getGoalData: View {
                     let calendar = Calendar.current
                     let ageComponents = calendar.dateComponents([.year], from: birthDate, to: Date())
                     age = ageComponents.year!
+                    
+                    tabSelection = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        tabSelection = 0
+                    }
                     
                     dismiss()
                     
