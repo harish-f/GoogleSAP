@@ -24,7 +24,8 @@ struct ScoringStandardsView: View {
             GeometryReader{ geometry in
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
-            let stations = Stations[ageInput<=19 ? "NAPFA":"IPPT"]! //updated for napfa only
+            
+            let stations = genderInput == .male && ageInput >= 15 ? Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.map{ $0.name == "No. of Inclined Pull-ups in 30 sec" ? Workout(name: "No. of Pull-ups in 30 sec", range: 0...10, isInt: true):$0 }:Stations[ageInput<=19 ? "NAPFA":"IPPT"]! //updated for napfa only
             VStack {
                 let ageGroup = Int(ceil( Double(ageInput)/3 - 6.0 ))
                 Text(ageInput<=19 ? "NAPFA":"IPPT").font(.title).bold()//updated for napfa only
@@ -64,7 +65,8 @@ struct ScoringStandardsView: View {
                         ))
                         .offset(y: (ViewGeometry.height/2-ViewGeometry.height/50)*1.5)
                 }
-            }.gesture(DragGesture()
+            }
+            .gesture(DragGesture()
 //                .onChanged { drag in
 //                    print()
 //                    print(drag.location.x)
