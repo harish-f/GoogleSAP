@@ -4,3 +4,4 @@ GoogleSAP.xcodeproj/project.xcworkspace/xcuserdata/sairamsuresh.xcuserdatad/User
 GoogleSAP.xcodeproj/xcuserdata/sairamsuresh.xcuserdatad/xcschemes/xcschememanagement.plist
 GoogleSAP.xcodeproj/project.pbxproj
 *.pbxproj
+.DS_Store
