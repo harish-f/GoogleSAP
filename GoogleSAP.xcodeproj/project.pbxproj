@@ -13,6 +13,7 @@
 		452821E428F6E0E80037A0FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E328F6E0E80037A0FB /* Preview Assets.xcassets */; };
 		4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18328F70BA20033B5B8 /* LoggerView.swift */; };
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
+		A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C9EFEB292F4387002CD872 /* StandardsModel.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
 		DCA9E79D290395DE0099B500 /* InternalProgressDataLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */; };
@@ -49,6 +50,7 @@
 		452821E328F6E0E80037A0FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4548F18328F70BA20033B5B8 /* LoggerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerView.swift; sourceTree = "<group>"; };
 		4548F18828F70BA20033B5B8 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A9C9EFEB292F4387002CD872 /* StandardsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardsModel.swift; sourceTree = "<group>"; };
 		DC0002672915F2B7008E03CC /* HomeDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
 		DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalProgressDataLargeView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				DCADE8F029221A200047B13F /* CalculatorStartPageView.swift */,
 				DCADE8F129221A200047B13F /* DataTypes.swift */,
+				A9C9EFEB292F4387002CD872 /* StandardsModel.swift */,
 				DCADE8F229221A200047B13F /* GradeScoreCaclulator.swift */,
 				DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */,
 			);
@@ -310,6 +313,7 @@
 				DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
 				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
+				A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */,
 				DCADE90B29221A7D0047B13F /* Routine.swift in Sources */,
 				DCA9E79F290395EB0099B500 /* InternalProgressDataSmallView.swift in Sources */,
 				DCADE90C29221A7D0047B13F /* WorkoutHistoryManager.swift in Sources */,
