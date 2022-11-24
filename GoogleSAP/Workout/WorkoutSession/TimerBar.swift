@@ -9,8 +9,7 @@ import SwiftUI
 
 struct TimerBar: View {
     let totalTime: Double
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @Binding var timeRemaining: Int
+    @Binding var timeRemaining: Double
     var body: some View {
         ZStack(alignment: .leading) {
             VStack{}
