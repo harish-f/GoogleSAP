@@ -81,13 +81,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         14: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 28, 32, 36, 39, 41 ],
+                [ 28, 32, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 185, 195, 205, 215, 224 ],
+                [ 185, 195, 205, 215, 225 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 26, 31, 35, 39, 42 ],
+                [ 26, 31, 35, 39, 43 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 7, 12, 17, 22, 25 ],
+                [ 7, 12, 17, 22, 26 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -95,13 +95,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         15: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 29, 33, 36, 39, 41 ],
+                [ 29, 33, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 197, 207, 217, 227, 236 ],
+                [ 197, 207, 217, 227, 237 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 28, 33, 37, 41, 44 ],
+                [ 28, 33, 37, 41, 45 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 0, 2, 4, 5, 6 ],
+                [ 0, 2, 4, 5, 7 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -109,13 +109,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         16: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 30, 33, 36, 39, 41 ],
+                [ 30, 33, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 205, 215, 225, 235, 244 ],
+                [ 205, 215, 225, 235, 245 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 30, 35, 39, 43, 46 ],
+                [ 30, 35, 39, 43, 47 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 0, 2, 4, 6, 7 ],
+                [ 0, 2, 4, 6, 8 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -123,13 +123,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         17: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 30, 33, 36, 39, 41 ],
+                [ 30, 33, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 209, 219, 229, 239, 248 ],
+                [ 209, 219, 229, 239, 249 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 36, 40, 44, 47 ],
+                [ 31, 36, 40, 44, 48 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 1, 3, 5, 7, 8 ],
+                [ 1, 3, 5, 7, 9 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -137,13 +137,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         18: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 30, 33, 36, 39, 41 ],
+                [ 30, 33, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 211, 221, 231, 241, 250 ],
+                [ 211, 221, 231, 241, 251 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 36, 40, 44, 47 ],
+                [ 31, 36, 40, 44, 48 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 4, 6, 7, 9 ],
+                [ 2, 4, 6, 7, 10 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -151,13 +151,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         19: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 30, 33, 36, 39, 41 ],
+                [ 30, 33, 36, 39, 42 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 211, 221, 231, 241, 250 ],
+                [ 211, 221, 231, 241, 251 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 36, 40, 44, 47 ],
+                [ 31, 36, 40, 44, 48 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 4, 6, 8, 9 ],
+                [ 2, 4, 6, 8, 10 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -237,13 +237,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         14: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 15, 19, 23, 27, 29 ],
+                [ 15, 19, 23, 27, 30 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 141, 150, 159, 168, 176 ],
+                [ 141, 150, 159, 168, 177 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 28, 33, 37, 40, 42 ],
+                [ 28, 33, 37, 40, 43 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 6, 9, 13, 16 ],
+                [ 2, 6, 9, 13, 17 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -251,13 +251,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         15: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 16, 20, 24, 28, 29 ],
+                [ 16, 20, 24, 28, 30 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 146, 155, 164, 173, 181 ],
+                [ 146, 155, 164, 173, 182 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 29, 34, 38, 42, 44 ],
+                [ 29, 34, 38, 42, 45 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 6, 9, 13, 15 ],
+                [ 2, 6, 9, 13, 16 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -265,13 +265,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         16: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 17, 21, 25, 28, 30 ],
+                [ 17, 21, 25, 28, 31 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 150, 159, 168, 177, 185 ],
+                [ 150, 159, 168, 177, 186 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 30, 35, 39, 43, 45 ],
+                [ 30, 35, 39, 43, 46 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 6, 10, 13, 16 ],
+                [ 2, 6, 10, 13, 17 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -279,13 +279,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         17: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 18, 21, 25, 28, 29 ],
+                [ 18, 21, 25, 28, 30 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 153, 162, 171, 180, 188 ],
+                [ 153, 162, 171, 180, 189 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 35, 39, 43, 45 ],
+                [ 31, 35, 39, 43, 46 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 2, 6, 10, 13, 15 ],
+                [ 2, 6, 10, 13, 16 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -293,13 +293,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         18: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 19, 23, 26, 28, 29 ],
+                [ 19, 23, 26, 28, 30 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 155, 164, 0173, 182, 191 ],
+                [ 155, 164, 0173, 182, 192 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 35, 39, 43, 45 ],
+                [ 31, 35, 39, 43, 46 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 3, 7, 10, 14, 16 ],
+                [ 3, 7, 10, 14, 17 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
@@ -307,13 +307,13 @@ let NAPFAStandards: [gender:[Int:[Workout:[Int]]]] = [
         ],
         19: [
             Stations["NAPFA"]![0]:  // Sit-ups
-                [ 20, 23, 26, 28, 29 ],
+                [ 20, 23, 26, 28, 30 ],
             Stations["NAPFA"]![1]:  // SBJ
-                [ 155, 164, 173, 184, 194 ],
+                [ 155, 164, 173, 184, 195 ],
             Stations["NAPFA"]![2]:  // Sit & Reach
-                [ 31, 35, 38, 42, 44 ],
+                [ 31, 35, 38, 42, 45 ],
             Stations["NAPFA"]![3]:  // (Inclined) Pull-Ups
-                [ 4, 7, 10, 14, 16 ],
+                [ 4, 7, 10, 14, 17 ],
             Stations["NAPFA"]![4]:  // Shuttle Run
                 [ 0, 0, 0, 0, 0 ],
             Stations["NAPFA"]![5]:  // 1.6km / 2.4km
