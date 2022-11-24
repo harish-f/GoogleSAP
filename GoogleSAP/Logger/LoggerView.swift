@@ -22,26 +22,33 @@ struct LoggerView: View {
         NavigationView {
             VStack {
                 Form {
-                    List(loggerHistoryManager.logRecords) { datum in
-                        
-                        if ((loggedType == "NAPFA") && (datum.napfaOrWorkout == "Napfa")) {
-                            NavigationLink {
-                                LogDetailedView(datum: datum)
-                            } label: {
-                                LoggerMenuItem(date: datum.date, description: datum.description)
+                    List {
+                        ForEach(loggerHistoryManager.logRecords) { datum in
+                            if ((loggedType == "NAPFA") && (datum.napfaOrWorkout == "Napfa")) {
+                                NavigationLink {
+                                    LogDetailedView(datum: datum)
+                                } label: {
+                                    LoggerMenuItem(date: datum.date, description: datum.description)
+                                }
+                            } else {
+                                EmptyView()
                             }
-                        } else {
-                            EmptyView()
+                            
+                            if ((loggedType == "Workouts") && (datum.napfaOrWorkout == "workout")) {
+                                NavigationLink {
+                                    LogDetailedView(datum: datum)
+                                } label: {
+                                    LoggerMenuItem(date: datum.date, description: datum.description)
+                                }
+                            } else {
+                                EmptyView()
+                            }
                         }
-                        
-                        if ((loggedType == "Workouts") && (datum.napfaOrWorkout == "workout")) {
-                            NavigationLink {
-                                LogDetailedView(datum: datum)
-                            } label: {
-                                LoggerMenuItem(date: datum.date, description: datum.description)
-                            }
-                        } else {
-                            EmptyView()
+                        .onDelete { indexSet in
+                            loggerHistoryManager.logRecords.remove(atOffsets: indexSet)
+                        }
+                        .onMove { oldOffset, newOffset in
+                            loggerHistoryManager.logRecords.move(fromOffsets: oldOffset, toOffset: newOffset)
                         }
                     }
                 }
@@ -52,11 +59,13 @@ struct LoggerView: View {
             .onChange(of: data) {_ in
                 loggerHistoryManager.logRecords = data
                 loggerHistoryManager.saveData()
-                
             }
             .navigationTitle("Logger")
             .navigationBarTitleDisplayMode(.inline)
-            .sheet(isPresented: $showNewLogCreationSheet) {
+            .sheet(isPresented: $showNewLogCreationSheet, onDismiss: {
+                print("data")
+                loggerHistoryManager.saveData()
+            }) {
                 CreateNewLogView(data: $data)
             }
             .toolbar {
@@ -85,7 +94,7 @@ struct CreateNewLogView: View {
     @State var loggedType = "NAPFA"
     
     @Binding var data: Array<LogRecord>
-//    @ObservedObject var loggerHistoryManager = LoggerDataManager()
+    //    @ObservedObject var loggerHistoryManager = LoggerDataManager()
     // This is more data from the user
     @State var descriptionOfLog = "Your Description Goes here..."
     @State var date: Date = Date()
@@ -96,8 +105,12 @@ struct CreateNewLogView: View {
     @State var sitUps = ""
     @State var sitAndReach = ""
     
-    // To ensure no wrong data entered
-    @State var isDataLegal = true
+    @State var twoPointFourKMRunSeconds = ""
+    @State var twoPointFourKMRunMinutes = ""
+
+    
+    // To inform user that any data entered cannot be used (because not a number, blank etc)
+    @State var showAlert = false
     
     var body: some View {
         NavigationView {
@@ -114,7 +127,9 @@ struct CreateNewLogView: View {
                     
                     Section {
                         Text("2.4KM Run")
-                        TextField("Seconds", text: $twoPointFourKMRun)
+                        TextField("Minutes", text: $twoPointFourKMRunMinutes)
+                            .keyboardType(.numberPad)
+                        TextField("Seconds", text: $twoPointFourKMRunSeconds)
                             .keyboardType(.numberPad)
                     }
                     Section {
@@ -144,9 +159,9 @@ struct CreateNewLogView: View {
                     }
                 }
             }
-//            .onAppear {
-//                loggerHistoryManager.loadData()
-//            }
+            //            .onAppear {
+            //                loggerHistoryManager.loadData()
+            //            }
             .navigationTitle("Create New Log")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -161,18 +176,30 @@ struct CreateNewLogView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
-                        if (loggedType == "NAPFA") {
-                            data.append(LogRecord(NapfaOrWorkouts: .napfa, description: descriptionOfLog, date: date, twoPointFourKMRun: twoPointFourKMRun, shuttleRun: shuttleRun, sitUps: sitUps, sitAndReach: sitAndReach, inclinedPullups: inclinedPullups, standingBroadJump: standingBroadJump))
+                        if (Float(twoPointFourKMRunMinutes) != nil && Float(sitAndReach) != nil && Float(twoPointFourKMRunSeconds) != nil && Float(standingBroadJump) != nil && Float(inclinedPullups) != nil && Float(shuttleRun) != nil && Float(sitUps) != nil) {
+                            if (loggedType == "NAPFA") {
+                                data.append(LogRecord(NapfaOrWorkouts: .napfa, description: descriptionOfLog, date: date, twoPointFourKMRun: String(Float(twoPointFourKMRunMinutes)! * 60 + Float(twoPointFourKMRunSeconds)!), shuttleRun: shuttleRun, sitUps: sitUps, sitAndReach: sitAndReach, inclinedPullups: inclinedPullups, standingBroadJump: standingBroadJump))
+                                dismiss()
+                            } else {
+                                data.append(LogRecord(NapfaOrWorkouts: .workout, description: descriptionOfLog, date: date, twoPointFourKMRun: String(Float(twoPointFourKMRunMinutes)! * 60 + Float(twoPointFourKMRunSeconds)!), shuttleRun: shuttleRun, sitUps: sitUps, sitAndReach: sitAndReach, inclinedPullups: inclinedPullups, standingBroadJump: standingBroadJump))
+                                dismiss()
+                            }
                         } else {
-                            data.append(LogRecord(NapfaOrWorkouts: .workout, description: descriptionOfLog, date: date, twoPointFourKMRun: twoPointFourKMRun, shuttleRun: shuttleRun, sitUps: sitUps, sitAndReach: sitAndReach, inclinedPullups: inclinedPullups, standingBroadJump: standingBroadJump))
+                            showAlert = true
                         }
-                        dismiss()
+                        
                     } label: {
                         // TODO: MAKE IT ADD BACK TO PERSISTENCE
                         Text("Add")
                     }
                 }
             }
+        }.alert("Error!", isPresented: $showAlert) {
+            Button("Ok") {
+                
+            }
+        } message: {
+            Text("Please ensure that the values entered are numbers and are not left blank.")
         }
     }
 }

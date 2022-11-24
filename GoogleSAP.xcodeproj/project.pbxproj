@@ -15,12 +15,10 @@
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
 		A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C9EFEB292F4387002CD872 /* StandardsModel.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
+		DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */; };
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
-		DCA9E79D290395DE0099B500 /* InternalProgressDataLargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */; };
-		DCA9E79F290395EB0099B500 /* InternalProgressDataSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79E290395EB0099B500 /* InternalProgressDataSmallView.swift */; };
 		DCA9E7A3290398330099B500 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E7A2290398330099B500 /* data.swift */; };
 		DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E72922197F0047B13F /* LoggerData.swift */; };
-		DCADE8EC2922197F0047B13F /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E82922197F0047B13F /* LogView.swift */; };
 		DCADE8ED2922197F0047B13F /* LoggerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E92922197F0047B13F /* LoggerDataManager.swift */; };
 		DCADE8EE2922197F0047B13F /* LoggerMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */; };
 		DCADE8F329221A200047B13F /* ScoringStandardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */; };
@@ -53,11 +51,8 @@
 		A9C9EFEB292F4387002CD872 /* StandardsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardsModel.swift; sourceTree = "<group>"; };
 		DC0002672915F2B7008E03CC /* HomeDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeDataManager.swift; sourceTree = "<group>"; };
 		DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularProgressViewSmall.swift; sourceTree = "<group>"; };
-		DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalProgressDataLargeView.swift; sourceTree = "<group>"; };
-		DCA9E79E290395EB0099B500 /* InternalProgressDataSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalProgressDataSmallView.swift; sourceTree = "<group>"; };
 		DCA9E7A2290398330099B500 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		DCADE8E72922197F0047B13F /* LoggerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerData.swift; sourceTree = "<group>"; };
-		DCADE8E82922197F0047B13F /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		DCADE8E92922197F0047B13F /* LoggerDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerDataManager.swift; sourceTree = "<group>"; };
 		DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerMenuItem.swift; sourceTree = "<group>"; };
 		DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoringStandardsView.swift; sourceTree = "<group>"; };
@@ -84,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,7 +144,6 @@
 				DCADE8E72922197F0047B13F /* LoggerData.swift */,
 				DCADE8E92922197F0047B13F /* LoggerDataManager.swift */,
 				DCADE8EA2922197F0047B13F /* LoggerMenuItem.swift */,
-				DCADE8E82922197F0047B13F /* LogView.swift */,
 				4548F18328F70BA20033B5B8 /* LoggerView.swift */,
 			);
 			path = Logger;
@@ -180,8 +175,6 @@
 			children = (
 				DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */,
 				DCE56DF828F7A11F0067DB9E /* CircularProgressViewLarge.swift */,
-				DCA9E79C290395DE0099B500 /* InternalProgressDataLargeView.swift */,
-				DCA9E79E290395EB0099B500 /* InternalProgressDataSmallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +235,9 @@
 			dependencies = (
 			);
 			name = GoogleSAP;
+			packageProductDependencies = (
+				DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */,
+			);
 			productName = GoogleSAP;
 			productReference = 452821D928F6E0E50037A0FB /* GoogleSAP.app */;
 			productType = "com.apple.product-type.application";
@@ -270,6 +266,9 @@
 				Base,
 			);
 			mainGroup = 452821D028F6E0E50037A0FB;
+			packageReferences = (
+				DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
+			);
 			productRefGroup = 452821DA28F6E0E50037A0FB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -297,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCADE8F629221A200047B13F /* GradeScoreCaclulator.swift in Sources */,
-				DCA9E79D290395DE0099B500 /* InternalProgressDataLargeView.swift in Sources */,
 				DCADE90729221A7D0047B13F /* EditExerciseView.swift in Sources */,
 				DCADE90F29221A7D0047B13F /* TimerBar.swift in Sources */,
 				4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */,
@@ -315,11 +313,9 @@
 				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
 				A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */,
 				DCADE90B29221A7D0047B13F /* Routine.swift in Sources */,
-				DCA9E79F290395EB0099B500 /* InternalProgressDataSmallView.swift in Sources */,
 				DCADE90C29221A7D0047B13F /* WorkoutHistoryManager.swift in Sources */,
 				DCADE8ED2922197F0047B13F /* LoggerDataManager.swift in Sources */,
 				DCE56DF928F7A11F0067DB9E /* CircularProgressViewLarge.swift in Sources */,
-				DCADE8EC2922197F0047B13F /* LogView.swift in Sources */,
 				DCADE8F329221A200047B13F /* ScoringStandardsView.swift in Sources */,
 				DCADE91029221A7D0047B13F /* WorkoutExerciseView.swift in Sources */,
 				DCADE90E29221A7D0047B13F /* StartWorkoutView.swift in Sources */,
@@ -531,6 +527,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ciaranrobrien/SwiftUISnappingScrollView.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
+			productName = SwiftUISnappingScrollView;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		DCADE8FF29221A7D0047B13F /* Model.xcdatamodeld */ = {

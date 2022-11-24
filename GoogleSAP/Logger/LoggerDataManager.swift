@@ -13,7 +13,7 @@ class LoggerDataManager: ObservableObject {
         loadData()
     }
     func getArchiveUrl() -> URL {
-        let plistName = "routinesData.plist"
+        let plistName = "loggerData.plist"
         let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return documentsDir.appendingPathComponent(plistName)
     }
@@ -28,7 +28,8 @@ class LoggerDataManager: ObservableObject {
             finalData = decodedData
         } else {
             finalData = [
-                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5")
+//                LogRecord(NapfaOrWorkouts: .napfa, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5"),
+//                LogRecord(NapfaOrWorkouts: .workout, description: "This is my description", date: Date(timeInterval: .zero, since: .now), twoPointFourKMRun: "118.5", shuttleRun: "30", sitUps: "21", sitAndReach: "22.5", inclinedPullups: "0.1", standingBroadJump: "118.5"),
             ]
             print("ded")
         }
