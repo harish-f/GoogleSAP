@@ -24,7 +24,7 @@ struct ScoringStandardsView: View {
             GeometryReader{ geometry in
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
-            
+            Color(UIColor.systemBackground)
             let stations = genderInput == .male && ageInput >= 15 ? Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.map{ $0.name == "No. of Inclined Pull-ups in 30 sec" ? Workout(name: "No. of Pull-ups in 30 sec", range: 0...10, isInt: true):$0 }:Stations[ageInput<=19 ? "NAPFA":"IPPT"]! //updated for napfa only
             VStack {
                 let ageGroup = Int(ceil( Double(ageInput)/3 - 6.0 ))
@@ -34,7 +34,7 @@ struct ScoringStandardsView: View {
                 } else {
                     Text("Age Group: \(ageGroup)")
                 }
-                Color(UIColor.systemBackground)
+                Spacer()
             }
             Group {
                 GeometryReader{ geometry in
