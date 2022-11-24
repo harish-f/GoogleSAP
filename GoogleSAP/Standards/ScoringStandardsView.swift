@@ -79,9 +79,9 @@ struct ScoringStandardsView: View {
 //                }
                 .onEnded { drag in
                     var ref = 0
-                    if drag.translation.width>0 { ref = -1 }
-                    else if drag.translation.width<0 { ref = 1 }
-                    let stationsCount = Stations[ageInput<18 ? "NAPFA":"IPPT"]!.count
+                    if drag.translation.width>ViewGeometry.width/10 { ref = -1 }
+                    else if drag.translation.width<0-ViewGeometry.width/10 { ref = 1 }
+                    let stationsCount = Stations[ageInput<=18 ? "NAPFA":"IPPT"]!.count
                     var ref2 = ref
                     if selected+ref<0 { ref2 += stationsCount }
                     if selected+ref>=stationsCount { ref2 -= stationsCount }
