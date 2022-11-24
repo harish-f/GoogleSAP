@@ -17,7 +17,7 @@ struct RoutinesView: View {
                 VStack {
                     List($routinesData.routines) { $routine in
                         NavigationLink {
-                            EditDayRoutinesView(routine: $routine)
+                            EditDayRoutinesView(routine: $routine, routinesData: routinesData)
                         } label: {
                             Text("\(routine.title)")
                         }
@@ -39,10 +39,8 @@ struct RoutinesView: View {
                     .padding(.bottom)
                 }
                 
-            }.navigationTitle("Workouts")
-                .onAppear {
-                    routinesData.saveData()
-                }
+            }
+            .navigationTitle("Workouts")
         }
     }
 }

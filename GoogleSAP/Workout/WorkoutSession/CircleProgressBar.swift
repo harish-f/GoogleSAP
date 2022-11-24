@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct CircleProgressBar: View {
-    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
     let totalTime: Double
     let showReps: Bool
-    @State var timeRemaining: Double
+    @Binding var timeRemaining: Double
     @State var repInfo: String
     var body: some View {
         ZStack {
@@ -35,14 +34,14 @@ struct CircleProgressBar: View {
                 .frame(width: 100)
                 .rotationEffect(.degrees(-90))
         }
-        .onReceive(timer) { _ in
-            withAnimation {
-                timeRemaining -= 0.1
-            }
-            if timeRemaining < 0 {
-                timeRemaining = totalTime
-            }
-        }
+//        .onReceive(timer) { _ in
+//            withAnimation {
+//                timeRemaining -= 0.1
+//            }
+//            if timeRemaining < 0 {
+//                timeRemaining = totalTime
+//            }
+//        }
     }
 }
 

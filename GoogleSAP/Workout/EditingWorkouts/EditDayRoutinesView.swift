@@ -11,14 +11,14 @@ import SwiftUI
 
 struct EditDayRoutinesView: View {
     @Binding var routine: Routine
+    @ObservedObject var routinesData: RoutinesDataManager
     @State var showEditSheet = false
     @State var showAddSheet = false
-    @State var shownExerciseIndex = 0
     @State var selectedExerciseIndex = 0
     var body: some View {
         VStack {
             List {
-                ForEach($routine.exercises) { $exercise in
+                ForEach(routine.exercises) { exercise in
                     Button {
                         selectedExerciseIndex = routine.exercises.firstIndex(of: exercise)!
                         showEditSheet = true
@@ -35,13 +35,14 @@ struct EditDayRoutinesView: View {
                     routine.exercises.move(fromOffsets: currIndex, toOffset: offset)
                 }
                 .onDelete { indexSet in
-                    routine.exercises.remove(atOffsets: indexSet)
+                    routine.exercises.remove(at: indexSet.first!)
                 }
             }
             .toolbar {
                 EditButton()
             }
         }
+        .navigationTitle(routine.title)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -51,7 +52,9 @@ struct EditDayRoutinesView: View {
                 }
             }
         }
-        .navigationTitle(routine.title)
+        .onChange(of: routine.exercises) { _ in
+            routinesData.saveData()
+        }
         .sheet(isPresented: $showEditSheet) {
             EditExerciseView(exercise: $routine.exercises[selectedExerciseIndex])
                 .presentationDetents([.medium])
@@ -63,9 +66,9 @@ struct EditDayRoutinesView: View {
     }
 }
 
-struct EditDayRoutinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            EditDayRoutinesView(routine: .constant(Routine(title: "Monday", exercises: [Exercise(name: "pushup", duration: 30, reps: 30)])))}
-    }
-}
+//struct EditDayRoutinesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            EditDayRoutinesView(routine: .constant(Routine(title: "Monday", exercises: [Exercise(name: "pushup", duration: 30, reps: 30)])))}
+//    }
+//}

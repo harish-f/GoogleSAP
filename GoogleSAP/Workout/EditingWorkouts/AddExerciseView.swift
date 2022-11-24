@@ -40,16 +40,19 @@ struct AddExerciseView: View {
                         .keyboardType(.numberPad)
                         .fixedSize()
                 }
-            }
-            Button {
-                exercises.append(newExercise)
-                dismiss()
-            } label: {
-                Text("Done")
-                    .padding(10)
-                    .background(.blue)
-                    .cornerRadius(15)
-                    .foregroundColor(.white)
+                Section {
+                    Button {
+                        exercises.append(newExercise)
+                        dismiss()
+                    } label: {
+                        Text("Done")
+                            .padding(10)
+                            .disabled(newExercise.reps <= 0 || newExercise.duration <= 0 || newExercise.name == "")
+//                            .background()
+                            .cornerRadius(15)
+//                            .foregroundColor(.white)
+                    }
+                }
             }
         }
     }

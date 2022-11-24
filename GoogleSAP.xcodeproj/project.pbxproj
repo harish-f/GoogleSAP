@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45129771292E3D1300C54A69 /* EndedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45129770292E3D1300C54A69 /* EndedWorkoutView.swift */; };
 		452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */; };
 		452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DE28F6E0E50037A0FB /* ContentView.swift */; };
 		452821E128F6E0E80037A0FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452821E028F6E0E80037A0FB /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		45129770292E3D1300C54A69 /* EndedWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndedWorkoutView.swift; sourceTree = "<group>"; };
 		452821D928F6E0E50037A0FB /* GoogleSAP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleSAP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSAPApp.swift; sourceTree = "<group>"; };
 		452821DE28F6E0E50037A0FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				DCADE90329221A7D0047B13F /* TimerBar.swift */,
 				45D2E3F12924915600D28729 /* CircleProgressBar.swift */,
 				DCADE90429221A7D0047B13F /* WorkoutExerciseView.swift */,
+				45129770292E3D1300C54A69 /* EndedWorkoutView.swift */,
 			);
 			path = WorkoutSession;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				DCA9E7A3290398330099B500 /* data.swift in Sources */,
 				DCADE8F529221A200047B13F /* DataTypes.swift in Sources */,
 				DCADE90629221A7D0047B13F /* RoutinesDataManager.swift in Sources */,
+				45129771292E3D1300C54A69 /* EndedWorkoutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
