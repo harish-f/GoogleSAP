@@ -23,13 +23,18 @@ struct ScoringStandardsView: View {
             GeometryReader{ geometry in
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
-            Group {
-                let stations = Stations[ageInput<18 ? "NAPFA":"IPPT"]!
-                VStack {
-                    Text(ageInput<18 ? "NAPFA":"IPPT").font(.title).bold()
-                    Text(stations[selected].name)
-                    Spacer()
+            let stations = Stations[ageInput<=18 ? "NAPFA":"IPPT"]!
+            VStack {
+                let ageGroup = Int(ceil( Double(ageInput)/3 - 6.0 ))
+                Text(ageInput<=18 ? "NAPFA":"IPPT").font(.title).bold()
+                if ageInput<=18 {
+                    Text("")
+                } else {
+                    Text("Age Group: \(ageGroup)")
                 }
+                Spacer()
+            }
+            Group {
                 GeometryReader{ geometry in
                     Circle()
                         .fill(Color(UIColor.label))
