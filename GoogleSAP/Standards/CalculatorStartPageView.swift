@@ -67,7 +67,7 @@ struct CalculatorStartPageView: View {
                             if pageType == calcPage.standards {
                                 ScoringStandardsView(ageInput: $ageInput, genderInput: $genderInput)
                             } else if pageType == calcPage.calculate {
-                                GradeScoreCaclulator()
+                                GradeScoreCaclulator(ageInput: $ageInput, genderInput: $genderInput)
                             }
                         }
                         .offset(y: dragOffset)
