@@ -309,27 +309,152 @@ struct HomeView: View {
                                                 CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
                                                     CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
                                                         if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            if colorScheme == .dark {
-                                                                Image("PullupsDark")
-                                                                    .resizable()
-                                                                    .frame(width: geometry.size.width / 20, height: geometry.size.height / 20)
-                                                            } else {
-                                                                Image("PullupsLight")
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("PullupsDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("PullupsLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
                                                             }
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
                                                         } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            Text("Pullups")
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text != "Inclined Pullups") {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("PullupsDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("PullupsLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text("Pullups")
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
+                                                        } else if (datum.text == "2.4 Run") {
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("RunningDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("RunningLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
+                                                        } else if (datum.text == "Situps") {
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("SitupsDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("SitupsLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
+                                                        } else if (datum.text == "Sit & Reach") {
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("SitAndReachDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("SitAndReachLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
+                                                        } else if (datum.text == "Shuttle Run") {
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("ShuttleRunDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("ShuttleRunLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
+                                                        } else if (datum.text == "Standing Broad Jump") {
+                                                            VStack {
+                                                                Spacer()
+                                                                Spacer()
+                                                                if colorScheme == .dark {
+                                                                    Image("SBJDark")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                    
+                                                                } else {
+                                                                    Image("SBJLight")
+                                                                        .resizable()
+                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                                                }
+                                                                Text(datum.text)
+                                                                    .font(.title3)
+                                                                    .multilineTextAlignment(.center)
+                                                                    .padding(geometry.size.width / 9)
+                                                                    .padding(.top, -(geometry.size.width / 10))
+                                                                Spacer()
+                                                            }
                                                         }
                                                     })
                                                     .padding(geometry.size.width / 10)
