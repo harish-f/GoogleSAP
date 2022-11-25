@@ -19,7 +19,7 @@ struct ScoringStandardsView: View {
     @State var scrollSelected: Int = 0
     @State var extraDrag: CGFloat = 0.0
     
-    let ABCDE = ["A", "B", "C", "D", "E", "NIL"]
+    let ABCDE = ["A", "B", "C", "D", "E", "F"]
     
     var body: some View {
         ZStack {
