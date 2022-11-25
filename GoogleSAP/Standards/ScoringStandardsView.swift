@@ -27,15 +27,9 @@ struct ScoringStandardsView: View {
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
             Color(UIColor.systemBackground)
-            let stations = genderInput == .male && ageInput >= 15 ? Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.map{ $0.name == "No. of Inclined Pull-ups in 30 sec" ? Workout(name: "No. of Pull-ups in 30 sec", range: 0...10, isInt: true):$0 }:Stations[ageInput<=19 ? "NAPFA":"IPPT"]! //updated for napfa only
+            let stations = genderInput == .male && ageInput >= 15 ? NAPFAStations.map{ $0 == "No. of Inclined Pull-ups in 30 sec" ? "No. of Pull-ups in 30 sec":$0 }:NAPFAStations
             VStack {
-                let ageGroup = Int(ceil( Double(ageInput)/3 - 6.0 ))
-                Text(ageInput<=19 ? "NAPFA":"IPPT").font(.title).bold()//updated for napfa only
-                if ageInput<=19 {//updated for napfa only
-                    Text("")
-                } else {
-                    Text("Age Group: \(ageGroup)")
-                }
+                Text("NAPFA").font(.title).bold()
                 Group {
                     ForEach(0...ABCDE.count-1, id: \.self) { i in
                         HStack {
@@ -75,8 +69,8 @@ struct ScoringStandardsView: View {
                 }
                 let countOffset = 360.0/Double(stations.count)
                 ForEach(stations, id: \.self) {
-                    Text($0.name)
-                        .bold(stations[selected].name == $0.name)
+                    Text($0)
+                        .bold(stations[selected] == $0)
                         .font(Font.title3)
                         .foregroundColor(Color(UIColor.secondarySystemBackground))
                         .multilineTextAlignment(.center)
@@ -105,7 +99,7 @@ struct ScoringStandardsView: View {
                     var ref = 0
                     if drag.translation.width>ViewGeometry.width/10 { ref = -1 }
                     else if drag.translation.width<0-ViewGeometry.width/10 { ref = 1 }
-                    let stationsCount = Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.count//updated for napfa only
+                    let stationsCount = NAPFAStations.count//updated for napfa only
                     var ref2 = ref
                     if selected+ref<0 { ref2 += stationsCount }
                     if selected+ref>=stationsCount { ref2 -= stationsCount }
