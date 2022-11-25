@@ -29,14 +29,24 @@ struct ScoringStandardsView: View {
             Color(UIColor.systemBackground)
             let stations = genderInput == .male && ageInput >= 15 ? NAPFAStations.map{ $0 == "No. of Inclined Pull-ups in 30 sec" ? "No. of Pull-ups in 30 sec":$0 }:NAPFAStations
             VStack {
-                Text("NAPFA").font(.title).bold()
-                Group {
+                Text("NAPFA").font(.title).bold().padding(.vertical)
+                VStack {
+                    Text("[Gold] C in all stations & 21 points")
+                    Text("[Silver] D in all stations & 15 points")
+                    Text("[Bronze] E in all stations & 6 points")
+                }.font(.title2).padding(.vertical)
+                VStack {
+                    VStack {
+                        Text("Requirements for:")
+                        Text(stations[selected])
+                    }.bold().padding().padding(.top)
                     ForEach(0...ABCDE.count-1, id: \.self) { i in
                         HStack {
                             let reverseI = ABCDE.count-i-1
                             Spacer()
-                            Text(ABCDE[i])
-                            Text(String(reverseI))
+                            let stringRef1 = "[" + ABCDE[i] + "] "
+                            let stringRef2 = String(reverseI) + " Points"
+                            Text(stringRef1 + stringRef2)
                             Spacer()
                             let ref = NAPFAStandards[genderInput]![ageInput]![selected]
                             if i == 0 {
