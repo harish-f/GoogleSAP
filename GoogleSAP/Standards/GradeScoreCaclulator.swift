@@ -41,7 +41,7 @@ struct GradeScoreCaclulator: View {
             VStack {
                 Text("Grade").font(.title).bold()
                 Spacer()
-            }.offset(y: (viewableScrollSize.height-pageOffset)*1.5)
+            }.offset(y: (viewableScrollSize.height-pageOffset)*1.5).background(Color(UIColor.systemBackground))
             let ref = NAPFAStandards[genderInput]![ageInput]!
             ScrollView(.vertical) {
                 VStack {
@@ -59,6 +59,7 @@ struct GradeScoreCaclulator: View {
                                     }
                             }.padding().padding(.horizontal)
                         }
+                        Text("Scroll Up for Grades").font(.footnote).foregroundColor(.secondary)
                         Image(systemName: "arrow.up.circle.fill")
                             .resizable()
                             .scaledToFit()
@@ -87,7 +88,7 @@ struct GradeScoreCaclulator: View {
                     calcValues = ref.map{ Double($0[0]-1) }
                     displayValues = calcToDisplay(calc: calcValues)
                 }
-            }.coordinateSpace(name: "scroll").offset(y: 0-pageOffset*1.5)
+            }.coordinateSpace(name: "scroll").background(Color(UIColor.systemBackground)).offset(y: 0-pageOffset*1.5)
         }
     }
 }
