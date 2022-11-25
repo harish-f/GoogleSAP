@@ -31,9 +31,11 @@ struct ScoringStandardsView: View {
             VStack {
                 Text("NAPFA").font(.title).bold().padding(.vertical)
                 VStack {
-                    Text("[Gold] C in all stations & 21 points")
-                    Text("[Silver] D in all stations & 15 points")
-                    Text("[Bronze] E in all stations & 6 points")
+                    Group {
+                        Text("[Gold] C in all stations & 21 points").padding().background(Color(red: 255/255, green: 215/255, blue: 0))
+                        Text("[Silver] D in all stations & 15 points").padding().background(Color(red: 192/255, green: 192/255, blue: 192/255))
+                        Text("[Bronze] E in all stations & 6 points").padding().background(Color(red: 205/255, green: 127/255, blue: 50/255))
+                    }.cornerRadius(10)
                 }.font(.title2).padding(.vertical)
                 VStack {
                     VStack {
