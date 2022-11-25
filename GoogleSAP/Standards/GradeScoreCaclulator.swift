@@ -16,7 +16,6 @@ struct GradeScoreCaclulator: View {
     @State var displayValues: [String] = ["","","","","",""]
     func calcToDisplay(calc: [Double]) -> [String] {
         let ref = NAPFAStandards[genderInput]![ageInput]!
-        print("banana" )
         return calc.map {
             let i = calc.firstIndex(of: $0)!
             if $0 < Double(ref[i][0]) {
@@ -115,7 +114,6 @@ struct GradeScoreCaclulator: View {
                 .onChange(of: calcValues) { _ in
                     displayValues = calcToDisplay(calc: calcValues)
                     points = calcToPoints(calc: calcValues)
-                    print(String(describing: points))
                 }
             }.coordinateSpace(name: "scroll").background(Color(UIColor.systemBackground)).offset(y: 0-pageOffset*1.5)
 //                .hidden(pageOffset != CGFloat.zero)//deelete this later, for testing only
