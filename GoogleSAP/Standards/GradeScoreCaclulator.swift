@@ -59,7 +59,7 @@ struct GradeScoreCaclulator: View {
                                     }
                             }.padding().padding(.horizontal)
                         }
-                        Text("Scroll Up for Grades").font(.footnote).foregroundColor(.secondary)
+                        Text("Scroll Up for Grades").font(.footnote).foregroundColor(.secondary).padding()
                         Image(systemName: "arrow.up.circle.fill")
                             .resizable()
                             .scaledToFit()
