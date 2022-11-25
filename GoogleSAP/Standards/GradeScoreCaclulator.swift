@@ -50,13 +50,22 @@ struct GradeScoreCaclulator: View {
     @State var pageOffset = CGFloat.zero
     
     @State var points = [0,0,0,0,0,0]
+    func attainment(_ points: [Int], getTotal: Bool = false) -> String {
+        let total = points.reduce(0){ $0 + $1 }
+        if getTotal { return String(total) }
+        let lowest = points.reduce(points[0]){ $1<$0 ? $1:$0 }
+        if total >= 21 && lowest >= 3 { return "GOLD" }
+        else if total >= 15 && lowest >= 4 { return "SILVER" }
+        else if total >= 6 && lowest >= 5 { return "BRONZE" }
+        else { return "NIL" }
+    }
     
     var body: some View {
         ZStack {
             VStack {
                 VStack {
-                    Text("Attainment: ")
-                    Text("Total Points: ")
+                    Text("Attainment: " + attainment(points))
+                    Text("Total Points: " + attainment(points, getTotal: true))
                 }.font(.title).bold().padding().padding(.bottom)
                 ForEach(0...NAPFAStations.count-1, id: \.self) { i in
                     let displayValueRef = " [" + displayValues[i] + "]"
