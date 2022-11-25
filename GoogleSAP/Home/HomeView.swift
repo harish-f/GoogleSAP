@@ -403,7 +403,18 @@ struct HomeView: View {
                                 .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                                 
                             }
+                            
+                            
+//                            ZStack {
+//
+//                            }
+//                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            
                         }
+                        .tabViewStyle(.page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode.never))
+                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                            }
+//                        }
                         
                         
                         Form {
