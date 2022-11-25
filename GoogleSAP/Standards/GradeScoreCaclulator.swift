@@ -16,6 +16,7 @@ struct GradeScoreCaclulator: View {
     @State var displayValues: [String] = ["","","","","",""]
     func calcToDisplay(calc: [Double]) -> [String] {
         let ref = NAPFAStandards[genderInput]![ageInput]!
+        print("banana" )
         return calc.map {
             let i = calc.firstIndex(of: $0)!
             if $0 < Double(ref[i][0]) {
@@ -27,6 +28,19 @@ struct GradeScoreCaclulator: View {
             }
         }
     }
+    func calcToPoints(calc: [Double]) -> [Int] {
+        let ref = NAPFAStandards[genderInput]![ageInput]!
+        var points = [0,0,0,0,0,0]
+        for i in 0...calc.count-1 {
+            for j in 0...ref[i].count-1 {
+                if Double(ref[i][ref[i].count-1-j]) < calc[i] {
+                    points[i] = ref[i].count-j
+                    break
+                }
+            }
+        }
+        return points
+    }
     
     @State var offset = CGFloat.zero
     @State var scrollSize = CGSize.zero
@@ -36,12 +50,25 @@ struct GradeScoreCaclulator: View {
     
     @State var pageOffset = CGFloat.zero
     
+    @State var points = [0,0,0,0,0,0]
+    
     var body: some View {
         ZStack {
             VStack {
-                Text("Grade").font(.title).bold()
+                VStack {
+                    Text("Attainment: ")
+                    Text("Total Points: ")
+                }.font(.title).bold().padding().padding(.bottom)
+                ForEach(0...NAPFAStations.count-1, id: \.self) { i in
+                    let displayValueRef = " [" + displayValues[i] + "]"
+                    GroupBox(NAPFAStations[i] + displayValueRef) {
+                        let b4Ref = points[i]
+                        let intRef = String(b4Ref)
+                        Text(intRef)
+                    }
+                }
                 Spacer()
-            }.offset(y: (viewableScrollSize.height-pageOffset)*1.5).background(Color(UIColor.systemBackground))
+            }.offset(y: (viewableScrollSize.height-pageOffset)*1.5).background(Color(UIColor.systemBackground)).padding(.horizontal)
             let ref = NAPFAStandards[genderInput]![ageInput]!
             ScrollView(.vertical) {
                 VStack {
@@ -54,9 +81,6 @@ struct GradeScoreCaclulator: View {
                                     Text(displayValues[i])
                                 }
                                 Slider(value: $calcValues[i], in: Double(ref[i][0]-1)...Double(ref[i][4]+1), step: 1)
-                                    .onChange(of: calcValues) { _ in
-                                        displayValues = calcToDisplay(calc: calcValues)
-                                    }
                             }.padding().padding(.horizontal)
                         }
                         Text("Scroll Up for Grades").font(.footnote).foregroundColor(.secondary).padding()
@@ -88,7 +112,13 @@ struct GradeScoreCaclulator: View {
                     calcValues = ref.map{ Double($0[0]-1) }
                     displayValues = calcToDisplay(calc: calcValues)
                 }
+                .onChange(of: calcValues) { _ in
+                    displayValues = calcToDisplay(calc: calcValues)
+                    points = calcToPoints(calc: calcValues)
+                    print(String(describing: points))
+                }
             }.coordinateSpace(name: "scroll").background(Color(UIColor.systemBackground)).offset(y: 0-pageOffset*1.5)
+//                .hidden(pageOffset != CGFloat.zero)//deelete this later, for testing only
         }
     }
 }
