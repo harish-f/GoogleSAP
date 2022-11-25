@@ -54,7 +54,11 @@ struct HomeView: View {
     @Binding var tabSelection: Int
     
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
+    @ObservedObject var HomeManager = HomeDataManager()
     @Environment(\.colorScheme) var colorScheme
+    
+    
+    @State var refresher = 0
     
     @State var stillHaveUnsetGoals = false
     @State var stillNeedFillNAPFAEntry = false
@@ -241,6 +245,8 @@ struct HomeView: View {
     @State var gender: Gender = .male
     @State var age = 0
     @State var birthdayObj = Date()
+    
+    
     @State var TwoPointFourKMRunUserSetScore = 0.0
     @State var ShuttleRunUserSetScore = 0.0
     @State var SitUpsUserSetScore = 0.0
@@ -306,8 +312,8 @@ struct HomeView: View {
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
                                                         if (datum.text == "Inclined Pullups" && age <= 14) {
                                                             VStack {
                                                                 Spacer()
@@ -483,8 +489,8 @@ struct HomeView: View {
                                         
                                         HStack(alignment: .center) {
                                             VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
+                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
+                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
                                                         if (datum.text == "Inclined Pullups" && age <= 14) {
                                                             VStack {
                                                                 Spacer()
@@ -634,8 +640,12 @@ struct HomeView: View {
                                                             }
                                                         }
                                                     })
+//                                                    .id(Date())
+                                                    .id(refresher)
                                                     .padding(geometry.size.width / 10)
                                                 })
+//                                                .id(Date())
+                                                .id(refresher)
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
                                             }
                                         }
@@ -672,6 +682,7 @@ struct HomeView: View {
 //                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                             
                         }
+                        
                         .tabViewStyle(.page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode.never))
                         .indexViewStyle(.page(backgroundDisplayMode: .always))
 //                            }
@@ -759,6 +770,20 @@ struct HomeView: View {
                                 }
                             }
                             .onAppear {
+                                HomeManager.loadData()
+                                
+                                TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
+                                SitUpsUserSetScore = HomeManager.stationData[0].SitUps
+                                SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
+                                InclinedPullupsUserSetScore = HomeManager.stationData[0].InclinedPullups
+                                ShuttleRunUserSetScore = HomeManager.stationData[0].ShuttleRun
+                                StandingBroadJumpUserSetScore = HomeManager.stationData[0].StandingBroadJump
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    print("j")
+//                                    refresher = refresher + 1
+                                }
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     userAgeBasedBestScore = listOfNapfaScores.last { score in
                                         score.age == age
@@ -798,7 +823,6 @@ struct HomeView: View {
                                             isAgeLegal = true
                                         }
                                     }
-                                    
                                     
                                     if (TwoPointFourKMRunUserSetScore == 0.0 || SitUpsUserSetScore == 0.0 || SitAndReachUserSetScore == 0.0 || InclinedPullupsUserSetScore == 0.0 || ShuttleRunUserSetScore == 0.0 || StandingBroadJumpUserSetScore == 0.0) {
                                         withAnimation {
@@ -854,14 +878,24 @@ struct HomeView: View {
                                             stillNeedFillWorkoutEntry = false
                                         }
                                     }
+                                    if refresher == 0 {
+                                        withAnimation {
+                                            refresher = refresher + 1
+                                        }
                                 }
+                                }
+                                
                             }
                         }
                         .sheet(isPresented: $showModal) {
                             showModal = false
                             tabSelection = 0
-                            print("the enddd")
-                            print(age)
+                            HomeManager.stationData = [
+                                UserSetScore(TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+                            ]
+                            HomeManager.saveData()
+                            refresher = refresher + 1
+                            
                         } content: {
                             getGoalData(tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
@@ -873,6 +907,15 @@ struct HomeView: View {
                             showModal = true
                         } label: {
                             Image(systemName: "target")
+                        }
+                        )
+                        .navigationBarItems(leading:
+                                                ZStack {
+                            if (refresher == 0) {
+                                ProgressView()
+                            } else {
+                                ZStack {}
+                            }
                         }
                         )
                 }.onAppear {
@@ -943,7 +986,7 @@ struct HomeView: View {
                     
                 }
             }
-        }
+        }.id(refresher)
     }
 }
 

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CircularProgressViewLarge<Content: View>: View {
     let progress: Double
+    @Binding var refresh: Int
     @ViewBuilder var content: Content
     
     var body: some View {
@@ -44,14 +45,15 @@ struct CircularProgressViewLarge<Content: View>: View {
 }
 
 extension CircularProgressViewLarge where Content == EmptyView {
-    init(progress: Double) {
-      self.init(progress: progress, content: { EmptyView() })
+    init(progress: Double, refresh: Binding<Int>) {
+        self.init(progress: progress, refresh: refresh, content: { EmptyView() })
   }
 }
 
 
 struct CircularProgressViewLargeIcon<Content: View>: View {
     let progress: Double
+    @Binding var refresh: Int
     let screenGeo: CGSize
     let sfSymbolNameTop: String
     let sfSymbolNameBottom: String
@@ -77,7 +79,7 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                             lineCap: .round
                         )
                     )
-                    .rotationEffect(.degrees(-93))
+                    .rotationEffect(.degrees(Double(refresh - refresh - 93)))
                     .animation(.easeOut, value: progress)
             }
             VStack {
@@ -96,6 +98,9 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
                 }
             }
             .padding(-13)
+        }
+        .onAppear {
+            print("refres")
         }
     }
 }
@@ -116,13 +121,15 @@ struct CircularProgressViewLarge_Previews: PreviewProvider {
             }
         }
     }
+    
+    @State static var num = 0
     static var previews: some View {
-        CircularProgressViewLarge(progress: 0.25, content: {
+        CircularProgressViewLarge(progress: 0.25, refresh: $num, content: {
             SimpleView()
         })
             .frame(width:200, height: 200)
         
-        CircularProgressViewLarge(progress: 0.25)
+        CircularProgressViewLarge(progress: 0.25, refresh: $num)
             .frame(width:200, height: 200)
     }
 }
@@ -137,9 +144,10 @@ struct CircularProgressViewLargeIcon_Previews: PreviewProvider {
     }
     
     static var someSize = CGSize(width: 300, height: 300)
+    @State static var a = 1
     
     static var previews: some View {
-        CircularProgressViewLargeIcon(progress: 0.25, screenGeo: someSize, sfSymbolNameTop: "arrow.right", sfSymbolNameBottom: "questionmark.circle", content: {
+        CircularProgressViewLargeIcon(progress: 0.25, refresh: $a, screenGeo: someSize, sfSymbolNameTop: "arrow.right", sfSymbolNameBottom: "questionmark.circle", content: {
             SimpleView()
         })
             .frame(width:200, height: 200)
