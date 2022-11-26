@@ -108,18 +108,9 @@ struct ScoringStandardsView: View {
                 }
             }
             .gesture(DragGesture()
-//                .onChanged { drag in
-//                    print()
-//                    print(drag.location.x)
-//                    print(drag.startLocation.x)
-//                    print((drag.location.x-drag.startLocation.x))
-//                    print((drag.location.x+drag.startLocation.x))
-//                    print((drag.location.x-drag.startLocation.x)/drag.startLocation.x)
-//                    print((drag.location.x+drag.startLocation.x)/drag.startLocation.x)
-//                    print(ViewGeometry.width)
-//                    print()
-//                    extraDrag = 2*(drag.location.x/ViewGeometry.width-0.5)
-//                }
+                .onChanged { drag in
+                    extraDrag = 2*(drag.translation.width/ViewGeometry.width)
+                }
                 .onEnded { drag in
                     var ref = 0
                     if drag.translation.width>ViewGeometry.width/10 { ref = -1 }
