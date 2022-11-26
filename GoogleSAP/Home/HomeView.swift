@@ -309,25 +309,11 @@ struct HomeView: View {
                             ForEach(data) { datum in
                                 if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
                                     Spacer()
-                                    
-                                    HStack(alignment: .center) {
-                                        VStack(alignment: .center) {
                                             CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            
-                                        }
-                                    }
                                     .padding(.top, 10)
                                     .padding()
                                     .padding()
-                                    .background(
-                                        GeometryReader { geometryProxy in
-                                            Color.clear
-                                                .onAppear {
-                                                    sizeOfBigProgress = geometryProxy.size
-                                                }
-                                        }
-                                    )
                                     
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
@@ -335,24 +321,11 @@ struct HomeView: View {
                                     
                                 } else {
                                     Spacer()
-                                    
-                                    HStack(alignment: .center) {
-                                        VStack(alignment: .center) {
                                             CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                        }
-                                    }
                                     .padding(.top, 10)
                                     .padding()
                                     .padding()
-                                    .background(
-                                        GeometryReader { geometryProxy in
-                                            Color.clear
-                                                .onAppear {
-                                                    sizeOfBigProgress = geometryProxy.size
-                                                }
-                                        }
-                                    )
                                     
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
@@ -829,30 +802,6 @@ struct getGoalData: View {
         }
     }
 }
-
-
-struct InternalButtonIconView: View {
-    var body: some View {
-        Image(systemName: "Arrow.right")
-    }
-}
-
-
-struct HomeView_Previews: PreviewProvider {
-    @State static var a = 1
-    static var previews: some View {
-        HomeView(tabSelection: $a)
-    }
-}
-
-//struct HomeViewModal_Previews: PreviewProvider {
-//    @State static var a = 1.0
-//    @State static var b = 1
-//    @State static var c = Date()
-//    static var previews: some View {
-//        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
-//    }
-//}
 
 struct CircularProgView: View {
     @Environment(\.colorScheme) var colorScheme
