@@ -19,7 +19,10 @@ struct ScoringStandardsView: View {
     @State var scrollSelected: Int = 0
     @State var extraDrag: CGFloat = 0.0
     
-    let ABCDE = ["A", "B", "C", "D", "E", "NIL"]
+    let ABCDE = ["A", "B", "C", "D", "E", "F"]
+    
+    @State var attainmentCollapsed = false
+    @State var attainmentCloseAmount = CGFloat.zero
     
     var body: some View {
         ZStack {
@@ -27,22 +30,39 @@ struct ScoringStandardsView: View {
                 Spacer().onAppear { ViewGeometry = geometry.size }
             }
             Color(UIColor.systemBackground)
-            let stations = genderInput == .male && ageInput >= 15 ? Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.map{ $0.name == "No. of Inclined Pull-ups in 30 sec" ? Workout(name: "No. of Pull-ups in 30 sec", range: 0...10, isInt: true):$0 }:Stations[ageInput<=19 ? "NAPFA":"IPPT"]! //updated for napfa only
+            let stations = genderInput == .male && ageInput >= 15 ? NAPFAStations.map{ $0 == "No. of Inclined Pull-ups in 30 sec" ? "No. of Pull-ups in 30 sec":$0 }:NAPFAStations
             VStack {
-                let ageGroup = Int(ceil( Double(ageInput)/3 - 6.0 ))
-                Text(ageInput<=19 ? "NAPFA":"IPPT").font(.title).bold()//updated for napfa only
-                if ageInput<=19 {//updated for napfa only
-                    Text("")
-                } else {
-                    Text("Age Group: \(ageGroup)")
-                }
-                Group {
+                Text("NAPFA").font(.title).bold().padding(.vertical)
+                ZStack {
+                    Text("[Bronze] E in all stations & 6 points").padding(15).background(Color(red: 205/255, green: 127/255, blue: 50/255)).cornerRadius(10).offset(y: 0-8)
+                    Text("[Silver] D in all stations & 15 points").padding(15).background(Color(red: 192/255, green: 192/255, blue: 192/255)).cornerRadius(10).offset(y: attainmentCollapsed ? attainmentCloseAmount:0)
+                    Text("[Gold] C in all stations & 21 points").padding(15).background(Color(red: 255/255, green: 215/255, blue: 0)).cornerRadius(10).offset(y: 8 + (attainmentCollapsed ? attainmentCloseAmount*2:0))
+                }.font(.title2).padding(.vertical)
+                    .background(GeometryReader { proxy -> Color in
+                        DispatchQueue.main.async { attainmentCloseAmount = proxy.size.height/2 }
+                        return Color.clear
+                    })
+                    .overlay {
+                        VStack {
+                            Spacer()
+                            Image(systemName: "chevron.compact.down").foregroundColor(.secondary).padding().rotationEffect(.degrees(attainmentCollapsed ? 0:180)).offset(y: 20 + (attainmentCollapsed ? attainmentCloseAmount*2:0))
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation(.spring()){ attainmentCollapsed.toggle() }
+                    }
+                VStack {
+                    VStack {
+                        Text("Requirements for:")
+                        Text(stations[selected])
+                    }.bold().padding().padding(.top)
                     ForEach(0...ABCDE.count-1, id: \.self) { i in
                         HStack {
                             let reverseI = ABCDE.count-i-1
                             Spacer()
-                            Text(ABCDE[i])
-                            Text(String(reverseI))
+                            let stringRef1 = "[" + ABCDE[i] + "] "
+                            let stringRef2 = String(reverseI) + " Points"
+                            Text(stringRef1 + stringRef2)
                             Spacer()
                             let ref = NAPFAStandards[genderInput]![ageInput]![selected]
                             if i == 0 {
@@ -55,10 +75,10 @@ struct ScoringStandardsView: View {
                             Spacer()
                         }
                     }
-                }
+                }.offset(y: attainmentCollapsed ? attainmentCloseAmount*3:0)
                 Spacer()
             }
-            Group {
+            ZStack {
                 GeometryReader{ geometry in
                     let sideColours = Array(1...Int((Double(stations.count-1)/2)+0.5)).map{ _ in Color(UIColor.secondaryLabel)}
                     Circle()
@@ -68,15 +88,14 @@ struct ScoringStandardsView: View {
                             startAngle: .degrees(90),
                             endAngle: .degrees(450)
                         ))
-                        .frame(width: ViewGeometry.width*1.5, height: ViewGeometry.height*1.5)
-                        .scaleEffect(circlePickerScale)
-                        .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50)
+                        .scaleEffect(circlePickerScale*1.5)
                         .onAppear{ withAnimation{ circlePickerScale = 1.0 } }
+                        .offset(x: 0, y: ViewGeometry.height-ViewGeometry.height/50)
                 }
                 let countOffset = 360.0/Double(stations.count)
                 ForEach(stations, id: \.self) {
-                    Text($0.name)
-                        .bold(stations[selected].name == $0.name)
+                    Text($0)
+                        .bold(stations[selected] == $0)
                         .font(Font.title3)
                         .foregroundColor(Color(UIColor.secondarySystemBackground))
                         .multilineTextAlignment(.center)
@@ -105,7 +124,7 @@ struct ScoringStandardsView: View {
                     var ref = 0
                     if drag.translation.width>ViewGeometry.width/10 { ref = -1 }
                     else if drag.translation.width<0-ViewGeometry.width/10 { ref = 1 }
-                    let stationsCount = Stations[ageInput<=19 ? "NAPFA":"IPPT"]!.count//updated for napfa only
+                    let stationsCount = NAPFAStations.count//updated for napfa only
                     var ref2 = ref
                     if selected+ref<0 { ref2 += stationsCount }
                     if selected+ref>=stationsCount { ref2 -= stationsCount }

@@ -5,3 +5,4 @@ GoogleSAP.xcodeproj/xcuserdata/sairamsuresh.xcuserdatad/xcschemes/xcschememanage
 GoogleSAP.xcodeproj/project.pbxproj
 *.pbxproj
 .DS_Store
+*.xcbkptlist
