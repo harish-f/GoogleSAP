@@ -65,7 +65,7 @@ struct AddExerciseView: View {
                             Spacer()
                         }
                     }
-                    .disabled(!isRest && (newExercise.reps <= 0 || newExercise.duration <= 0 || newExercise.name == ""))
+                    .disabled(newExercise.duration <= 0 || (newExercise.name == "" || newExercise.reps <= 0) && !isRest)
                 }
             }
         }
