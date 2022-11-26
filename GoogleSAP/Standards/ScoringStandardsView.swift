@@ -78,7 +78,7 @@ struct ScoringStandardsView: View {
                 }.offset(y: attainmentCollapsed ? attainmentCloseAmount*3:0)
                 Spacer()
             }
-            Group {
+            ZStack {
                 GeometryReader{ geometry in
                     let sideColours = Array(1...Int((Double(stations.count-1)/2)+0.5)).map{ _ in Color(UIColor.secondaryLabel)}
                     Circle()
@@ -88,10 +88,9 @@ struct ScoringStandardsView: View {
                             startAngle: .degrees(90),
                             endAngle: .degrees(450)
                         ))
-                        .frame(width: ViewGeometry.width*1.5, height: ViewGeometry.height*1.5)
-                        .scaleEffect(circlePickerScale)
-                        .offset(x: 0-ViewGeometry.width/4, y: ViewGeometry.height/2-ViewGeometry.height/50)
+                        .scaleEffect(circlePickerScale*1.5)
                         .onAppear{ withAnimation{ circlePickerScale = 1.0 } }
+                        .offset(x: 0, y: ViewGeometry.height-ViewGeometry.height/50)
                 }
                 let countOffset = 360.0/Double(stations.count)
                 ForEach(stations, id: \.self) {
