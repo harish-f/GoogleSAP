@@ -305,390 +305,81 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         if (refresher != 0) {
-                        ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
-                                ForEach(data) { datum in
-                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("PullupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("PullupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("PullupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("PullupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text("Pullups")
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "2.4 Run") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("RunningDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("RunningLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Situps") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SitupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SitupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Sit & Reach") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SitAndReachDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SitAndReachLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Shuttle Run") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("ShuttleRunDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("ShuttleRunLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Standing Broad Jump") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SBJDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SBJLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        }
-                                                    })
-                                                    .padding(geometry.size.width / 10)
-                                                })
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
-                                        }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                        
-                                    } else {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("PullupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("PullupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("PullupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("PullupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text("Pullups")
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "2.4 Run") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("RunningDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("RunningLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Situps") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SitupsDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SitupsLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Sit & Reach") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SitAndReachDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SitAndReachLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Shuttle Run") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("ShuttleRunDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("ShuttleRunLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        } else if (datum.text == "Standing Broad Jump") {
-                                                            VStack {
-                                                                Spacer()
-                                                                Spacer()
-                                                                if colorScheme == .dark {
-                                                                    Image("SBJDark")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                    
-                                                                } else {
-                                                                    Image("SBJLight")
-                                                                        .resizable()
-                                                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
-                                                                }
-                                                                Text(datum.text)
-                                                                    .font(.title3)
-                                                                    .multilineTextAlignment(.center)
-                                                                    .padding(geometry.size.width / 9)
-                                                                    .padding(.top, -(geometry.size.width / 10))
-                                                                Spacer()
-                                                            }
-                                                        }
-                                                    })
-                                                    //                                                    .id(Date())
-                                                    .id(refresher)
-                                                    .padding(geometry.size.width / 10)
-                                                })
-                                                //                                                .id(Date())
-                                                .id(refresher)
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
-                                        }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                    }
-                                }
-                                
-                                
-                                ZStack {
+                        SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
+                            ForEach(data) { datum in
+                                if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
+                                    Spacer()
                                     
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .center) {
+                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
+                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
+                                        }
+                                    )
+                                    
+                                    Spacer()
+                                        .scrollSnappingAnchor(.bounds)
+                                        .id(idGen(text: datum.text))
+                                    
+                                } else {
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .center) {
+                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
+                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
+                                        }
+                                    )
+                                    
+                                    Spacer()
+                                        .scrollSnappingAnchor(.bounds)
+                                        .id(idGen(text: datum.text))
                                 }
-                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
-                                
                             }
                             
                             
-                            //                            ZStack {
-                            //
-                            //                            }
-                            //                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            ZStack {
+                                
+                            }
+                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                             
                         }
                         } else {
                             ProgressView()
                                 .frame(width: geometry.size.width, height: geometry.size.width)
                         }
-//                            }
-//                        }
+                        
+                        
+                        //                            ZStack {
+                        //
+                        //                            }
+                        //                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                        
+                        //                            }
+                        //                        }
                         
                         
                         Form {
@@ -774,6 +465,8 @@ struct HomeView: View {
                             .onAppear {
                                 HomeManager.loadData()
                                 
+                                age = HomeManager.stationData[0].age
+                                birthdayObj = HomeManager.stationData[0].ageDate
                                 TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
                                 SitUpsUserSetScore = HomeManager.stationData[0].SitUps
                                 SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
@@ -783,7 +476,7 @@ struct HomeView: View {
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     print("j")
-//                                    refresher = refresher + 1
+                                    //                                    refresher = refresher + 1
                                 }
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
@@ -884,7 +577,7 @@ struct HomeView: View {
                                         withAnimation {
                                             refresher = refresher + 1
                                         }
-                                }
+                                    }
                                 }
                                 
                             }
@@ -893,13 +586,13 @@ struct HomeView: View {
                             showModal = false
                             tabSelection = 0
                             HomeManager.stationData = [
-                                UserSetScore(TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+                                UserSetScore(age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             ]
                             HomeManager.saveData()
                             refresher = refresher + 1
                             
                         } content: {
-                            getGoalData(tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(refresher: $refresher, tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -998,6 +691,7 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var refresher: Int
     @Binding var tabSelection: Int
     @Binding var age: Int
     @Binding var firstTimeEnterAge: Bool
@@ -1118,6 +812,7 @@ struct getGoalData: View {
                     tabSelection = 1
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         tabSelection = 0
+                        refresher = 0
                     }
                     
                     dismiss()
@@ -1158,3 +853,195 @@ struct HomeView_Previews: PreviewProvider {
 //        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
 //    }
 //}
+
+struct CircularProgView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    var datum: ProgressData
+    var outerRingFraction: Double
+    var innerRingFraction: Double
+    var age: Int
+    var geometry: GeometryProxy
+    
+    @Binding var refresher: Int
+    @Binding var updateProgressSize: CGSize
+    
+    var outerRingTopSymbol: String
+    var outerRingBottomSymbol: String
+    var innerRingTopSymbol: String
+    var innerRingBottomSymbol: String
+    //     datum.fractionWorkoutForA
+    //     datum.fractionNAPFA
+    
+    var body: some View {
+        HStack(alignment: .center) {
+            VStack(alignment: .center) {
+                CircularProgressViewLargeIcon(progress: outerRingFraction.isInfinite ? 0 : outerRingFraction, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: outerRingTopSymbol, sfSymbolNameBottom: outerRingBottomSymbol, content: {
+                    CircularProgressViewLargeIcon(progress: innerRingFraction.isInfinite ? 0 : innerRingFraction, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: innerRingTopSymbol, sfSymbolNameBottom: innerRingBottomSymbol, content: {
+                        if (datum.text == "Inclined Pullups" && age <= 14) {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("PullupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("PullupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("PullupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("PullupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text("Pullups")
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "2.4 Run") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("RunningDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("RunningLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Situps") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SitupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SitupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Sit & Reach") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SitAndReachDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SitAndReachLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Shuttle Run") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("ShuttleRunDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("ShuttleRunLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Standing Broad Jump") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SBJDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SBJLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        }
+                    })
+                    //                                                    .id(Date())
+                    .id(refresher)
+                    .padding(geometry.size.width / 10)
+                })
+                //                                                .id(Date())
+                .id(refresher)
+            }
+        }
+        .background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .onAppear {
+                        updateProgressSize = geometryProxy.size
+                    }
+            }
+        )
+    }
+}

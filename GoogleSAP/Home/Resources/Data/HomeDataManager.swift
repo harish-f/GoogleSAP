@@ -9,7 +9,7 @@ import Foundation
 
 class HomeDataManager: ObservableObject {
     @Published var stationData: [UserSetScore] = [
-        UserSetScore(TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
+        UserSetScore(age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
     ]
     
     init() {
@@ -31,7 +31,7 @@ class HomeDataManager: ObservableObject {
             finalStationData = decodedData
         } else {
             finalStationData = [
-                UserSetScore(TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
+                UserSetScore(age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
             ]
         }
         stationData = finalStationData
