@@ -59,6 +59,7 @@ struct HomeView: View {
     
     
     @State var refresher = 0
+    @State var hasUserNotViewedInstructionsOnce = false
     
     @State var stillHaveUnsetGoals = false
     @State var stillNeedFillNAPFAEntry = false
@@ -314,14 +315,6 @@ struct HomeView: View {
                                     .padding(.top, 10)
                                     .padding()
                                     .padding()
-                                    .background(
-                                        GeometryReader { geometryProxy in
-                                            Color.clear
-                                                .onAppear {
-                                                    sizeOfBigProgress = geometryProxy.size
-                                                }
-                                        }
-                                    )
                                     
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
@@ -329,24 +322,11 @@ struct HomeView: View {
                                     
                                 } else {
                                     Spacer()
-                                    
-                                    HStack(alignment: .center) {
-                                        VStack(alignment: .center) {
                                             CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                        }
-                                    }
                                     .padding(.top, 10)
                                     .padding()
                                     .padding()
-                                    .background(
-                                        GeometryReader { geometryProxy in
-                                            Color.clear
-                                                .onAppear {
-                                                    sizeOfBigProgress = geometryProxy.size
-                                                }
-                                        }
-                                    )
                                     
                                     Spacer()
                                         .scrollSnappingAnchor(.bounds)
@@ -467,13 +447,9 @@ struct HomeView: View {
                                 InclinedPullupsUserSetScore = HomeManager.stationData[0].InclinedPullups
                                 ShuttleRunUserSetScore = HomeManager.stationData[0].ShuttleRun
                                 StandingBroadJumpUserSetScore = HomeManager.stationData[0].StandingBroadJump
+                                hasUserNotViewedInstructionsOnce = HomeManager.stationData[0].hasUserNotSawInstructions
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    print("j")
-                                    //                                    refresher = refresher + 1
-                                }
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     userAgeBasedBestScore = listOfNapfaScores.last { score in
                                         score.age == age
                                     } ?? NAPFAAScores(age: 0, TwoPointFourKMRunUserSetScoreMale: 0.0, ShuttleRunUserSetScoreMale: 0.0, SitUpsUserSetScoreMale: 0.0, SitAndReachUserSetScoreMale: 0.0, InclinedPullupsUserSetScoreMale: 0.0, StandingBroadJumpUserSetScoreMale: 0.0, TwoPointFourKMRunUserSetScoreFemale: 0.0, ShuttleRunUserSetScoreFemale: 0.0, SitUpsUserSetScoreFemale: 0.0, SitAndReachUserSetScoreFemale: 0.0, InclinedPullupsUserSetScoreFemale: 0.0, StandingBroadJumpUserSetScoreFemale: 0.0)
@@ -517,7 +493,6 @@ struct HomeView: View {
                                         withAnimation {
                                             stillHaveUnsetGoals = true
                                         }
-                                        print("still unset goals")
                                     } else {
                                         withAnimation {
                                             stillHaveUnsetGoals = false
@@ -580,7 +555,7 @@ struct HomeView: View {
                             showModal = false
                             tabSelection = 0
                             HomeManager.stationData = [
-                                UserSetScore(age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             ]
                             HomeManager.saveData()
                             refresher = refresher + 1
@@ -588,6 +563,7 @@ struct HomeView: View {
                         } content: {
                             getGoalData(refresher: $refresher, tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
+                        
                         
                     }.navigationTitle("Overview")
                         .navigationBarTitleDisplayMode(.inline)
@@ -607,10 +583,17 @@ struct HomeView: View {
                             }
                         }
                         )
+                        .sheet(isPresented: $hasUserNotViewedInstructionsOnce) {
+                            hasUserNotViewedInstructionsOnce = false
+                            HomeManager.stationData = [
+                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+                            ]
+                            HomeManager.saveData()
+                        } content: {
+                            InstructionsView()
+                        }
                 }.onAppear {
                     loggerHistoryManager.loadData()
-                    
-                    withAnimation {
                         lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
                             LogRecord.napfaOrWorkout == "Napfa"
                         } ?? LogRecord(
@@ -666,18 +649,19 @@ struct HomeView: View {
                                          fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
                                          fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
                         ]
-                    }
-                    
-                    print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
-                    print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
-                    print(data[2].text + " " + String(data[2].fractionWorkoutForUserGoal))
-                    print(data[3].text + " " + String(data[3].fractionWorkoutForUserGoal))
-                    print(data[4].text + " " + String(data[4].fractionWorkoutForUserGoal))
-                    print(data[5].text + " " + String(data[5].fractionWorkoutForUserGoal))
-                    
                 }
             }
         }.id(refresher)
+    }
+}
+
+struct InstructionsView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            Text("Instruction View")
+        }
     }
 }
 
@@ -823,30 +807,6 @@ struct getGoalData: View {
         }
     }
 }
-
-
-struct InternalButtonIconView: View {
-    var body: some View {
-        Image(systemName: "Arrow.right")
-    }
-}
-
-
-struct HomeView_Previews: PreviewProvider {
-    @State static var a = 1
-    static var previews: some View {
-        HomeView(tabSelection: $a)
-    }
-}
-
-//struct HomeViewModal_Previews: PreviewProvider {
-//    @State static var a = 1.0
-//    @State static var b = 1
-//    @State static var c = Date()
-//    static var previews: some View {
-//        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
-//    }
-//}
 
 struct CircularProgView: View {
     @Environment(\.colorScheme) var colorScheme
