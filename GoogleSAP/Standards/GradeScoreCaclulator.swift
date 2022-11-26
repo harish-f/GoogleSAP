@@ -117,7 +117,11 @@ struct GradeScoreCaclulator: View {
                                     DispatchQueue.main.asyncAfter(deadline: .now()+0.25) { pageOffset = .zero }
                                 }
                             } else {
-                                arrowScale = round(scrollSize.height-viewableScrollSize.height)/((scrollSize.height-arrowSize.height)/2)
+                                if offset < round(scrollSize.height-viewableScrollSize.height) {
+                                    arrowScale = offset/((scrollSize.height-arrowSize.height)/2)
+                                } else {
+                                    arrowScale = round(scrollSize.height-viewableScrollSize.height)/((scrollSize.height-arrowSize.height)/2)
+                                }
                                 if offset >= round(scrollSize.height-viewableScrollSize.height)*1.25 {
                                     withAnimation(.spring(response: 0.5)) { pageOffset = viewableScrollSize.height }
                                 }
