@@ -95,7 +95,7 @@ struct WorkoutExerciseView: View {
                                 }
                             } label: {
                                 Text("Skip")
-                                    .foregroundColor(.red)
+                                    .foregroundColor(.blue)
                                     .frame(maxWidth: .infinity, alignment: .center)
                             }
                         }
@@ -112,7 +112,7 @@ struct WorkoutExerciseView: View {
                                 Spacer()
                             }
                         }
-                        .listRowBackground(Color.red)
+                        .listRowBackground(Color.blue)
                     }
                 }
                 .toolbar {

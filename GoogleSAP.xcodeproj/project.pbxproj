@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F8718BF29305D0A00E1A3B1 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = 2F8718BE29305D0A00E1A3B1 /* SwiftUISnappingScrollView */; };
 		45129771292E3D1300C54A69 /* EndedWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45129770292E3D1300C54A69 /* EndedWorkoutView.swift */; };
 		452821DD28F6E0E50037A0FB /* GoogleSAPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DC28F6E0E50037A0FB /* GoogleSAPApp.swift */; };
 		452821DF28F6E0E50037A0FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452821DE28F6E0E50037A0FB /* ContentView.swift */; };
@@ -16,7 +17,7 @@
 		4548F19128F70BA20033B5B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4548F18828F70BA20033B5B8 /* HomeView.swift */; };
 		45D2E3F22924915600D28729 /* CircleProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D2E3F12924915600D28729 /* CircleProgressBar.swift */; };
 		DC0002682915F2B7008E03CC /* HomeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0002672915F2B7008E03CC /* HomeDataManager.swift */; };
-		DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */ = {isa = PBXBuildFile; productRef = DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */; };
+		DC759309292BB36700E17B27 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E79A29037C590099B500 /* CircularProgressViewSmall.swift */; };
 		DCA9E7A3290398330099B500 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA9E7A2290398330099B500 /* data.swift */; };
 		DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCADE8E72922197F0047B13F /* LoggerData.swift */; };
@@ -77,7 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC759309292BB36700E17B27 /* SwiftUISnappingScrollView in Frameworks */,
+				2F8718BF29305D0A00E1A3B1 /* SwiftUISnappingScrollView in Frameworks */,
+				DC759309292BB36700E17B27 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +152,6 @@
 			children = (
 				DCADE8F029221A200047B13F /* CalculatorStartPageView.swift */,
 				DCADE8F129221A200047B13F /* DataTypes.swift */,
-				A9C9EFEB292F4387002CD872 /* StandardsModel.swift */,
 				DCADE8F229221A200047B13F /* GradeScoreCaclulator.swift */,
 				DCADE8EF29221A200047B13F /* ScoringStandardsView.swift */,
 			);
@@ -234,7 +235,7 @@
 			);
 			name = GoogleSAP;
 			packageProductDependencies = (
-				DC759308292BB36700E17B27 /* SwiftUISnappingScrollView */,
+				2F8718BE29305D0A00E1A3B1 /* SwiftUISnappingScrollView */,
 			);
 			productName = GoogleSAP;
 			productReference = 452821D928F6E0E50037A0FB /* GoogleSAP.app */;
@@ -265,7 +266,7 @@
 			);
 			mainGroup = 452821D028F6E0E50037A0FB;
 			packageReferences = (
-				DC759307292BB36600E17B27 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
+				2F8718BD29305D0A00E1A3B1 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */,
 			);
 			productRefGroup = 452821DA28F6E0E50037A0FB /* Products */;
 			projectDirPath = "";
@@ -308,7 +309,6 @@
 				DCADE8EB2922197F0047B13F /* LoggerData.swift in Sources */,
 				4548F18E28F70BA20033B5B8 /* LoggerView.swift in Sources */,
 				DCA9E79B29037C590099B500 /* CircularProgressViewSmall.swift in Sources */,
-				A9C9EFEC292F4387002CD872 /* StandardsModel.swift in Sources */,
 				DCADE90B29221A7D0047B13F /* Routine.swift in Sources */,
 				DCADE90C29221A7D0047B13F /* WorkoutHistoryManager.swift in Sources */,
 				DCADE8ED2922197F0047B13F /* LoggerDataManager.swift in Sources */,
@@ -525,6 +525,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2F8718BD29305D0A00E1A3B1 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ciaranrobrien/SwiftUISnappingScrollView";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2F8718BE29305D0A00E1A3B1 /* SwiftUISnappingScrollView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F8718BD29305D0A00E1A3B1 /* XCRemoteSwiftPackageReference "SwiftUISnappingScrollView" */;
+			productName = SwiftUISnappingScrollView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 452821D128F6E0E50037A0FB /* Project object */;
 }
