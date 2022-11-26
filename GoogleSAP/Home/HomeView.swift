@@ -304,6 +304,7 @@ struct HomeView: View {
             NavigationView {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
+                        if (refresher != 0) {
                         ScrollViewReader { proxy in
                             SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
                                 ForEach(data) { datum in
@@ -640,11 +641,11 @@ struct HomeView: View {
                                                             }
                                                         }
                                                     })
-//                                                    .id(Date())
+                                                    //                                                    .id(Date())
                                                     .id(refresher)
                                                     .padding(geometry.size.width / 10)
                                                 })
-//                                                .id(Date())
+                                                //                                                .id(Date())
                                                 .id(refresher)
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
                                             }
@@ -676,15 +677,16 @@ struct HomeView: View {
                             }
                             
                             
-//                            ZStack {
-//
-//                            }
-//                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            //                            ZStack {
+                            //
+                            //                            }
+                            //                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                             
                         }
-                        
-                        .tabViewStyle(.page(indexDisplayMode: PageTabViewStyle.IndexDisplayMode.never))
-                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+                        } else {
+                            ProgressView()
+                                .frame(width: geometry.size.width, height: geometry.size.width)
+                        }
 //                            }
 //                        }
                         
@@ -921,61 +923,63 @@ struct HomeView: View {
                 }.onAppear {
                     loggerHistoryManager.loadData()
                     
-                    lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
-                        LogRecord.napfaOrWorkout == "Napfa"
-                    } ?? LogRecord(
-                        NapfaOrWorkouts: .napfa,
-                        description: "This is my description",
-                        date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
-                    )
-                    
-                    lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
-                        LogRecord.NapfaOrWorkouts == .workout
-                    } ?? LogRecord(
-                        NapfaOrWorkouts: .workout,
-                        description: "This is my description",
-                        date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
-                    )
-                    
-                    data = [
-                        ProgressData(text: "2.4 Run",
-                                     fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
-                                     fractionWorkoutForA: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!,
-                                     fractionWorkoutForUserGoal: TwoPointFourKMRunUserSetScore == 0.0 ? 0.0 :
-                                        TwoPointFourKMRunUserSetScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
-                        ProgressData(text: "Situps",
-                                     fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore,
-                                     fractionWorkoutForUserGoal: SitUpsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitUps)! / SitUpsUserSetScore),
-                        ProgressData(text: "Inclined Pullups",
-                                     fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / InclinedPullupsHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsHighestScore,
-                                     fractionWorkoutForUserGoal: InclinedPullupsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsUserSetScore),
-                        ProgressData(text: "Sit & Reach",
-                                     fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore,
-                                     fractionWorkoutForUserGoal: SitAndReachUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitAndReach)! / SitAndReachUserSetScore),
-                        ProgressData(text: "Shuttle Run",
-                                     fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
-                                     fractionWorkoutForA: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!,
-                                     fractionWorkoutForUserGoal: ShuttleRunUserSetScore == 0.0 ? 0.0 : ShuttleRunUserSetScore / Double(lastWorkoutElement.shuttleRun)!),
-                        ProgressData(text: "Standing Broad Jump",
-                                     fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
-                                     fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
-                    ]
+                    withAnimation {
+                        lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
+                            LogRecord.napfaOrWorkout == "Napfa"
+                        } ?? LogRecord(
+                            NapfaOrWorkouts: .napfa,
+                            description: "This is my description",
+                            date: Date(timeInterval: .zero, since: .now),
+                            twoPointFourKMRun: "0",
+                            shuttleRun: "0",
+                            sitUps: "0",
+                            sitAndReach: "0",
+                            inclinedPullups: "0",
+                            standingBroadJump: "0"
+                        )
+                        
+                        lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
+                            LogRecord.NapfaOrWorkouts == .workout
+                        } ?? LogRecord(
+                            NapfaOrWorkouts: .workout,
+                            description: "This is my description",
+                            date: Date(timeInterval: .zero, since: .now),
+                            twoPointFourKMRun: "0",
+                            shuttleRun: "0",
+                            sitUps: "0",
+                            sitAndReach: "0",
+                            inclinedPullups: "0",
+                            standingBroadJump: "0"
+                        )
+                        
+                        data = [
+                            ProgressData(text: "2.4 Run",
+                                         fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
+                                         fractionWorkoutForA: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!,
+                                         fractionWorkoutForUserGoal: TwoPointFourKMRunUserSetScore == 0.0 ? 0.0 :
+                                            TwoPointFourKMRunUserSetScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
+                            ProgressData(text: "Situps",
+                                         fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore,
+                                         fractionWorkoutForUserGoal: SitUpsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitUps)! / SitUpsUserSetScore),
+                            ProgressData(text: "Inclined Pullups",
+                                         fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                         fractionWorkoutForUserGoal: InclinedPullupsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsUserSetScore),
+                            ProgressData(text: "Sit & Reach",
+                                         fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore,
+                                         fractionWorkoutForUserGoal: SitAndReachUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitAndReach)! / SitAndReachUserSetScore),
+                            ProgressData(text: "Shuttle Run",
+                                         fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
+                                         fractionWorkoutForA: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!,
+                                         fractionWorkoutForUserGoal: ShuttleRunUserSetScore == 0.0 ? 0.0 : ShuttleRunUserSetScore / Double(lastWorkoutElement.shuttleRun)!),
+                            ProgressData(text: "Standing Broad Jump",
+                                         fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                         fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
+                        ]
+                    }
                     
                     print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
                     print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
