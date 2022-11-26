@@ -11,6 +11,7 @@ struct GradeScoreCaclulator: View {
     
     @Binding var ageInput: Int
     @Binding var genderInput: gender
+    @Binding var pageType: calcPage
     
     @State var calcValues: [Double] = [0.0,0.0,0.0,0.0,0.0,0.0]
     @State var displayValues: [String] = ["","","","","",""]
@@ -60,6 +61,8 @@ struct GradeScoreCaclulator: View {
         else { return "NIL" }
     }
     
+    let FEDCBA = ["F", "E", "D", "C", "B", "A"]
+    
     var body: some View {
         ZStack {
             VStack {
@@ -104,9 +107,16 @@ struct GradeScoreCaclulator: View {
                         DispatchQueue.main.async {
                             offset = -proxy.frame(in: .named("scroll")).origin.y
                             scrollSize = proxy.size
-                            if offset < round(scrollSize.height-viewableScrollSize.height) {
-                                arrowScale = offset/((scrollSize.height-arrowSize.height)/2)
-                                withAnimation(.spring(response: 0.5)) { pageOffset = CGFloat.zero }
+                            if 0.0-offset > viewableScrollSize.height*0.25 {
+                                withAnimation(.spring(response: 0.25)){
+                                    pageOffset = 0-viewableScrollSize.height
+                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                                    withAnimation(.spring(response: 0.25)){
+                                        pageType = .none
+                                    }
+                                    DispatchQueue.main.asyncAfter(deadline: .now()+0.25) { pageOffset = .zero }
+                                }
                             } else {
                                 arrowScale = round(scrollSize.height-viewableScrollSize.height)/((scrollSize.height-arrowSize.height)/2)
                                 if offset >= round(scrollSize.height-viewableScrollSize.height)*1.25 {
@@ -125,13 +135,12 @@ struct GradeScoreCaclulator: View {
                     points = calcToPoints(calc: calcValues)
                 }
             }.coordinateSpace(name: "scroll").background(Color(UIColor.systemBackground)).offset(y: 0-pageOffset*1.5)
-//                .hidden(pageOffset != CGFloat.zero)//deelete this later, for testing only
         }
     }
 }
 
 struct GradeScoreCaclulator_Previews: PreviewProvider {
     static var previews: some View {
-        GradeScoreCaclulator(ageInput: .constant(14), genderInput: .constant(gender.male), viewableScrollSize: CGSize.zero)
+        GradeScoreCaclulator(ageInput: .constant(14), genderInput: .constant(gender.male), pageType: .constant(calcPage.calculate), viewableScrollSize: CGSize.zero)
     }
 }
