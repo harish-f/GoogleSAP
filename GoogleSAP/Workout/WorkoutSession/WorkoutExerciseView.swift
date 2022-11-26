@@ -21,7 +21,7 @@ struct WorkoutExerciseView: View {
     @State var remainingTimePerRep = 0.0
     @State var restart = "false"
     @State var completedReps = 0
-    
+    @Environment(\.colorScheme) var colorScheme
     @ObservedObject var historyManager = WorkoutHistoryManger()
     
     func restartWorkout() {
@@ -40,7 +40,7 @@ struct WorkoutExerciseView: View {
                 VStack {
                     HStack {
                         if exercises[currentExerciseIndex].name == "Rest" {
-                            CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration))
+                            CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration), refresh: .constant(0))
                         } else {
                             Spacer()
                             CircleProgressBar(
@@ -73,7 +73,6 @@ struct WorkoutExerciseView: View {
                                         } else {
                                             completedReps += 1
                                             remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
-                                            
                                         }
                                     }
                                 } else {
@@ -103,7 +102,7 @@ struct WorkoutExerciseView: View {
                                 }
                             } label: {
                                 Text("Skip")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.red)
                                     .frame(maxWidth: .infinity, alignment: .center)
                             }
                         }
@@ -120,7 +119,7 @@ struct WorkoutExerciseView: View {
                                 Spacer()
                             }
                         }
-                        .listRowBackground(Color.blue)
+                        .listRowBackground(Color.red)
                     }
                 }
                 .toolbar {
@@ -153,7 +152,7 @@ struct WorkoutExerciseView: View {
                         }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
-                .background(timeRemaining == 0 ? .green : .white)
+                .background(timeRemaining == 0 ? .green : colorScheme == .dark ? .black : .white)
             }
             if ended {
                 EndedWorkoutView(restart: $restart, completedExercises: completedExercises, allExercises: exercises)
