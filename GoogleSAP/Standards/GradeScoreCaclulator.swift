@@ -94,7 +94,6 @@ struct GradeScoreCaclulator: View {
                                 Slider(value: $calcValues[i], in: Double(ref[i][0]-1)...Double(ref[i][4]+1), step: 1)
                             }.padding().padding(.horizontal)
                         }
-                        Text("Scroll Up for Grades").font(.footnote).foregroundColor(.secondary).padding()
                         Image(systemName: "arrow.up.circle.fill")
                             .resizable()
                             .scaledToFit()
@@ -135,6 +134,14 @@ struct GradeScoreCaclulator: View {
                     points = calcToPoints(calc: calcValues)
                 }
             }.coordinateSpace(name: "scroll").background(Color(UIColor.systemBackground)).offset(y: 0-pageOffset*1.5)
+                .overlay {
+                    if pageOffset == CGFloat.zero {
+                        VStack {
+                            Spacer()
+                            Text("Swipe Up for Grades").font(.footnote).foregroundColor(.secondary).padding()
+                        }
+                    }
+                }
         }
     }
 }
