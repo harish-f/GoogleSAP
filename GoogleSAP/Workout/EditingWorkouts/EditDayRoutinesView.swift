@@ -11,37 +11,48 @@ import SwiftUI
 
 struct EditDayRoutinesView: View {
     @Binding var routine: Routine
+    @ObservedObject var routinesData: RoutinesDataManager
     @State var showEditSheet = false
     @State var showAddSheet = false
-    @State var shownExerciseIndex = 0
     @State var selectedExerciseIndex = 0
+    @State var tempRoutine:Routine = Routine(title: "", exercises: [])
     var body: some View {
         VStack {
             List {
-                ForEach($routine.exercises) { $exercise in
+                ForEach(tempRoutine.exercises) { exercise in
                     Button {
-                        selectedExerciseIndex = routine.exercises.firstIndex(of: exercise)!
+                        selectedExerciseIndex = tempRoutine.exercises.firstIndex(of: exercise)!
                         showEditSheet = true
                     } label: {
-                        VStack(alignment: .leading) {
-                            Text(exercise.name)
-                            Text("\(exercise.reps) reps, \(exercise.duration)s")
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                        if exercise.name == "Rest" {
+                            VStack(alignment: .leading) {
+                                Text(exercise.name)
+                                Text("\(exercise.duration)s")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
+                        } else {
+                            VStack(alignment: .leading) {
+                                Text(exercise.name)
+                                Text("\(exercise.reps) reps, \(exercise.duration)s")
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                 }
                 .onMove { currIndex, offset in
-                    routine.exercises.move(fromOffsets: currIndex, toOffset: offset)
+                    tempRoutine.exercises.move(fromOffsets: currIndex, toOffset: offset)
                 }
                 .onDelete { indexSet in
-                    routine.exercises.remove(atOffsets: indexSet)
+                    tempRoutine.exercises.remove(at: indexSet.first!)
                 }
             }
             .toolbar {
                 EditButton()
             }
         }
+        .navigationTitle(routine.title)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -51,21 +62,27 @@ struct EditDayRoutinesView: View {
                 }
             }
         }
-        .navigationTitle(routine.title)
+        .onChange(of: tempRoutine.exercises) { _ in
+            routine = tempRoutine
+            routinesData.saveData()
+        }
         .sheet(isPresented: $showEditSheet) {
-            EditExerciseView(exercise: $routine.exercises[selectedExerciseIndex])
+            EditExerciseView(exercise: $tempRoutine.exercises[selectedExerciseIndex])
                 .presentationDetents([.medium])
         }
         .sheet(isPresented: $showAddSheet) {
-            AddExerciseView(exercises: $routine.exercises)
+            AddExerciseView(exercises: $tempRoutine.exercises)
                 .presentationDetents([.medium])
+        }
+        .onAppear {
+            tempRoutine = routine
         }
     }
 }
 
-struct EditDayRoutinesView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            EditDayRoutinesView(routine: .constant(Routine(title: "Monday", exercises: [Exercise(name: "pushup", duration: 30, reps: 30)])))}
-    }
-}
+//struct EditDayRoutinesView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NavigationView {
+//            EditDayRoutinesView(routine: .constant(Routine(title: "Monday", exercises: [Exercise(name: "pushup", duration: 30, reps: 30)])))}
+//    }
+//}
