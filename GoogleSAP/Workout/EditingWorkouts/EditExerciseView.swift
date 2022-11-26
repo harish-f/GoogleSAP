@@ -11,6 +11,8 @@ import SwiftUI
 
 struct EditExerciseView: View {
     @Binding var exercise: Exercise
+    @State var editedExercise: Exercise = Exercise(name: "", duration: 0, reps: 0)
+    @State var isRest = false
     @Environment(\.dismiss) var dismiss
     var body: some View {
         VStack {
@@ -21,23 +23,28 @@ struct EditExerciseView: View {
                 .padding()
             Form {
                 Section {
-                    HStack {
-                        Text("Name")
-                        Spacer()
-                        TextField("0", text: $exercise.name)
-                            .fixedSize()
+                    Toggle("Rest", isOn: $isRest)
+                }
+                Section {
+                    if !isRest {
+                        HStack {
+                            Text("Name")
+                            Spacer()
+                            TextField("0", text: $editedExercise.name)
+                                .fixedSize()
+                        }
+                        HStack {
+                            Text("Reps")
+                            Spacer()
+                            TextField("0", value: $editedExercise.reps, format: .number)
+                                .keyboardType(.numberPad)
+                                .fixedSize()
+                        }
                     }
                     HStack {
                         Text("Duration")
                         Spacer()
-                        TextField("0", value: $exercise.duration, format: .number)
-                            .keyboardType(.numberPad)
-                            .fixedSize()
-                    }
-                    HStack {
-                        Text("Reps")
-                        Spacer()
-                        TextField("0", value: $exercise.reps, format: .number)
+                        TextField("0", value: $editedExercise.duration, format: .number)
                             .keyboardType(.numberPad)
                             .fixedSize()
                     }
@@ -45,13 +52,19 @@ struct EditExerciseView: View {
                 HStack {
                     Spacer()
                     Button {
+                        exercise = editedExercise
                         dismiss()
                     } label: {
                         Text("Done")
                     }
+                    .disabled(editedExercise.duration <= 0 || (editedExercise.name == "" || editedExercise.reps <= 0) && !isRest)
                     Spacer()
                 }
             }
+        }
+        .onAppear {
+            editedExercise = exercise
+            isRest = exercise.name == "Rest"
         }
     }
 }

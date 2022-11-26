@@ -20,6 +20,7 @@ struct WorkoutExerciseView: View {
     @State var showEndedDetails = false
     @State var remainingTimePerRep = 0.0
     @State var restart = "false"
+    @State var completedReps = 0
     
     @ObservedObject var historyManager = WorkoutHistoryManger()
     
@@ -51,7 +52,7 @@ struct WorkoutExerciseView: View {
                             Spacer()
                             CircleProgressBar(
                                 totalTime: Double(exercises[currentExerciseIndex].duration)/Double(exercises[currentExerciseIndex].reps),
-                                showReps: true,
+                                showReps: false,
                                 timeRemaining: $remainingTimePerRep,
                                 repInfo: "\(ceil(Double(Int(timeRemaining)/exercises[currentExerciseIndex].duration*exercises[currentExerciseIndex].reps)))/\(exercises[currentExerciseIndex].reps)"
                             )
@@ -65,8 +66,14 @@ struct WorkoutExerciseView: View {
                                 if timeRemaining > 0 {
                                     withAnimation(.linear(duration: 0.1)) {
                                         timeRemaining -= 0.1
-                                        if exercises[currentExerciseIndex].name != "Rest" {
+                                    }
+                                    if exercises[currentExerciseIndex].name != "Rest" {
+                                        if timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps)) == 0 {
                                             remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                        } else {
+                                            completedReps += 1
+                                            remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                            
                                         }
                                     }
                                 } else {
@@ -75,6 +82,7 @@ struct WorkoutExerciseView: View {
                                     }
                                     if currentExerciseIndex < exercises.count-1 {
                                         currentExerciseIndex += 1
+                                        completedReps = 0
                                         timeRemaining = Double(exercises[currentExerciseIndex].duration)
                                     } else {
                                         ended = true
