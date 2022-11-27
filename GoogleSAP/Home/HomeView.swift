@@ -459,8 +459,8 @@ struct HomeView: View {
                             .onAppear {
                                 HomeManager.loadData()
                                 
-                                age = HomeManager.stationData[0].age
-                                birthdayObj = HomeManager.stationData[0].ageDate
+//                                age = HomeManager.stationData[0].age
+//                                birthdayObj = HomeManager.stationData[0].ageDate
                                 TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
                                 SitUpsUserSetScore = HomeManager.stationData[0].SitUps
                                 SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
@@ -579,9 +579,9 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                             tabSelection = 0
-                            HomeManager.stationData = [
-                                UserSetScore(age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
-                            ]
+//                            HomeManager.stationData = [
+//                                UserSetScore(age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+//                            ]
                             HomeManager.saveData()
                             refresher = refresher + 1
                             
