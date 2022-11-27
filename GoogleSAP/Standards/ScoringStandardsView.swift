@@ -65,12 +65,26 @@ struct ScoringStandardsView: View {
                             Text(stringRef1 + stringRef2)
                             Spacer()
                             let ref = NAPFAStandards[genderInput]![ageInput]![selected]
-                            if i == 0 {
-                                Text("> " + String(ref[4]))
+                            if selected < 4 {
+                                if i == 0 {
+                                    Text("   > " + String(ref[4]-1))
+                                } else if reverseI == 0 {
+                                    Text("   < " + String(ref[0]))
+                                } else {
+                                    let ref2 = String(ref[reverseI-1])
+                                    let ref3 = String(ref[reverseI]-1)
+                                    Text(ref2 + " - " + ref3)
+                                }
                             } else {
-                                let ref2 = reverseI == 0 ? "0":String(ref[reverseI-1])
-                                let ref3 = String(ref[reverseI])
-                                Text(ref2 + " - " + ref3)
+                                if i == 0 {
+                                    Text("   < " + String(Double(ref[0])/10.0))
+                                } else if reverseI == 0 {
+                                    Text("   > " + String(Double(ref[4]-1)/10.0))
+                                } else {
+                                    let ref2 = String(Double(ref[i-1])/10.0)
+                                    let ref3 = String(Double(ref[i]-1)/10.0)
+                                    Text(ref2 + " - " + ref3)
+                                }
                             }
                             Spacer()
                         }
