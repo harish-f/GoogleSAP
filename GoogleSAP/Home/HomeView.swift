@@ -27,10 +27,6 @@ enum Gender {
 //  - Switch the weird picker thing for a textfield
 //  - Colour Scheme
 
-
-// TODO: FIGURE OUT A WAY TO GET HOMESCREEN TO RERENDER AFTER MODAL VIEW IS REMOVED FROM SCREEN
-// TODO: PUT DOWN ALL VALUES FROM NAPFA INTO TABLE VIEW TO SHOW NAPFA A SCORE DIFFS
-
 struct idGen: Hashable {
     var text: String
 }
@@ -58,6 +54,11 @@ struct HomeView: View {
     @Binding var tabSelection: Int
     
     @ObservedObject var loggerHistoryManager = LoggerDataManager()
+    @ObservedObject var HomeManager = HomeDataManager()
+    @Environment(\.colorScheme) var colorScheme
+    
+    
+    @State var refresher = 0
     
     @State var stillHaveUnsetGoals = false
     @State var stillNeedFillNAPFAEntry = false
@@ -244,6 +245,8 @@ struct HomeView: View {
     @State var gender: Gender = .male
     @State var age = 0
     @State var birthdayObj = Date()
+    
+    
     @State var TwoPointFourKMRunUserSetScore = 0.0
     @State var ShuttleRunUserSetScore = 0.0
     @State var SitUpsUserSetScore = 0.0
@@ -301,109 +304,76 @@ struct HomeView: View {
             NavigationView {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
-                        ScrollViewReader { proxy in
-                            SnappingScrollView(.horizontal, decelerationRate: .fast, showsIndicators: true) {
-                                ForEach(data) { datum in
-                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForUserGoal.isInfinite ? 0 : datum.fractionWorkoutForUserGoal, screenGeo: geometry.size, sfSymbolNameTop: "target", sfSymbolNameBottom: "", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "a.circle", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            Text("Pullups")
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text != "Inclined Pullups") {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        }
-                                                    })
-                                                    .padding(geometry.size.width / 10)
-                                                })
+                        if (refresher != 0) {
+                        SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
+                            ForEach(data) { datum in
+                                if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
+                                    Spacer()
+                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
                                                 .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
                                         }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                        
-                                    } else {
-                                        Spacer()
-                                        
-                                        HStack(alignment: .center) {
-                                            VStack(alignment: .center) {
-                                                CircularProgressViewLargeIcon(progress: datum.fractionWorkoutForA.isInfinite ? 0 : datum.fractionWorkoutForA, screenGeo: geometry.size, sfSymbolNameTop: "figure.walk", sfSymbolNameBottom: "questionmark.circle", content: {
-                                                    CircularProgressViewLargeIcon(progress: datum.fractionNAPFA.isInfinite ? 0 : datum.fractionNAPFA, screenGeo: geometry.size, sfSymbolNameTop: "figure.run", sfSymbolNameBottom: "", content: {
-                                                        if (datum.text == "Inclined Pullups" && age <= 14) {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
-                                                            Text("Pullups")
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        } else if (datum.text != "Inclined Pullups") {
-                                                            Text(datum.text)
-                                                                .font(.title3)
-                                                                .multilineTextAlignment(.center)
-                                                                .padding(geometry.size.width / 9)
-                                                        }
-                                                    })
-                                                    .padding(geometry.size.width / 10)
-                                                })
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                            }
-                                        }
-                                        .padding(.top, 10)
-                                        .padding()
-                                        .padding()
-                                        .background(
-                                            GeometryReader { geometryProxy in
-                                                Color.clear
-                                                    .onAppear {
-                                                        sizeOfBigProgress = geometryProxy.size
-                                                    }
-                                            }
-                                        )
-                                        
-                                        Spacer()
-                                            .scrollSnappingAnchor(.bounds)
-                                            .id(idGen(text: datum.text))
-                                    }
-                                }
-                                
-                                
-                                ZStack {
+                                    )
                                     
+                                    Spacer()
+                                        .scrollSnappingAnchor(.bounds)
+                                        .id(idGen(text: datum.text))
+                                    
+                                } else {
+                                    Spacer()
+                                    
+                                    HStack(alignment: .center) {
+                                        VStack(alignment: .center) {
+                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
+                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                        }
+                                    }
+                                    .padding(.top, 10)
+                                    .padding()
+                                    .padding()
+                                    .background(
+                                        GeometryReader { geometryProxy in
+                                            Color.clear
+                                                .onAppear {
+                                                    sizeOfBigProgress = geometryProxy.size
+                                                }
+                                        }
+                                    )
+                                    
+                                    Spacer()
+                                        .scrollSnappingAnchor(.bounds)
+                                        .id(idGen(text: datum.text))
                                 }
-                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            }
+                            
+                            
+                            ZStack {
                                 
                             }
+                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                            
                         }
+                        } else {
+                            ProgressView()
+                                .frame(width: geometry.size.width, height: geometry.size.width)
+                        }
+                        
+                        
+                        //                            ZStack {
+                        //
+                        //                            }
+                        //                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
+                        
+                        //                            }
+                        //                        }
                         
                         
                         Form {
@@ -487,6 +457,22 @@ struct HomeView: View {
                                 }
                             }
                             .onAppear {
+                                HomeManager.loadData()
+                                
+//                                age = HomeManager.stationData[0].age
+//                                birthdayObj = HomeManager.stationData[0].ageDate
+                                TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
+                                SitUpsUserSetScore = HomeManager.stationData[0].SitUps
+                                SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
+                                InclinedPullupsUserSetScore = HomeManager.stationData[0].InclinedPullups
+                                ShuttleRunUserSetScore = HomeManager.stationData[0].ShuttleRun
+                                StandingBroadJumpUserSetScore = HomeManager.stationData[0].StandingBroadJump
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    print("j")
+                                    //                                    refresher = refresher + 1
+                                }
+                                
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     userAgeBasedBestScore = listOfNapfaScores.last { score in
                                         score.age == age
@@ -526,7 +512,6 @@ struct HomeView: View {
                                             isAgeLegal = true
                                         }
                                     }
-                                    
                                     
                                     if (TwoPointFourKMRunUserSetScore == 0.0 || SitUpsUserSetScore == 0.0 || SitAndReachUserSetScore == 0.0 || InclinedPullupsUserSetScore == 0.0 || ShuttleRunUserSetScore == 0.0 || StandingBroadJumpUserSetScore == 0.0) {
                                         withAnimation {
@@ -582,16 +567,26 @@ struct HomeView: View {
                                             stillNeedFillWorkoutEntry = false
                                         }
                                     }
+                                    if refresher == 0 {
+                                        withAnimation {
+                                            refresher = refresher + 1
+                                        }
+                                    }
                                 }
+                                
                             }
                         }
                         .sheet(isPresented: $showModal) {
                             showModal = false
                             tabSelection = 0
-                            print("the enddd")
-                            print(age)
+//                            HomeManager.stationData = [
+//                                UserSetScore(age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
+//                            ]
+                            HomeManager.saveData()
+                            refresher = refresher + 1
+                            
                         } content: {
-                            getGoalData(tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
+                            getGoalData(refresher: $refresher, tabSelection: $tabSelection, age: $age, firstTimeEnterAge: $firstTimeEnteringAge, gender: $gender, birthDate: $birthdayObj, twoPointFourKMRunScore: $TwoPointFourKMRunUserSetScore, standingBroadJumpScore: $StandingBroadJumpUserSetScore, inclinedPullupsScore: $InclinedPullupsUserSetScore, shuttleRunScore: $ShuttleRunUserSetScore, sitUpsScore: $SitUpsUserSetScore, sitAndReachScore: $SitAndReachUserSetScore)
                         }
                         
                     }.navigationTitle("Overview")
@@ -603,64 +598,75 @@ struct HomeView: View {
                             Image(systemName: "target")
                         }
                         )
+                        .navigationBarItems(leading:
+                                                ZStack {
+                            if (refresher == 0) {
+                                ProgressView()
+                            } else {
+                                ZStack {}
+                            }
+                        }
+                        )
                 }.onAppear {
                     loggerHistoryManager.loadData()
                     
-                    lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
-                        LogRecord.napfaOrWorkout == "Napfa"
-                    } ?? LogRecord(
-                        NapfaOrWorkouts: .napfa,
-                        description: "This is my description",
-                        date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
-                    )
-                    
-                    lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
-                        LogRecord.NapfaOrWorkouts == .workout
-                    } ?? LogRecord(
-                        NapfaOrWorkouts: .workout,
-                        description: "This is my description",
-                        date: Date(timeInterval: .zero, since: .now),
-                        twoPointFourKMRun: "0",
-                        shuttleRun: "0",
-                        sitUps: "0",
-                        sitAndReach: "0",
-                        inclinedPullups: "0",
-                        standingBroadJump: "0"
-                    )
-                    
-                    data = [
-                        ProgressData(text: "2.4 Run",
-                                     fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
-                                     fractionWorkoutForA: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!,
-                                     fractionWorkoutForUserGoal: TwoPointFourKMRunUserSetScore == 0.0 ? 0.0 :
-                                        TwoPointFourKMRunUserSetScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
-                        ProgressData(text: "Situps",
-                                     fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore,
-                                     fractionWorkoutForUserGoal: SitUpsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitUps)! / SitUpsUserSetScore),
-                        ProgressData(text: "Inclined Pullups",
-                                     fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / InclinedPullupsHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsHighestScore,
-                                     fractionWorkoutForUserGoal: InclinedPullupsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsUserSetScore),
-                        ProgressData(text: "Sit & Reach",
-                                     fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore,
-                                     fractionWorkoutForUserGoal: SitAndReachUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitAndReach)! / SitAndReachUserSetScore),
-                        ProgressData(text: "Shuttle Run",
-                                     fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
-                                     fractionWorkoutForA: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!,
-                                     fractionWorkoutForUserGoal: ShuttleRunUserSetScore == 0.0 ? 0.0 : ShuttleRunUserSetScore / Double(lastWorkoutElement.shuttleRun)!),
-                        ProgressData(text: "Standing Broad Jump",
-                                     fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore,
-                                     fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
-                                     fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
-                    ]
+                    withAnimation {
+                        lastNAPFAElement = loggerHistoryManager.logRecords.last { LogRecord in
+                            LogRecord.napfaOrWorkout == "Napfa"
+                        } ?? LogRecord(
+                            NapfaOrWorkouts: .napfa,
+                            description: "This is my description",
+                            date: Date(timeInterval: .zero, since: .now),
+                            twoPointFourKMRun: "0",
+                            shuttleRun: "0",
+                            sitUps: "0",
+                            sitAndReach: "0",
+                            inclinedPullups: "0",
+                            standingBroadJump: "0"
+                        )
+                        
+                        lastWorkoutElement = loggerHistoryManager.logRecords.last { LogRecord in
+                            LogRecord.NapfaOrWorkouts == .workout
+                        } ?? LogRecord(
+                            NapfaOrWorkouts: .workout,
+                            description: "This is my description",
+                            date: Date(timeInterval: .zero, since: .now),
+                            twoPointFourKMRun: "0",
+                            shuttleRun: "0",
+                            sitUps: "0",
+                            sitAndReach: "0",
+                            inclinedPullups: "0",
+                            standingBroadJump: "0"
+                        )
+                        
+                        data = [
+                            ProgressData(text: "2.4 Run",
+                                         fractionNAPFA: TwoPointFourKMRunHighestScore / Double(lastNAPFAElement.twoPointFourKMRun)!,
+                                         fractionWorkoutForA: TwoPointFourKMRunHighestScore / Double(lastWorkoutElement.twoPointFourKMRun)!,
+                                         fractionWorkoutForUserGoal: TwoPointFourKMRunUserSetScore == 0.0 ? 0.0 :
+                                            TwoPointFourKMRunUserSetScore / Double(lastWorkoutElement.twoPointFourKMRun)!),
+                            ProgressData(text: "Situps",
+                                         fractionNAPFA: Double(lastNAPFAElement.sitUps)! / SitUpsHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.sitUps)! / SitUpsHighestScore,
+                                         fractionWorkoutForUserGoal: SitUpsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitUps)! / SitUpsUserSetScore),
+                            ProgressData(text: "Inclined Pullups",
+                                         fractionNAPFA: Double(lastNAPFAElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsHighestScore,
+                                         fractionWorkoutForUserGoal: InclinedPullupsUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.inclinedPullups)! / InclinedPullupsUserSetScore),
+                            ProgressData(text: "Sit & Reach",
+                                         fractionNAPFA: Double(lastNAPFAElement.sitAndReach)! / SitAndReachHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.sitAndReach)! / SitAndReachHighestScore,
+                                         fractionWorkoutForUserGoal: SitAndReachUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.sitAndReach)! / SitAndReachUserSetScore),
+                            ProgressData(text: "Shuttle Run",
+                                         fractionNAPFA: ShuttleRunHighestScore / Double(lastNAPFAElement.shuttleRun)!,
+                                         fractionWorkoutForA: ShuttleRunHighestScore / Double(lastWorkoutElement.shuttleRun)!,
+                                         fractionWorkoutForUserGoal: ShuttleRunUserSetScore == 0.0 ? 0.0 : ShuttleRunUserSetScore / Double(lastWorkoutElement.shuttleRun)!),
+                            ProgressData(text: "Standing Broad Jump",
+                                         fractionNAPFA: Double(lastNAPFAElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                         fractionWorkoutForA: Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpHighestScore,
+                                         fractionWorkoutForUserGoal: StandingBroadJumpUserSetScore == 0.0 ? 0.0 : Double(lastWorkoutElement.standingBroadJump)! / StandingBroadJumpUserSetScore)
+                        ]
+                    }
                     
                     print(data[0].text + " " + String(data[0].fractionWorkoutForUserGoal))
                     print(data[1].text + " " + String(data[1].fractionWorkoutForUserGoal))
@@ -671,7 +677,7 @@ struct HomeView: View {
                     
                 }
             }
-        }
+        }.id(refresher)
     }
 }
 
@@ -679,6 +685,7 @@ struct HomeView: View {
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
     
+    @Binding var refresher: Int
     @Binding var tabSelection: Int
     @Binding var age: Int
     @Binding var firstTimeEnterAge: Bool
@@ -799,6 +806,7 @@ struct getGoalData: View {
                     tabSelection = 1
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         tabSelection = 0
+                        refresher = 0
                     }
                     
                     dismiss()
@@ -839,3 +847,195 @@ struct HomeView_Previews: PreviewProvider {
 //        getGoalData(age: $b, birthDate: $c, twoPointFourKMRunScore: $a, standingBroadJumpScore: $a, inclinedPullupsScore: $a, shuttleRunScore: $a, sitUpsScore: $a, sitAndReachScore: $a)
 //    }
 //}
+
+struct CircularProgView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    var datum: ProgressData
+    var outerRingFraction: Double
+    var innerRingFraction: Double
+    var age: Int
+    var geometry: GeometryProxy
+    
+    @Binding var refresher: Int
+    @Binding var updateProgressSize: CGSize
+    
+    var outerRingTopSymbol: String
+    var outerRingBottomSymbol: String
+    var innerRingTopSymbol: String
+    var innerRingBottomSymbol: String
+    //     datum.fractionWorkoutForA
+    //     datum.fractionNAPFA
+    
+    var body: some View {
+        HStack(alignment: .center) {
+            VStack(alignment: .center) {
+                CircularProgressViewLargeIcon(progress: outerRingFraction.isInfinite ? 0 : outerRingFraction, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: outerRingTopSymbol, sfSymbolNameBottom: outerRingBottomSymbol, content: {
+                    CircularProgressViewLargeIcon(progress: innerRingFraction.isInfinite ? 0 : innerRingFraction, refresh: $refresher, screenGeo: geometry.size, sfSymbolNameTop: innerRingTopSymbol, sfSymbolNameBottom: innerRingBottomSymbol, content: {
+                        if (datum.text == "Inclined Pullups" && age <= 14) {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("PullupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("PullupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Inclined Pullups" && age >= 15) {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("PullupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("PullupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text("Pullups")
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "2.4 Run") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("RunningDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("RunningLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Situps") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SitupsDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SitupsLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Sit & Reach") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SitAndReachDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SitAndReachLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Shuttle Run") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("ShuttleRunDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("ShuttleRunLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        } else if (datum.text == "Standing Broad Jump") {
+                            VStack {
+                                Spacer()
+                                Spacer()
+                                if colorScheme == .dark {
+                                    Image("SBJDark")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                    
+                                } else {
+                                    Image("SBJLight")
+                                        .resizable()
+                                        .frame(width: geometry.size.width / 5, height: geometry.size.width / 5)
+                                }
+                                Text(datum.text)
+                                    .font(.title3)
+                                    .multilineTextAlignment(.center)
+                                    .padding(geometry.size.width / 9)
+                                    .padding(.top, -(geometry.size.width / 10))
+                                Spacer()
+                            }
+                        }
+                    })
+                    //                                                    .id(Date())
+                    .id(refresher)
+                    .padding(geometry.size.width / 10)
+                })
+                //                                                .id(Date())
+                .id(refresher)
+            }
+        }
+        .background(
+            GeometryReader { geometryProxy in
+                Color.clear
+                    .onAppear {
+                        updateProgressSize = geometryProxy.size
+                    }
+            }
+        )
+    }
+}

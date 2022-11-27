@@ -11,13 +11,13 @@ struct CircleProgressBar: View {
     let totalTime: Double
     let showReps: Bool
     @Binding var timeRemaining: Double
-    @State var repInfo: String
+    @Binding var repInfo: String
     var body: some View {
         ZStack {
             if showReps {
                 Text(repInfo)
             } else {
-                Text("\(String(format: "%.1f", timeRemaining))")
+                Text("\(String(format: "%.0f", timeRemaining))")
                     .animation(.none)
             }
             Circle()
@@ -34,14 +34,6 @@ struct CircleProgressBar: View {
                 .frame(width: 100)
                 .rotationEffect(.degrees(-90))
         }
-//        .onReceive(timer) { _ in
-//            withAnimation {
-//                timeRemaining -= 0.1
-//            }
-//            if timeRemaining < 0 {
-//                timeRemaining = totalTime
-//            }
-//        }
     }
 }
 
