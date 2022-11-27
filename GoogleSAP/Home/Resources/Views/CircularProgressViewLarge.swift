@@ -101,9 +101,6 @@ struct CircularProgressViewLargeIcon<Content: View>: View {
             }
             .padding(-13)
         }
-        .onAppear {
-            print("refres")
-        }
     }
 }
 
