@@ -306,41 +306,41 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         if (refresher != 0) {
-                        SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
-                            ForEach(data) { datum in
-                                if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
-                                    Spacer()
-                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                    .padding(.top, 10)
-                                    .padding()
-                                    .padding()
-                                    
-                                    Spacer()
-                                        .scrollSnappingAnchor(.bounds)
-                                        .id(idGen(text: datum.text))
-                                    
-                                } else {
-                                    Spacer()
-                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                    .padding(.top, 10)
-                                    .padding()
-                                    .padding()
-                                    
-                                    Spacer()
-                                        .scrollSnappingAnchor(.bounds)
-                                        .id(idGen(text: datum.text))
+                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
+                                ForEach(data) { datum in
+                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
+                                        Spacer()
+                                        CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            .padding(.top, 10)
+                                            .padding()
+                                            .padding()
+                                        
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
+                                        
+                                    } else {
+                                        Spacer()
+                                        CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            .padding(.top, 10)
+                                            .padding()
+                                            .padding()
+                                        
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
+                                    }
                                 }
-                            }
-                            
-                            
-                            ZStack {
+                                
+                                
+                                ZStack {
+                                    
+                                }
+                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                                 
                             }
-                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
-                            
-                        }
                         } else {
                             ProgressView()
                                 .frame(width: geometry.size.width, height: geometry.size.width)
@@ -575,14 +575,16 @@ struct HomeView: View {
                         }
                         )
                         .navigationBarItems(leading:
-                                                ZStack {
-                            if (refresher == 0) {
-                                ProgressView()
-                            } else {
-                                ZStack {}
-                            }
+                                                Button("Tutorial") {
+                            hasUserNotViewedInstructionsOnce = true
                         }
-                        )
+                                            )
+//                                                ZStack {
+//                            if (refresher == 0) {
+//                                ProgressView()
+//                            } else {
+//                                EmptyView()
+//                            }
                         .sheet(isPresented: $hasUserNotViewedInstructionsOnce) {
                             hasUserNotViewedInstructionsOnce = false
                             HomeManager.stationData = [
@@ -660,7 +662,9 @@ struct InstructionsView: View {
     
     var body: some View {
         NavigationView {
-            Text("Instruction View")
+            VStack {
+                // HI RACHEL PUT STUFF HERE THANKS
+            }
         }
     }
 }

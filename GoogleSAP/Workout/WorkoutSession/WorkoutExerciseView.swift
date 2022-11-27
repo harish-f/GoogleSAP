@@ -40,7 +40,7 @@ struct WorkoutExerciseView: View {
                 VStack {
                     HStack {
                         if exercises[currentExerciseIndex].name == "Rest" {
-                            CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration))
+//                            CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration))
                         } else {
                             Spacer()
                             CircleProgressBar(
