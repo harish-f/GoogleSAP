@@ -21,8 +21,8 @@ struct GradeScoreCaclulator: View {
             let i = calc.firstIndex(of: $0)!
             if $0 < Double(ref[i][0]) {
                 return "< " + String(ref[i][0])
-            } else if $0 > Double(ref[i][4]) {
-                return "> " + String(ref[i][4])
+            } else if $0 > Double(ref[i][4]-1) {
+                return "> " + String(ref[i][4]-1)
             } else {
                 return String(Int($0))
             }
@@ -91,7 +91,7 @@ struct GradeScoreCaclulator: View {
                                     Spacer()
                                     Text(displayValues[i])
                                 }
-                                Slider(value: $calcValues[i], in: Double(ref[i][0]-1)...Double(ref[i][4]+1), step: 1)
+                                Slider(value: $calcValues[i], in: Double(ref[i][0]-1)...Double(ref[i][4]), step: 1)
                             }.padding().padding(.horizontal)
                         }
                         Image(systemName: "arrow.up.circle.fill")
