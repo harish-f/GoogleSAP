@@ -665,6 +665,12 @@ struct InstructionsView: View {
     }
 }
 
+struct InstructionView_Previews: PreviewProvider {
+    static var previews: some View {
+        InstructionsView()
+    }
+}
+
 
 struct getGoalData: View {
     @Environment(\.dismiss) var dismiss
