@@ -438,6 +438,8 @@ struct HomeView: View {
                                 }
                             }
                             .onAppear {
+                                print("a")
+                                
                                 HomeManager.loadData()
                                 
                                 age = HomeManager.stationData[0].age
@@ -661,7 +663,7 @@ struct HomeView: View {
 
 struct InstructionsView: View {
     @Environment(\.dismiss) var dismiss
-    private var numberOfImages = 6
+    private var numberOfImages = 10
     private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
     @State private var currentIndex = 0
     

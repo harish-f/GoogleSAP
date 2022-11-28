@@ -40,17 +40,6 @@ struct WorkoutExerciseView: View {
             if started && !ended {
                 VStack {
                     HStack {
-                        Spacer()
-                        if currentExerciseIndex >= exercises.count-1 {
-                            Text("Last one! Keep going!")
-                        } else {
-                            Text("Next: \(exercises[currentExerciseIndex+1].name)")
-                        }
-                    }
-                    .padding(.bottom)
-                    .padding(.bottom)
-                    .padding(.trailing)
-                    HStack {
                         if exercises[currentExerciseIndex].name == "Rest" {
                             CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration), refresh: .constant(0))
                         } else {
@@ -164,7 +153,8 @@ struct WorkoutExerciseView: View {
             if !started {
                 VStack {
                     Text(timeRemaining == 0 ? "GO" : String(format: "%.0f", timeRemaining))
-                        .font(.title)
+                        .font(.largeTitle)
+                        .bold()
                         .onReceive(timer) { _ in
                             if timeRemaining > 1 && !started {
                                 withAnimation {

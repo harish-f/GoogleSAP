@@ -22,7 +22,7 @@ struct ScoringStandardsView: View {
     let ABCDE = ["A", "B", "C", "D", "E", "F"]
     
     @State var attainmentCollapsed = false
-    @State var attainmentCloseAmount = CGFloat.zero
+    @State var attainmentCloseAmount: CGSize = CGSize.zero
     
     func intToTime(_ int: Int, isLongDist: Bool) -> String {
         if isLongDist {
@@ -43,18 +43,34 @@ struct ScoringStandardsView: View {
             VStack {
                 Text("NAPFA").font(.title).bold().padding(.vertical)
                 ZStack {
-                    Text("[Bronze] E in all stations & 6 points").padding(15).background(Color(red: 205/255, green: 127/255, blue: 50/255)).cornerRadius(10).offset(y: 0-8)
-                    Text("[Silver] D in all stations & 15 points").padding(15).background(Color(red: 192/255, green: 192/255, blue: 192/255)).cornerRadius(10).offset(y: attainmentCollapsed ? attainmentCloseAmount:0)
-                    Text("[Gold] C in all stations & 21 points").padding(15).background(Color(red: 255/255, green: 215/255, blue: 0)).cornerRadius(10).offset(y: 8 + (attainmentCollapsed ? attainmentCloseAmount*2:0))
+                    Text("[Bronze] E in all stations & 6 points")
+                        .padding(15)
+                        .background(Color(red: 205/255, green: 127/255, blue: 50/255))
+                        .cornerRadius(10)
+                        .offset(y: 0-15)
+                    Text("[Silver] D in all stations & 15 points")
+                        .padding(15)
+                        .background(Color(red: 192/255, green: 192/255, blue: 192/255))
+                        .cornerRadius(10)
+                        .offset(y: attainmentCollapsed ? attainmentCloseAmount.height/2:0)
+                    Text("[Gold] C in all stations & 21 points")
+                        .padding(15)
+                        .background(Color(red: 255/255, green: 215/255, blue: 0))
+                        .cornerRadius(10)
+                        .offset(y: 15 + (attainmentCollapsed ? attainmentCloseAmount.height:0))
                 }.font(.title2).padding(.vertical)
                     .background(GeometryReader { proxy -> Color in
-                        DispatchQueue.main.async { attainmentCloseAmount = proxy.size.height/2 }
+                        DispatchQueue.main.async { attainmentCloseAmount = proxy.size }
                         return Color.clear
                     })
                     .overlay {
                         VStack {
                             Spacer()
-                            Image(systemName: "chevron.compact.down").foregroundColor(.secondary).padding().rotationEffect(.degrees(attainmentCollapsed ? 0:180)).offset(y: 20 + (attainmentCollapsed ? attainmentCloseAmount*2:0))
+                            Image(systemName: "chevron.compact.down")
+                                .foregroundColor(.secondary)
+                                .padding()
+                                .rotationEffect(.degrees(attainmentCollapsed ? 0:180))
+                                .offset(y: 40 + (attainmentCollapsed ? attainmentCloseAmount.height:0))
                         }
                     }
                     .onTapGesture {
@@ -99,7 +115,7 @@ struct ScoringStandardsView: View {
                             Spacer()
                         }
                     }
-                }.offset(y: attainmentCollapsed ? attainmentCloseAmount*3:0)
+                }.offset(y: attainmentCollapsed ? attainmentCloseAmount.height/2*3:0)
                 Spacer()
             }
             ZStack {
