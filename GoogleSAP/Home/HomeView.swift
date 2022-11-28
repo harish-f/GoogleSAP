@@ -17,12 +17,6 @@ struct ProgressData: Hashable, Identifiable {
     var id = UUID()
 }
 
-enum Gender {
-    case male
-    case female
-    case none
-}
-
 //  - Replace Text with symbols
 //  - Switch the weird picker thing for a textfield
 //  - Colour Scheme
@@ -243,7 +237,7 @@ struct HomeView: View {
     
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
-    @State var gender: Gender = .male
+    @State var gender = "male"
     @State var age = 0
     @State var birthdayObj = Date()
     
@@ -442,15 +436,16 @@ struct HomeView: View {
                                 
                                 HomeManager.loadData()
                                 
-                                age = HomeManager.stationData[0].age
-                                birthdayObj = HomeManager.stationData[0].ageDate
-                                TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
-                                SitUpsUserSetScore = HomeManager.stationData[0].SitUps
-                                SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
-                                InclinedPullupsUserSetScore = HomeManager.stationData[0].InclinedPullups
-                                ShuttleRunUserSetScore = HomeManager.stationData[0].ShuttleRun
-                                StandingBroadJumpUserSetScore = HomeManager.stationData[0].StandingBroadJump
-                                hasUserNotViewedInstructionsOnce = HomeManager.stationData[0].hasUserNotSawInstructions
+                                age = HomeManager.stationData.age
+                                gender = HomeManager.stationData.gender
+                                birthdayObj = HomeManager.stationData.ageDate
+                                TwoPointFourKMRunUserSetScore = HomeManager.stationData.TwoPointFourKMRun
+                                SitUpsUserSetScore = HomeManager.stationData.SitUps
+                                SitAndReachUserSetScore = HomeManager.stationData.StandingBroadJump
+                                InclinedPullupsUserSetScore = HomeManager.stationData.InclinedPullups
+                                ShuttleRunUserSetScore = HomeManager.stationData.ShuttleRun
+                                StandingBroadJumpUserSetScore = HomeManager.stationData.StandingBroadJump
+                                hasUserNotViewedInstructionsOnce = HomeManager.stationData.hasUserNotSawInstructions
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     userAgeBasedBestScore = listOfNapfaScores.last { score in
@@ -462,7 +457,7 @@ struct HomeView: View {
                                             isAgeLegal = false
                                         }
                                     } else {
-                                        if (gender == .male) {
+                                        if (gender == "male") {
                                             StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreMale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
@@ -474,7 +469,7 @@ struct HomeView: View {
                                             SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreMale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
-                                        } else if (gender == .female) {
+                                        } else if (gender == "female") {
                                             StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreFemale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
@@ -557,9 +552,7 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                             tabSelection = 0
-                            HomeManager.stationData = [
-                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
-                            ]
+                            HomeManager.stationData = UserSetScore(gender: gender, hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             HomeManager.saveData()
                             refresher = refresher + 1
                             
@@ -590,9 +583,7 @@ struct HomeView: View {
 //                            }
                         .sheet(isPresented: $hasUserNotViewedInstructionsOnce) {
                             hasUserNotViewedInstructionsOnce = false
-                            HomeManager.stationData = [
-                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
-                            ]
+                            HomeManager.stationData = UserSetScore(gender: gender, hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             HomeManager.saveData()
                         } content: {
                             InstructionsView()
@@ -754,7 +745,7 @@ struct getGoalData: View {
     @Binding var tabSelection: Int
     @Binding var age: Int
     @Binding var firstTimeEnterAge: Bool
-    @Binding var gender: Gender
+    @Binding var gender: String
     @Binding var birthDate: Date
     @Binding var twoPointFourKMRunScore: Double
     @Binding var standingBroadJumpScore: Double
@@ -786,8 +777,8 @@ struct getGoalData: View {
                     Section {
                         DatePicker(selection: $birthDate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
                         Picker(selection: $gender, label: Text("Gender")) {
-                            Text("Male").tag(Gender.male)
-                            Text("Female").tag(Gender.female)
+                            Text("Male").tag("male")
+                            Text("Female").tag("female")
                         }
                     } footer: {
                         Text("We need your birthday and gender to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
