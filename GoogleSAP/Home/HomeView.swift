@@ -796,7 +796,7 @@ struct getGoalData: View {
                         Text("2.4KM Run")
                         TextField(String(
                             Int(twoPointFourKMRunScore)), text: $twoPointFourKMRun)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                     } footer: {
                         Text("Seconds")
                     }
@@ -804,7 +804,7 @@ struct getGoalData: View {
                     Section {
                         Text("Sit And Reach")
                         TextField(String(sitAndReachScore), text: $sitAndReach)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("CM")
                     }
@@ -812,7 +812,7 @@ struct getGoalData: View {
                     Section {
                         Text("Standing Broad Jump")
                         TextField(String(standingBroadJumpScore), text: $standingBroadJump)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("CM")
                     }
@@ -820,7 +820,7 @@ struct getGoalData: View {
                     Section {
                         Text("Inclined Pullups (In 30 seconds)")
                         TextField(String(Int(inclinedPullupsScore)), text: $inclinedPullups)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Reps")
                     }
@@ -828,7 +828,7 @@ struct getGoalData: View {
                     Section {
                         Text("Shuttle Run")
                         TextField(String(shuttleRunScore), text: $shuttleRun)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Seconds")
                     }
@@ -836,7 +836,7 @@ struct getGoalData: View {
                     Section {
                         Text("Situps (In 1 min)")
                         TextField(String(Int(sitUpsScore)), text: $sitUps)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Reps")
                     }

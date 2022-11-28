@@ -128,34 +128,34 @@ struct CreateNewLogView: View {
                     Section {
                         Text("2.4KM Run")
                         TextField("Minutes", text: $twoPointFourKMRunMinutes)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                         TextField("Seconds", text: $twoPointFourKMRunSeconds)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     Section {
                         Text("Sit And Reach")
                         TextField("CM", text: $sitAndReach)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     Section {
                         Text("Standing Broad Jump")
                         TextField("CM", text: $standingBroadJump)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     Section {
                         Text("Inclined Pullups")
                         TextField("Reps", text: $inclinedPullups)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     Section {
                         Text("Shuttle Run")
                         TextField("Seconds", text: $shuttleRun)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                     Section {
                         Text("Situps")
                         TextField("Reps", text: $sitUps)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     }
                 }
             }
