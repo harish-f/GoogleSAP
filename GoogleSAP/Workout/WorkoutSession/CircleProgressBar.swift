@@ -11,7 +11,7 @@ struct CircleProgressBar: View {
     let totalTime: Double
     let showReps: Bool
     @Binding var timeRemaining: Double
-    @State var repInfo: String
+    @Binding var repInfo: String
     var body: some View {
         ZStack {
             if showReps {

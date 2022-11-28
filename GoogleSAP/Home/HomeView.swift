@@ -439,8 +439,8 @@ struct HomeView: View {
                             .onAppear {
                                 HomeManager.loadData()
                                 
-                                age = HomeManager.stationData[0].age
-                                birthdayObj = HomeManager.stationData[0].ageDate
+//                                age = HomeManager.stationData[0].age
+//                                birthdayObj = HomeManager.stationData[0].ageDate
                                 TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
                                 SitUpsUserSetScore = HomeManager.stationData[0].SitUps
                                 SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump

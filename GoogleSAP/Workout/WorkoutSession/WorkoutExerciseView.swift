@@ -32,12 +32,24 @@ struct WorkoutExerciseView: View {
         started = false
         ended = false
         showEndedDetails = false
+        completedReps = 0
         timer.upstream.autoconnect()
     }
     var body: some View {
         ZStack {
             if started && !ended {
                 VStack {
+                    HStack {
+                        Spacer()
+                        if currentExerciseIndex >= exercises.count-1 {
+                            Text("Last one! Keep going!")
+                        } else {
+                            Text("Next: \(exercises[currentExerciseIndex+1].name)")
+                        }
+                    }
+                    .padding(.bottom)
+                    .padding(.bottom)
+                    .padding(.trailing)
                     HStack {
                         if exercises[currentExerciseIndex].name == "Rest" {
                             CircularProgressViewLarge(progress: timeRemaining/Double(exercises[currentExerciseIndex].duration), refresh: .constant(0))
@@ -47,32 +59,38 @@ struct WorkoutExerciseView: View {
                                 totalTime: Double(exercises[currentExerciseIndex].duration),
                                 showReps: false,
                                 timeRemaining: $timeRemaining,
-                                repInfo: ""
+                                repInfo: .constant("")
                             )
                             Spacer()
                             CircleProgressBar(
                                 totalTime: Double(exercises[currentExerciseIndex].duration)/Double(exercises[currentExerciseIndex].reps),
-                                showReps: false,
+                                showReps: true,
                                 timeRemaining: $remainingTimePerRep,
-                                repInfo: "\(ceil(Double(Int(timeRemaining)/exercises[currentExerciseIndex].duration*exercises[currentExerciseIndex].reps)))/\(exercises[currentExerciseIndex].reps)"
+                                repInfo: .constant("\(completedReps)/\(exercises[currentExerciseIndex].reps)")
                             )
                             Spacer()
                         }
                     }
-                    Text("\(Int(timeRemaining)/exercises[currentExerciseIndex].duration*exercises[currentExerciseIndex].reps)/\(exercises[currentExerciseIndex].reps)")
                     Text("\(exercises[currentExerciseIndex].name)")
+                        .font(.largeTitle)
+                        .padding(.bottom)
                         .onReceive(timer) { _ in
                             if !isPaused && started {
-                                if timeRemaining > 0 {
+                                if timeRemaining >= 0 {
                                     withAnimation(.linear(duration: 0.1)) {
                                         timeRemaining -= 0.1
                                     }
                                     if exercises[currentExerciseIndex].name != "Rest" {
-                                        if timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps)) == 0 {
+                                        if remainingTimePerRep <= 0.1 {
                                             remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
                                         } else {
+                                            withAnimation {
+                                                remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                            }
+                                        }
+                                        if remainingTimePerRep <= 0.1 && completedReps <= exercises[currentExerciseIndex].reps {
                                             completedReps += 1
-                                            remainingTimePerRep = timeRemaining.truncatingRemainder(dividingBy: Double(exercises[currentExerciseIndex].duration/exercises[currentExerciseIndex].reps))
+                                            print("kusegklhtjgieh")
                                         }
                                     }
                                 } else {
@@ -84,43 +102,53 @@ struct WorkoutExerciseView: View {
                                         completedReps = 0
                                         timeRemaining = Double(exercises[currentExerciseIndex].duration)
                                     } else {
+                                        restartWorkout()
                                         ended = true
+                                        completedReps = 0
                                         timer.upstream.connect().cancel()
                                     }
                                 }
                             }
                         }
                     Spacer()
-                    Form {
-                        Section {
-                            Button {
-                                if currentExerciseIndex + 1 < exercises.count {
-                                    currentExerciseIndex += 1
-                                    timeRemaining = Double(exercises[currentExerciseIndex].duration)
-                                } else {
-                                    ended = true
-                                }
-                            } label: {
-                                Text("Skip")
-                                    .foregroundColor(.red)
-                                    .frame(maxWidth: .infinity, alignment: .center)
+                    
+                    HStack {
+                        Spacer()
+                        Button {
+                            if currentExerciseIndex + 1 < exercises.count {
+                                currentExerciseIndex += 1
+                                timeRemaining = Double(exercises[currentExerciseIndex].duration)
+                            } else {
+                                restartWorkout()
+                                ended = true
                             }
+                        } label: {
+                            Text("Skip")
+                                .frame(maxWidth: UIScreen.main.bounds.width-50, alignment: .center)
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(.blue)
+                                .cornerRadius(15)
                         }
-                        Section {
-                            HStack {
-                                Spacer()
-                                Button {
-                                    ended = true
-                                    timer.upstream.connect().cancel()
-                                } label: {
-                                    Text("End Workout")
-                                        .foregroundColor(.white)
-                                }
-                                Spacer()
-                            }
-                        }
-                        .listRowBackground(Color.red)
+                        Spacer()
                     }
+                    HStack {
+                        Spacer()
+                        Button {
+                            restartWorkout()
+                            ended = true
+                            timer.upstream.connect().cancel()
+                        } label: {
+                            Text("End Workout")
+                                .frame(maxWidth: UIScreen.main.bounds.width-50, alignment: .center)
+                                .padding()
+                                .background(.red)
+                                .foregroundColor(.white)
+                                .cornerRadius(15)
+                        }
+                        Spacer()
+                    }
+                    .padding(.bottom)
                 }
                 .toolbar {
                     Button {
@@ -161,6 +189,7 @@ struct WorkoutExerciseView: View {
         .onChange(of: restart) { _ in
             restartWorkout()
         }
+        .frame(minHeight: 0, maxHeight: .infinity)
     }
 }
 
