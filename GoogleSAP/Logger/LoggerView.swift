@@ -63,7 +63,6 @@ struct LoggerView: View {
             .navigationTitle("Logger")
             .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showNewLogCreationSheet, onDismiss: {
-                print("data")
                 loggerHistoryManager.saveData()
             }) {
                 CreateNewLogView(data: $data)

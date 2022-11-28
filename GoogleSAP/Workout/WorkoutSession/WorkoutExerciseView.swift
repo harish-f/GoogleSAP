@@ -79,7 +79,6 @@ struct WorkoutExerciseView: View {
                                         }
                                         if remainingTimePerRep <= 0.1 && completedReps <= exercises[currentExerciseIndex].reps {
                                             completedReps += 1
-                                            print("kusegklhtjgieh")
                                         }
                                     }
                                 } else {

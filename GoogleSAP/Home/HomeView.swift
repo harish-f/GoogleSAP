@@ -432,8 +432,6 @@ struct HomeView: View {
                                 }
                             }
                             .onAppear {
-                                print("a")
-                                
                                 HomeManager.loadData()
                                 
                                 age = HomeManager.stationData.age
