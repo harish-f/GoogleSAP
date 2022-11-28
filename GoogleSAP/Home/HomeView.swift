@@ -593,6 +593,7 @@ struct HomeView: View {
                             HomeManager.saveData()
                         } content: {
                             InstructionsView()
+                                .presentationDetents([.medium])
                         }
                 }.onAppear {
                     loggerHistoryManager.loadData()
@@ -659,12 +660,79 @@ struct HomeView: View {
 
 struct InstructionsView: View {
     @Environment(\.dismiss) var dismiss
+    private var numberOfImages = 6
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @State private var currentIndex = 0
+    
+    func previous() {
+        withAnimation {
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : numberOfImages - 1
+        }
+    }
+    
+    func next() {
+        withAnimation {
+            currentIndex = currentIndex < numberOfImages ? currentIndex + 1 : 0
+        }
+    }
+    
+    var controls: some View {
+        HStack {
+            Button {
+                previous()
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            Spacer()
+                .frame(width: 100)
+            Button {
+                next()
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+        }.accentColor(.primary)
+    }
     
     var body: some View {
+        
         NavigationView {
             VStack {
                 // HI RACHEL PUT STUFF HERE THANKS
+                GeometryReader { proxy in
+                    VStack {
+                        TabView(selection: $currentIndex) {
+                            ForEach(0..<numberOfImages) { num in
+                                Image("\(num)")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .overlay(Color.black.opacity(0.4))
+                                    .tag(num)
+                            }
+                        }.tabViewStyle(PageTabViewStyle())
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .padding()
+                            .frame(width: proxy.size.width, height: proxy.size.height)
+                            .onReceive(timer, perform: { _ in
+                                withAnimation {
+                                    next()
+                                    
+                                }
+                            })
+                        controls
+                    }
+                    
+                }
             }
+            .navigationTitle("Tutorial")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Done")
+                }
+            )
+            
         }
     }
 }
