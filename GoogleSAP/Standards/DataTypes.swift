@@ -126,7 +126,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 10, 14, 18, 22, 27 ],  // Sit-ups
             [ 119, 129, 139, 148, 159 ],  // SBJ
             [ 19, 24, 28, 31, 34 ],  // Sit & Reach
-            [ 2, 8, 9, 12, 15 ],  // (Inclined) Pull-Ups
+            [ 2, 6, 9, 12, 15 ],  // (Inclined) Pull-Ups
             [ 118, 124, 129, 134, 139 ],  // Shuttle Run
             [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
         ],
