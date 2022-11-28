@@ -24,6 +24,15 @@ struct ScoringStandardsView: View {
     @State var attainmentCollapsed = false
     @State var attainmentCloseAmount = CGFloat.zero
     
+    func intToTime(_ int: Int, isLongDist: Bool) -> String {
+        if isLongDist {
+            let sec = String(int%60)
+            return String(int/60) + ":" + String(repeating: "0", count: (2-sec.count)) + sec
+        } else {
+            return String(Double(int)/10.0) + "s"
+        }
+    }
+    
     var body: some View {
         ZStack {
             GeometryReader{ geometry in
@@ -76,13 +85,14 @@ struct ScoringStandardsView: View {
                                     Text(ref2 + " - " + ref3)
                                 }
                             } else {
+                                let isLongDist = selected == 5
                                 if i == 0 {
-                                    Text("   < " + String(Double(ref[0])/10.0))
+                                    Text("   < " + intToTime(ref[0], isLongDist: isLongDist))
                                 } else if reverseI == 0 {
-                                    Text("   > " + String(Double(ref[4]-1)/10.0))
+                                    Text("   > " + intToTime(ref[4]-1, isLongDist: isLongDist))
                                 } else {
-                                    let ref2 = String(Double(ref[i-1])/10.0)
-                                    let ref3 = String(Double(ref[i]-1)/10.0)
+                                    let ref2 = intToTime(ref[i-1], isLongDist: isLongDist)
+                                    let ref3 = intToTime(ref[i]-1, isLongDist: isLongDist)
                                     Text(ref2 + " - " + ref3)
                                 }
                             }

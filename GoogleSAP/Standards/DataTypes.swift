@@ -38,7 +38,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 16, 21, 26, 30, 34 ],  // Sit & Reach
             [ 3, 9, 13, 18, 22 ],  // (Inclined) Pull-Ups
             [ 113, 119, 123, 128, 132 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 580, 641, 701, 761, 831 ],  // 1.6km / 2.4km
         ],
         10: [
             [ 17, 21, 26, 31, 37 ],  // Sit-ups
@@ -46,7 +46,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 18, 23, 28, 32, 36 ],  // Sit & Reach
             [ 3, 9, 14, 19, 23 ],  // (Inclined) Pull-Ups
             [ 111, 117, 121, 125, 130 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 570, 631, 701, 761, 821 ],  // 1.6km / 2.4km
         ],
         11: [
             [ 20, 25, 30, 34, 40 ],  // Sit-ups
@@ -54,7 +54,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 20, 25, 30, 34, 38 ],  // Sit & Reach
             [ 4, 10, 15, 20, 24 ],  // (Inclined) Pull-Ups
             [ 107, 113, 117 , 121, 126 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 530, 601, 671, 741, 811 ],  // 1.6km / 2.4km
         ],
         12: [
             [ 22, 27, 32, 36, 42 ],  // Sit-ups
@@ -62,7 +62,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 23, 28, 32, 36, 40 ],  // Sit & Reach
             [ 5, 11, 16, 21, 25 ],  // (Inclined) Pull-Ups
             [ 104, 110, 114, 118, 123 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 520, 681, 641, 701, 751 ],  // 1.6km / 2.4km
         ],
         13: [
             [ 25, 29, 34, 38, 43 ],  // Sit-ups
@@ -70,7 +70,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 25, 30, 34, 38, 42 ],  // Sit & Reach
             [ 7, 12, 17, 22, 26 ],  // (Inclined) Pull-Ups
             [ 103, 108, 112, 116, 120 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 691, 751, 821, 891, 961 ],  // 1.6km / 2.4km
         ],
         14: [
             [ 29, 33, 37, 40, 43 ],  // Sit-ups
@@ -78,7 +78,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 27, 32, 36, 40, 44 ],  // Sit & Reach
             [ 8, 13, 18, 23, 27 ],  // (Inclined) Pull-Ups
             [ 102, 105, 109, 113, 117 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 661, 721, 781, 851, 921 ],  // 1.6km / 2.4km
         ],
         15: [
             [ 30, 34, 37, 40, 43 ],  // Sit-ups
@@ -86,7 +86,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 29, 34, 38, 42, 46 ],  // Sit & Reach
             [ 1, 3, 5, 6, 8 ],  // (Inclined) Pull-Ups
             [ 102, 104, 106, 110, 114 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 641, 701, 761, 821, 881 ],  // 1.6km / 2.4km
         ],
         16: [
             [ 31, 34, 37, 40, 43 ],  // Sit-ups
@@ -94,7 +94,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 31, 36, 40, 44, 48 ],  // Sit & Reach
             [ 1, 3, 5, 7, 9 ],  // (Inclined) Pull-Ups
             [ 102, 104, 106, 108, 112 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 631, 691, 741, 801, 851 ],  // 1.6km / 2.4km
         ],
         17: [
             [ 31, 34, 37, 40, 43 ],  // Sit-ups
@@ -102,7 +102,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 37, 41, 45, 49 ],  // Sit & Reach
             [ 2, 4, 6, 8, 10 ],  // (Inclined) Pull-Ups
             [ 102, 104, 106, 108, 110 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 621, 671, 721, 771, 821 ],  // 1.6km / 2.4km
         ],
         18: [
             [ 31, 34, 37, 40, 43 ],  // Sit-ups
@@ -110,7 +110,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 37, 41, 45, 49 ],  // Sit & Reach
             [ 3, 5, 7, 9, 11 ],  // (Inclined) Pull-Ups
             [ 102, 104, 106, 108, 110 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 621, 671, 711, 761, 811 ],  // 1.6km / 2.4km
         ],
         19: [
             [ 31, 34, 37, 40, 43 ],  // Sit-ups
@@ -118,7 +118,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 37, 41, 45, 49 ],  // Sit & Reach
             [ 3, 5, 7, 9, 11 ],  // (Inclined) Pull-Ups
             [ 102, 104, 106, 108, 110 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 621, 661, 701, 751, 801 ],  // 1.6km / 2.4km
         ],
     ],
     .female: [
@@ -128,7 +128,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 19, 24, 28, 31, 34 ],  // Sit & Reach
             [ 2, 6, 9, 12, 15 ],  // (Inclined) Pull-Ups
             [ 118, 124, 129, 134, 139 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 640, 701, 771, 831, 901 ],  // 1.6km / 2.4km
         ],
         10: [
             [ 11, 15, 19, 23, 28 ],  // Sit-ups
@@ -136,7 +136,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 21, 26, 30, 33, 36 ],  // Sit & Reach
             [ 3, 6, 9, 12, 15 ],  // (Inclined) Pull-Ups
             [ 117, 123, 128, 133, 138 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 630, 686, 751, 806, 871 ],  // 1.6km / 2.4km
         ],
         11: [
             [ 12, 16, 20, 24, 29 ],  // Sit-ups
@@ -144,7 +144,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 23, 28, 32, 35, 38 ],  // Sit & Reach
             [ 3, 7, 10, 13, 16 ],  // (Inclined) Pull-Ups
             [ 116, 122, 126, 130, 135 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 620, 671, 731, 806, 871 ],  // 1.6km / 2.4km
         ],
         12: [
             [ 13, 17, 21, 25, 30 ],  // Sit-ups
@@ -152,7 +152,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 25, 30, 34, 37, 40 ],  // Sit & Reach
             [ 3, 7, 10, 13, 16 ],  // (Inclined) Pull-Ups
             [ 115, 120, 124, 128, 133 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 610, 661, 721, 771, 831 ],  // 1.6km / 2.4km
         ],
         13: [
             [ 14, 18, 22, 26, 31 ],  // Sit-ups
@@ -160,7 +160,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 27, 32, 36, 39, 42 ],  // Sit & Reach
             [ 3, 7, 10, 13, 17 ],  // (Inclined) Pull-Ups
             [ 113, 118, 123, 128, 133 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 871, 931, 991, 1051, 1111 ],  // 1.6km / 2.4km
         ],
         14: [
             [ 16, 20, 24, 28, 31 ],  // Sit-ups
@@ -168,7 +168,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 29, 34, 38, 41, 44 ],  // Sit & Reach
             [ 3, 7, 10, 14, 17 ],  // (Inclined) Pull-Ups
             [ 115, 119, 123, 127, 131 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 861, 921, 981, 1041, 1101 ],  // 1.6km / 2.4km
         ],
         15: [
             [ 17, 21, 25, 29, 31 ],  // Sit-ups
@@ -176,7 +176,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 30, 35, 39, 43, 46 ],  // Sit & Reach
             [ 3, 7, 10, 14, 17 ],  // (Inclined) Pull-Ups
             [ 113, 117, 121, 125, 129 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 851, 911, 971, 1031, 1091 ],  // 1.6km / 2.4km
         ],
         16: [
             [ 18, 22, 26, 29, 31 ],  // Sit-ups
@@ -184,7 +184,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 31, 36, 40, 44, 47 ],  // Sit & Reach
             [ 3, 7, 11, 14, 18 ],  // (Inclined) Pull-Ups
             [ 113, 116, 119, 123, 127 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 841, 901, 961, 1021, 1071 ],  // 1.6km / 2.4km
         ],
         17: [
             [ 19, 23, 27, 29, 31 ],  // Sit-ups
@@ -192,7 +192,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 36, 40, 44, 47 ],  // Sit & Reach
             [ 3, 7, 11, 14, 18 ],  // (Inclined) Pull-Ups
             [ 113, 116, 119, 122, 126 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 841, 891, 951, 1001, 1051 ],  // 1.6km / 2.4km
         ],
         18: [
             [ 20, 24, 27, 29, 31 ],  // Sit-ups
@@ -200,7 +200,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 36, 40, 44, 47 ],  // Sit & Reach
             [ 4, 8, 11, 15, 18 ],  // (Inclined) Pull-Ups
             [ 113, 116, 119, 122, 125 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 841, 891, 941, 991, 1041 ],  // 1.6km / 2.4km
         ],
         19: [
             [ 21, 24, 27, 29, 31 ],  // Sit-ups
@@ -208,7 +208,7 @@ let NAPFAStandards: [gender:[Int:[[Int]]]] = [
             [ 32, 36, 39, 43, 46 ],  // Sit & Reach
             [ 5, 8, 11, 15, 18 ],  // (Inclined) Pull-Ups
             [ 113, 116, 119, 122, 125 ],  // Shuttle Run
-            [ 0, 0, 0, 0, 0 ],  // 1.6km / 2.4km
+            [ 821, 891, 931, 981, 1031 ],  // 1.6km / 2.4km
         ],
     ]
 ]

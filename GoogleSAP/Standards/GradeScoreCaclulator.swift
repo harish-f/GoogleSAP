@@ -15,16 +15,35 @@ struct GradeScoreCaclulator: View {
     
     @State var calcValues: [Double] = [0.0,0.0,0.0,0.0,0.0,0.0]
     @State var displayValues: [String] = ["","","","","",""]
+    func intToTime(_ int: Int, isLongDist: Bool) -> String {
+        if isLongDist {
+            let sec = String(int%60)
+            return String(int/60) + ":" + String(repeating: "0", count: (2-sec.count)) + sec
+        } else {
+            return String(Double(int)/10.0) + "s"
+        }
+    }
     func calcToDisplay(calc: [Double]) -> [String] {
         let ref = NAPFAStandards[genderInput]![ageInput]!
         return calc.map {
             let i = calc.firstIndex(of: $0)!
-            if $0 < Double(ref[i][0]) {
-                return "< " + String(ref[i][0])
-            } else if $0 > Double(ref[i][4]-1) {
-                return "> " + String(ref[i][4]-1)
+            if i < 4 {
+                if $0 < Double(ref[i][0]) {
+                    return "< " + String(ref[i][0])
+                } else if $0 > Double(ref[i][4]-1) {
+                    return "> " + String(ref[i][4]-1)
+                } else {
+                    return String(Int($0))
+                }
             } else {
-                return String(Int($0))
+                let isLongDist = i == 5
+                if $0 < Double(ref[i][0]) {
+                    return "< " + intToTime(ref[i][0], isLongDist: isLongDist)
+                } else if $0 > Double(ref[i][4]-1) {
+                    return "> " + intToTime(ref[i][4]-1, isLongDist: isLongDist)
+                } else {
+                    return intToTime(Int($0), isLongDist: isLongDist)
+                }
             }
         }
     }
@@ -33,7 +52,7 @@ struct GradeScoreCaclulator: View {
         var points = [0,0,0,0,0,0]
         for i in 0...calc.count-1 {
             for j in 0...ref[i].count-1 {
-                if Double(ref[i][ref[i].count-1-j]) < calc[i] {
+                if Double(ref[i][ref[i].count-1-j])-1 < calc[i] {
                     points[i] = ref[i].count-j
                     break
                 }
