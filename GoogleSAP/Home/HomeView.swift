@@ -341,9 +341,6 @@ struct HomeView: View {
                                 .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                                 
                             }
-                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
-                            
-                        }
                         } else {
                             ProgressView()
                                 .frame(width: geometry.size.width, height: geometry.size.width)
@@ -371,6 +368,31 @@ struct HomeView: View {
                                     Spacer()
                                     Image(systemName: "arrowshape.right.fill")
                                 }
+                                
+                                if stillNeedFillNAPFAEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your offical NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
+                                if stillNeedFillWorkoutEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your mock (Practise) NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
                                 if stillHaveUnsetGoals {
                                     Button {
                                         showModal = true
@@ -393,30 +415,6 @@ struct HomeView: View {
                                                 .font(.title3)
                                             Text("It seems like your age does not fall into any napfa scoring standards that we can use. Please update your age to be within the range of 9-19 inclusive.")
                                                 .multilineTextAlignment(.leading)
-                                        }
-                                    }
-                                }
-                                
-                                if stillNeedFillNAPFAEntry {
-                                    Button {
-                                        self.tabSelection = 2
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: "info.circle")
-                                                .font(.title3)
-                                            Text("You do not seem to have a log of your offical NAPFA score. You can set this in the logger.")
-                                        }
-                                    }
-                                }
-                                
-                                if stillNeedFillWorkoutEntry {
-                                    Button {
-                                        self.tabSelection = 2
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: "info.circle")
-                                                .font(.title3)
-                                            Text("You do not seem to have a log of your mock (Practise) NAPFA score. You can set this in the logger.")
                                         }
                                     }
                                 }
@@ -743,16 +741,6 @@ struct InstructionsView: View {
 struct InstructionView_Previews: PreviewProvider {
     static var previews: some View {
         InstructionsView()
-    }
-}
-
-struct InstructionsView: View {
-    @Environment(\.dismiss) var dismiss
-    
-    var body: some View {
-        NavigationView {
-            Text("Instruction View")
-        }
     }
 }
 
