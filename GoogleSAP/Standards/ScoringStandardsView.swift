@@ -24,6 +24,15 @@ struct ScoringStandardsView: View {
     @State var attainmentCollapsed = false
     @State var attainmentCloseAmount = CGFloat.zero
     
+    func intToTime(_ int: Int, isLongDist: Bool) -> String {
+        if isLongDist {
+            let sec = String(int%60)
+            return String(int/60) + ":" + String(repeating: "0", count: (2-sec.count)) + sec
+        } else {
+            return String(Double(int)/10.0) + "s"
+        }
+    }
+    
     var body: some View {
         ZStack {
             GeometryReader{ geometry in
@@ -65,12 +74,27 @@ struct ScoringStandardsView: View {
                             Text(stringRef1 + stringRef2)
                             Spacer()
                             let ref = NAPFAStandards[genderInput]![ageInput]![selected]
-                            if i == 0 {
-                                Text("> " + String(ref[4]))
+                            if selected < 4 {
+                                if i == 0 {
+                                    Text("   > " + String(ref[4]-1))
+                                } else if reverseI == 0 {
+                                    Text("   < " + String(ref[0]))
+                                } else {
+                                    let ref2 = String(ref[reverseI-1])
+                                    let ref3 = String(ref[reverseI]-1)
+                                    Text(ref2 + " - " + ref3)
+                                }
                             } else {
-                                let ref2 = reverseI == 0 ? "0":String(ref[reverseI-1])
-                                let ref3 = String(ref[reverseI])
-                                Text(ref2 + " - " + ref3)
+                                let isLongDist = selected == 5
+                                if i == 0 {
+                                    Text("   < " + intToTime(ref[0], isLongDist: isLongDist))
+                                } else if reverseI == 0 {
+                                    Text("   > " + intToTime(ref[4]-1, isLongDist: isLongDist))
+                                } else {
+                                    let ref2 = intToTime(ref[i-1], isLongDist: isLongDist)
+                                    let ref3 = intToTime(ref[i]-1, isLongDist: isLongDist)
+                                    Text(ref2 + " - " + ref3)
+                                }
                             }
                             Spacer()
                         }

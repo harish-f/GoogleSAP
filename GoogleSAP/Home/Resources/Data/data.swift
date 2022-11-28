@@ -9,6 +9,9 @@ import Foundation
 
 struct UserSetScore: Codable, Hashable, Identifiable {
     var id = UUID()
+    let hasUserNotSawInstructions: Bool
+    let age: Int
+    let ageDate: Date
     let TwoPointFourKMRun: Double
     let ShuttleRun: Double
     let SitUps: Double
