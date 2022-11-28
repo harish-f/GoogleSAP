@@ -49,12 +49,19 @@ struct GradeScoreCaclulator: View {
     }
     func calcToPoints(calc: [Double]) -> [Int] {
         let ref = NAPFAStandards[genderInput]![ageInput]!
-        var points = [0,0,0,0,0,0]
+        var points = [0,0,0,0,5,5]
         for i in 0...calc.count-1 {
             for j in 0...ref[i].count-1 {
-                if Double(ref[i][ref[i].count-1-j])-1 < calc[i] {
-                    points[i] = ref[i].count-j
-                    break
+                if i < 4 {
+                    if Double(ref[i][ref[i].count-1-j])-1 < calc[i] {
+                        points[i] = ref[i].count-j
+                        break
+                    }
+                } else {
+                    if Double(ref[i][ref[i].count-1-j])-1 < calc[i] {
+                        points[i] = j
+                        break
+                    }
                 }
             }
         }
