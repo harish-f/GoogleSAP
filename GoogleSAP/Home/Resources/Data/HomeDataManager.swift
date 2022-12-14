@@ -8,13 +8,13 @@
 import Foundation
 
 class HomeDataManager: ObservableObject {
-    @Published var stationData: [UserSetScore] = [
-        UserSetScore(hasUserNotSawInstructions: true, age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
-    ]
+    @Published var stationData =
+        UserSetScore(gender: "male", hasUserNotSawInstructions: true, age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
     
     init() {
         loadData()
     }
+    
     func getArchiveUrl() -> URL {
         let plistName = "UserSetScore.plist"
         let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -24,15 +24,13 @@ class HomeDataManager: ObservableObject {
         let archiveUrl = getArchiveUrl()
         let plistDecoder = PropertyListDecoder()
         
-        var finalStationData: [UserSetScore]!
+        var finalStationData: UserSetScore
         
         if let retrievedData = try? Data(contentsOf: archiveUrl),
-           let decodedData = try? plistDecoder.decode(Array<UserSetScore>.self, from: retrievedData){
+           let decodedData = try? plistDecoder.decode(UserSetScore.self, from: retrievedData){
             finalStationData = decodedData
         } else {
-            finalStationData = [
-                UserSetScore(hasUserNotSawInstructions: true, age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
-            ]
+            finalStationData = UserSetScore(gender: "male", hasUserNotSawInstructions: true, age: 0, ageDate: Date(), TwoPointFourKMRun: 0.0, ShuttleRun: 0.0, SitUps: 0.0, SitAndReach: 0.0, InclinedPullups: 0.0, StandingBroadJump: 0.0)
         }
         stationData = finalStationData
     }

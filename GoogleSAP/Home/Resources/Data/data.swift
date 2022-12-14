@@ -9,6 +9,7 @@ import Foundation
 
 struct UserSetScore: Codable, Hashable, Identifiable {
     var id = UUID()
+    var gender: String
     let hasUserNotSawInstructions: Bool
     let age: Int
     let ageDate: Date

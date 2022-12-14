@@ -17,12 +17,6 @@ struct ProgressData: Hashable, Identifiable {
     var id = UUID()
 }
 
-enum Gender {
-    case male
-    case female
-    case none
-}
-
 //  - Replace Text with symbols
 //  - Switch the weird picker thing for a textfield
 //  - Colour Scheme
@@ -243,7 +237,7 @@ struct HomeView: View {
     
     
     // TODO: MAKE THIS TAKE FROM PERSISTENCE AND AUTOUPDATE BASED ON BDAY
-    @State var gender: Gender = .male
+    @State var gender = "male"
     @State var age = 0
     @State var birthdayObj = Date()
     
@@ -306,41 +300,41 @@ struct HomeView: View {
                 ZStack(alignment: .leading) {
                     VStack(alignment: .leading) {
                         if (refresher != 0) {
-                        SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
-                            ForEach(data) { datum in
-                                if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
-                                    Spacer()
-                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                    .padding(.top, 10)
-                                    .padding()
-                                    .padding()
-                                    
-                                    Spacer()
-                                        .scrollSnappingAnchor(.bounds)
-                                        .id(idGen(text: datum.text))
-                                    
-                                } else {
-                                    Spacer()
-                                            CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
-                                                .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
-                                    .padding(.top, 10)
-                                    .padding()
-                                    .padding()
-                                    
-                                    Spacer()
-                                        .scrollSnappingAnchor(.bounds)
-                                        .id(idGen(text: datum.text))
+                            SnappingScrollView(.horizontal, decelerationRate: .normal, showsIndicators: false) {
+                                ForEach(data) { datum in
+                                    if (datum.fractionWorkoutForUserGoal != 0 && datum.fractionWorkoutForUserGoal.isFinite) {
+                                        Spacer()
+                                        CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForUserGoal, innerRingFraction: datum.fractionWorkoutForA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "target", outerRingBottomSymbol: "", innerRingTopSymbol: "a.circle", innerRingBottomSymbol: "")
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            .padding(.top, 10)
+                                            .padding()
+                                            .padding()
+                                        
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
+                                        
+                                    } else {
+                                        Spacer()
+                                        CircularProgView(datum: datum, outerRingFraction: datum.fractionWorkoutForA, innerRingFraction: datum.fractionNAPFA, age: age, geometry: geometry, refresher: $refresher, updateProgressSize: $sizeOfBigProgress, outerRingTopSymbol: "figure.walk", outerRingBottomSymbol: "", innerRingTopSymbol: "figure.run", innerRingBottomSymbol: "")
+                                            .frame(width:UIScreen.main.bounds.width-90, height: UIScreen.main.bounds.width-90, alignment: .center)
+                                            .padding(.top, 10)
+                                            .padding()
+                                            .padding()
+                                        
+                                        Spacer()
+                                            .scrollSnappingAnchor(.bounds)
+                                            .id(idGen(text: datum.text))
+                                    }
                                 }
-                            }
-                            
-                            
-                            ZStack {
+                                
+                                
+                                ZStack {
+                                    
+                                }
+                                .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
                                 
                             }
-                            .frame(width: sizeOfBigProgress.width * 0.01, height: sizeOfBigProgress.height * 0.01)
-                            
-                        }
                         } else {
                             ProgressView()
                                 .frame(width: geometry.size.width, height: geometry.size.width)
@@ -368,6 +362,31 @@ struct HomeView: View {
                                     Spacer()
                                     Image(systemName: "arrowshape.right.fill")
                                 }
+                                
+                                if stillNeedFillNAPFAEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your offical NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
+                                if stillNeedFillWorkoutEntry {
+                                    Button {
+                                        self.tabSelection = 2
+                                    } label: {
+                                        HStack {
+                                            Image(systemName: "info.circle")
+                                                .font(.title3)
+                                            Text("You do not seem to have a log of your mock (Practise) NAPFA score. You can set this in the logger.")
+                                        }
+                                    }
+                                }
+                                
                                 if stillHaveUnsetGoals {
                                     Button {
                                         showModal = true
@@ -394,30 +413,6 @@ struct HomeView: View {
                                     }
                                 }
                                 
-                                if stillNeedFillNAPFAEntry {
-                                    Button {
-                                        self.tabSelection = 2
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: "info.circle")
-                                                .font(.title3)
-                                            Text("You do not seem to have a log of your offical NAPFA score. You can set this in the logger.")
-                                        }
-                                    }
-                                }
-                                
-                                if stillNeedFillWorkoutEntry {
-                                    Button {
-                                        self.tabSelection = 2
-                                    } label: {
-                                        HStack {
-                                            Image(systemName: "info.circle")
-                                                .font(.title3)
-                                            Text("You do not seem to have a log of your mock (Practise) NAPFA score. You can set this in the logger.")
-                                        }
-                                    }
-                                }
-                                
                             }
                             Section {
                                 Button("Go to Workouts") {
@@ -439,15 +434,16 @@ struct HomeView: View {
                             .onAppear {
                                 HomeManager.loadData()
                                 
-//                                age = HomeManager.stationData[0].age
-//                                birthdayObj = HomeManager.stationData[0].ageDate
-                                TwoPointFourKMRunUserSetScore = HomeManager.stationData[0].TwoPointFourKMRun
-                                SitUpsUserSetScore = HomeManager.stationData[0].SitUps
-                                SitAndReachUserSetScore = HomeManager.stationData[0].StandingBroadJump
-                                InclinedPullupsUserSetScore = HomeManager.stationData[0].InclinedPullups
-                                ShuttleRunUserSetScore = HomeManager.stationData[0].ShuttleRun
-                                StandingBroadJumpUserSetScore = HomeManager.stationData[0].StandingBroadJump
-                                hasUserNotViewedInstructionsOnce = HomeManager.stationData[0].hasUserNotSawInstructions
+                                age = HomeManager.stationData.age
+                                gender = HomeManager.stationData.gender
+                                birthdayObj = HomeManager.stationData.ageDate
+                                TwoPointFourKMRunUserSetScore = HomeManager.stationData.TwoPointFourKMRun
+                                SitUpsUserSetScore = HomeManager.stationData.SitUps
+                                SitAndReachUserSetScore = HomeManager.stationData.StandingBroadJump
+                                InclinedPullupsUserSetScore = HomeManager.stationData.InclinedPullups
+                                ShuttleRunUserSetScore = HomeManager.stationData.ShuttleRun
+                                StandingBroadJumpUserSetScore = HomeManager.stationData.StandingBroadJump
+                                hasUserNotViewedInstructionsOnce = HomeManager.stationData.hasUserNotSawInstructions
                                 
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     userAgeBasedBestScore = listOfNapfaScores.last { score in
@@ -459,7 +455,7 @@ struct HomeView: View {
                                             isAgeLegal = false
                                         }
                                     } else {
-                                        if (gender == .male) {
+                                        if (gender == "male") {
                                             StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreMale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
@@ -471,7 +467,7 @@ struct HomeView: View {
                                             SitAndReachHighestScore = userAgeBasedBestScore.SitAndReachUserSetScoreMale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreMale
-                                        } else if (gender == .female) {
+                                        } else if (gender == "female") {
                                             StandingBroadJumpHighestScore = userAgeBasedBestScore.StandingBroadJumpUserSetScoreFemale
                                             
                                             TwoPointFourKMRunHighestScore = userAgeBasedBestScore.TwoPointFourKMRunUserSetScoreFemale
@@ -554,9 +550,7 @@ struct HomeView: View {
                         .sheet(isPresented: $showModal) {
                             showModal = false
                             tabSelection = 0
-                            HomeManager.stationData = [
-                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
-                            ]
+                            HomeManager.stationData = UserSetScore(gender: gender, hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             HomeManager.saveData()
                             refresher = refresher + 1
                             
@@ -575,22 +569,23 @@ struct HomeView: View {
                         }
                         )
                         .navigationBarItems(leading:
-                                                ZStack {
-                            if (refresher == 0) {
-                                ProgressView()
-                            } else {
-                                ZStack {}
-                            }
+                                                Button("Tutorial") {
+                            hasUserNotViewedInstructionsOnce = true
                         }
-                        )
+                                            )
+//                                                ZStack {
+//                            if (refresher == 0) {
+//                                ProgressView()
+//                            } else {
+//                                EmptyView()
+//                            }
                         .sheet(isPresented: $hasUserNotViewedInstructionsOnce) {
                             hasUserNotViewedInstructionsOnce = false
-                            HomeManager.stationData = [
-                                UserSetScore(hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
-                            ]
+                            HomeManager.stationData = UserSetScore(gender: gender, hasUserNotSawInstructions: hasUserNotViewedInstructionsOnce, age: age, ageDate: birthdayObj, TwoPointFourKMRun: TwoPointFourKMRunUserSetScore, ShuttleRun: ShuttleRunUserSetScore, SitUps: SitUpsUserSetScore, SitAndReach: SitAndReachUserSetScore, InclinedPullups: InclinedPullupsUserSetScore, StandingBroadJump: StandingBroadJumpUserSetScore)
                             HomeManager.saveData()
                         } content: {
                             InstructionsView()
+                                .presentationDetents([.medium])
                         }
                 }.onAppear {
                     loggerHistoryManager.loadData()
@@ -657,11 +652,86 @@ struct HomeView: View {
 
 struct InstructionsView: View {
     @Environment(\.dismiss) var dismiss
+    private var numberOfImages = 10
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @State private var currentIndex = 0
+    
+    func previous() {
+        withAnimation {
+            currentIndex = currentIndex > 0 ? currentIndex - 1 : numberOfImages - 1
+        }
+    }
+    
+    func next() {
+        withAnimation {
+            currentIndex = currentIndex < numberOfImages ? currentIndex + 1 : 0
+        }
+    }
+    
+    var controls: some View {
+        HStack {
+            Button {
+                previous()
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            Spacer()
+                .frame(width: 100)
+            Button {
+                next()
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+        }.accentColor(.primary)
+    }
     
     var body: some View {
+        
         NavigationView {
-            Text("Instruction View")
+            VStack {
+                // HI RACHEL PUT STUFF HERE THANKS
+                GeometryReader { proxy in
+                    VStack {
+                        TabView(selection: $currentIndex) {
+                            ForEach(0..<numberOfImages) { num in
+                                Image("\(num)")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .overlay(Color.black.opacity(0.4))
+                                    .tag(num)
+                            }
+                        }.tabViewStyle(PageTabViewStyle())
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                            .padding()
+                            .frame(width: proxy.size.width, height: proxy.size.height)
+                            .onReceive(timer, perform: { _ in
+                                withAnimation {
+                                    next()
+                                    
+                                }
+                            })
+                        controls
+                    }
+                    
+                }
+            }
+            .navigationTitle("Tutorial")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing:
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Done")
+                }
+            )
+            
         }
+    }
+}
+
+struct InstructionView_Previews: PreviewProvider {
+    static var previews: some View {
+        InstructionsView()
     }
 }
 
@@ -673,7 +743,7 @@ struct getGoalData: View {
     @Binding var tabSelection: Int
     @Binding var age: Int
     @Binding var firstTimeEnterAge: Bool
-    @Binding var gender: Gender
+    @Binding var gender: String
     @Binding var birthDate: Date
     @Binding var twoPointFourKMRunScore: Double
     @Binding var standingBroadJumpScore: Double
@@ -705,8 +775,8 @@ struct getGoalData: View {
                     Section {
                         DatePicker(selection: $birthDate, in: dateClosedRange, displayedComponents: [.date], label: { Text("Your Birthday") })
                         Picker(selection: $gender, label: Text("Gender")) {
-                            Text("Male").tag(Gender.male)
-                            Text("Female").tag(Gender.female)
+                            Text("Male").tag("male")
+                            Text("Female").tag("female")
                         }
                     } footer: {
                         Text("We need your birthday and gender to allow us to calculate your NAPFA Scores. This data will be kept confidential and will not be uploaded to any cloud server.")
@@ -717,7 +787,7 @@ struct getGoalData: View {
                         Text("2.4KM Run")
                         TextField(String(
                             Int(twoPointFourKMRunScore)), text: $twoPointFourKMRun)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.decimalPad)
                     } footer: {
                         Text("Seconds")
                     }
@@ -725,7 +795,7 @@ struct getGoalData: View {
                     Section {
                         Text("Sit And Reach")
                         TextField(String(sitAndReachScore), text: $sitAndReach)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("CM")
                     }
@@ -733,7 +803,7 @@ struct getGoalData: View {
                     Section {
                         Text("Standing Broad Jump")
                         TextField(String(standingBroadJumpScore), text: $standingBroadJump)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("CM")
                     }
@@ -741,7 +811,7 @@ struct getGoalData: View {
                     Section {
                         Text("Inclined Pullups (In 30 seconds)")
                         TextField(String(Int(inclinedPullupsScore)), text: $inclinedPullups)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Reps")
                     }
@@ -749,7 +819,7 @@ struct getGoalData: View {
                     Section {
                         Text("Shuttle Run")
                         TextField(String(shuttleRunScore), text: $shuttleRun)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Seconds")
                     }
@@ -757,7 +827,7 @@ struct getGoalData: View {
                     Section {
                         Text("Situps (In 1 min)")
                         TextField(String(Int(sitUpsScore)), text: $sitUps)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
                     } footer: {
                         Text("Reps")
                     }
